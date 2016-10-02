@@ -8,6 +8,7 @@ import java.net.CookieStore;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
+import javax.servlet.http.Cookie;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,11 +21,16 @@ import org.jsoup.select.Elements;
  */
 public class ColetorReceita {
 
-    public Document doc;
+    private Document doc;
+    private Cookie cookie_session;
 
     public ColetorReceita() {
     }
 
+    public Cookie getCookie_session() {
+        return cookie_session;
+    }
+   
     /**
      *
      * @param args
@@ -41,6 +47,7 @@ public class ColetorReceita {
         return element.toString();
     }
 
+ 
     public String coletar_pagina(String str_url) {
         StringBuilder pagina = new StringBuilder();
         try {
@@ -56,6 +63,10 @@ public class ColetorReceita {
             CookieStore cookieStore = cookieManager.getCookieStore();
 
             List cookieList = cookieStore.getCookies();
+            String[] cookie = cookieList.toString().split("[=]");            
+            
+            cookie_session = new Cookie(cookie[0].substring(1), 
+                                        cookie[1].substring(0,cookie[1].length()-1));
             
             InputStreamReader reader = new InputStreamReader(url_connection.getInputStream());
             BufferedReader buffer = new BufferedReader(reader);
@@ -67,6 +78,7 @@ public class ColetorReceita {
             }
 
         } catch (Exception e) {
+            System.out.println(e);
             System.out.println("Erro: não foi possível coletar a página: " + str_url + "!");
         }
         return pagina.toString();

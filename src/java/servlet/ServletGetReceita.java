@@ -36,7 +36,7 @@ public class ServletGetReceita extends HttpServlet {
         ColetorReceita coletor2 = new ColetorReceita();
         coletor2.rodar();
         
-        response.addCookie(null);
+        response.addCookie(coletor2.getCookie_session());
         
         try {
             /* TODO output your page here. You may use following sample code. */

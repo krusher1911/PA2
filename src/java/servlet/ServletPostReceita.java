@@ -1,6 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package servlet;
 
-import coletor.ColetorReceita;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -9,14 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
 /**
  *
  * @author Gustavo
  */
-@WebServlet(name = "Receita", urlPatterns = {"/Receita"})
-public class ServletReceita extends HttpServlet {
+@WebServlet(name = "ServletPostReceita", urlPatterns = {"/ServletPostReceita"})
+public class ServletPostReceita extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,42 +32,56 @@ public class ServletReceita extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+            
+        //__EVENTTARGET
+        String event_targer = null;
+        
+        //__EVENTARGUMENT
+        String event_argument = null;
+        
+        //__VIEWSTATE
+        String viewState = request.getParameter("__VIEWSTATE");
+        
+        //__VIEWSTATEGENERATOR
+        String view_state_generator = request.getParameter("__VIEWSTATEGENERATOR");
+        
+        //__EVENTVALIDATION
+        String event_validation = request.getParameter("__EVENTVALIDATION");
+        
+        //ctl00$txtPalavraChave
+        String txt_palavra_chave = null;
+        
+        //ctl00$ContentPlaceHolder1$txtChaveAcessoCompleta
+        String chave_acesso_completa = request.getParameter("ctl00$ContentPlaceHolder1$txtChaveAcessoCompleta");
+        
+        //ctl00$ContentPlaceHolder1$txtCaptcha
+        String txt_captcha = request.getParameter("ctl00$ContentPlaceHolder1$txtCaptcha");
+        
+        //ctl00$ContentPlaceHolder1$btnConsultar
+        String btn_consultar = request.getParameter("ctl00$ContentPlaceHolder1$btnConsultar");
+        
+        //ctl00$ContentPlaceHolder1$token
+        String token = request.getParameter("ctl00$ContentPlaceHolder1$token");
+        
+        //ctl00$ContentPlaceHolder1$captchaSom
+        String captcha_som = request.getParameter("ctl00$ContentPlaceHolder1$captchaSom");
+        
+        //hiddenInputToUpdateATBuffer_CommonToolkitScripts
+        String toolkit = request.getParameter("hiddenInputToUpdateATBuffer_CommonToolkitScripts");
+        
+        
+        
         PrintWriter out = response.getWriter();
-        
-        
-        ColetorReceita coletor2 = new ColetorReceita();
-        coletor2.rodar();
- 
-        
         try {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Receita</title>");
-            out.println("<link href=\"css/main.css\"rel=\"stylesheet\"type=\"text/css\"/>");
+            out.println("<title>Servlet ServletPostReceita</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<table class=\"tg\">");
-            out.println("  <tr>");
-            out.println("    <th rowspan=\"2\">" + coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_imgCaptcha") + "</th>");
-            out.println("    <th colspan=\"2\">"+ coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_txtChaveAcessoCompleta") + "</th>");
-            out.println("  </tr>");
-            out.println("  <tr>");
-            out.println("    <td colspan=\"2\">"+ coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_txtCaptcha") + "</td>");
-            out.println("  </tr>");
-            out.println("  <tr>");
-            out.println("    <td></td>");
-            out.println("    <td>" + coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_btnConsultar") + " " +  coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_btnLimpar") + "</td>");
-            out.println("    <td></td>");
-            out.println("  </tr>");
-            out.println("</table>");
-            out.println(coletor2.getElementoPorID("[name=__VIEWSTATE]"));
-            out.println(coletor2.getElementoPorID("[name=__VIEWSTATEGENERATOR]"));
-            out.println(coletor2.getElementoPorID("[name=__EVENTVALIDATION]"));
-            out.println(coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_token"));
-            out.println(coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_captchaSom"));
-            
+            out.println(request);  
+            out.println("<h1>Servlet ServletPostReceita at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
