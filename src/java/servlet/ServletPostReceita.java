@@ -39,40 +39,40 @@ public class ServletPostReceita extends HttpServlet {
         String[] nome_parametros = new String[12];
         
         nome_parametros[0] = "__EVENTTARGET";
-        parametros[0] = null;
+        parametros[0] = "";
         
-        nome_parametros[0] = "__EVENTARGUMENT";
-        parametros[1] = null;
+        nome_parametros[1] = "__EVENTARGUMENT";
+        parametros[1] = "";
         
-        nome_parametros[0] = "__VIEWSTATE";
+        nome_parametros[2] = "__VIEWSTATE";
         parametros[2] = request.getParameter("__VIEWSTATE");
         
-        nome_parametros[0] = "__VIEWSTATEGENERATOR";
+        nome_parametros[3] = "__VIEWSTATEGENERATOR";
         parametros[3] = request.getParameter("__VIEWSTATEGENERATOR");
         
-        nome_parametros[0] = "__EVENTVALIDATION";
+        nome_parametros[4] = "__EVENTVALIDATION";
         parametros[4] = request.getParameter("__EVENTVALIDATION");
         
-        nome_parametros[0] = "ctl00$txtPalavraChave";
-        parametros[5] = null;
+        nome_parametros[5] = "ctl00$txtPalavraChave";
+        parametros[5] = "";
         
-        nome_parametros[0] = "ctl00$ContentPlaceHolder1$txtChaveAcessoCompleta";
+        nome_parametros[6] = "ctl00$ContentPlaceHolder1$txtChaveAcessoCompleta";
         parametros[6] = request.getParameter("ctl00$ContentPlaceHolder1$txtChaveAcessoCompleta");
         
-        nome_parametros[0] = "ctl00$ContentPlaceHolder1$txtCaptcha";
+        nome_parametros[7] = "ctl00$ContentPlaceHolder1$txtCaptcha";
         parametros[7] = request.getParameter("ctl00$ContentPlaceHolder1$txtCaptcha");
         
-        nome_parametros[0] = "ctl00$ContentPlaceHolder1$btnConsultar";
+        nome_parametros[8] = "ctl00$ContentPlaceHolder1$btnConsultar";
         parametros[8] = request.getParameter("ctl00$ContentPlaceHolder1$btnConsultar");
         
-        nome_parametros[0] = "ctl00$ContentPlaceHolder1$token";
+        nome_parametros[9] = "ctl00$ContentPlaceHolder1$token";
         parametros[9] = request.getParameter("ctl00$ContentPlaceHolder1$token");
         
-        nome_parametros[0] = "ctl00$ContentPlaceHolder1$captchaSom";
+        nome_parametros[10] = "ctl00$ContentPlaceHolder1$captchaSom";
         parametros[10] = request.getParameter("ctl00$ContentPlaceHolder1$captchaSom");
         
-        nome_parametros[0] = "hiddenInputToUpdateATBuffer_CommonToolkitScripts";
-        parametros[11] = request.getParameter("hiddenInputToUpdateATBuffer_CommonToolkitScripts");
+        nome_parametros[11] = "hiddenInputToUpdateATBuffer_CommonToolkitScripts";
+        parametros[11] = "1";
         
         Cookie[] cookies = request.getCookies();
         
