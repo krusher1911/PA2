@@ -5,10 +5,12 @@
  */
 package servlet;
 
+import coletor.ConectorReceita;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,47 +34,54 @@ public class ServletPostReceita extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            
-        //__EVENTTARGET
-        String event_targer = null;
         
-        //__EVENTARGUMENT
-        String event_argument = null;
+        String[] parametros = new String[12];
+        String[] nome_parametros = new String[12];
         
-        //__VIEWSTATE
-        String viewState = request.getParameter("__VIEWSTATE");
+        nome_parametros[0] = "__EVENTTARGET";
+        parametros[0] = null;
         
-        //__VIEWSTATEGENERATOR
-        String view_state_generator = request.getParameter("__VIEWSTATEGENERATOR");
+        nome_parametros[0] = "__EVENTARGUMENT";
+        parametros[1] = null;
         
-        //__EVENTVALIDATION
-        String event_validation = request.getParameter("__EVENTVALIDATION");
+        nome_parametros[0] = "__VIEWSTATE";
+        parametros[2] = request.getParameter("__VIEWSTATE");
         
-        //ctl00$txtPalavraChave
-        String txt_palavra_chave = null;
+        nome_parametros[0] = "__VIEWSTATEGENERATOR";
+        parametros[3] = request.getParameter("__VIEWSTATEGENERATOR");
         
-        //ctl00$ContentPlaceHolder1$txtChaveAcessoCompleta
-        String chave_acesso_completa = request.getParameter("ctl00$ContentPlaceHolder1$txtChaveAcessoCompleta");
+        nome_parametros[0] = "__EVENTVALIDATION";
+        parametros[4] = request.getParameter("__EVENTVALIDATION");
         
-        //ctl00$ContentPlaceHolder1$txtCaptcha
-        String txt_captcha = request.getParameter("ctl00$ContentPlaceHolder1$txtCaptcha");
+        nome_parametros[0] = "ctl00$txtPalavraChave";
+        parametros[5] = null;
         
-        //ctl00$ContentPlaceHolder1$btnConsultar
-        String btn_consultar = request.getParameter("ctl00$ContentPlaceHolder1$btnConsultar");
+        nome_parametros[0] = "ctl00$ContentPlaceHolder1$txtChaveAcessoCompleta";
+        parametros[6] = request.getParameter("ctl00$ContentPlaceHolder1$txtChaveAcessoCompleta");
         
-        //ctl00$ContentPlaceHolder1$token
-        String token = request.getParameter("ctl00$ContentPlaceHolder1$token");
+        nome_parametros[0] = "ctl00$ContentPlaceHolder1$txtCaptcha";
+        parametros[7] = request.getParameter("ctl00$ContentPlaceHolder1$txtCaptcha");
         
-        //ctl00$ContentPlaceHolder1$captchaSom
-        String captcha_som = request.getParameter("ctl00$ContentPlaceHolder1$captchaSom");
+        nome_parametros[0] = "ctl00$ContentPlaceHolder1$btnConsultar";
+        parametros[8] = request.getParameter("ctl00$ContentPlaceHolder1$btnConsultar");
         
-        //hiddenInputToUpdateATBuffer_CommonToolkitScripts
-        String toolkit = request.getParameter("hiddenInputToUpdateATBuffer_CommonToolkitScripts");
+        nome_parametros[0] = "ctl00$ContentPlaceHolder1$token";
+        parametros[9] = request.getParameter("ctl00$ContentPlaceHolder1$token");
         
+        nome_parametros[0] = "ctl00$ContentPlaceHolder1$captchaSom";
+        parametros[10] = request.getParameter("ctl00$ContentPlaceHolder1$captchaSom");
         
+        nome_parametros[0] = "hiddenInputToUpdateATBuffer_CommonToolkitScripts";
+        parametros[11] = request.getParameter("hiddenInputToUpdateATBuffer_CommonToolkitScripts");
+        
+        Cookie[] cookies = request.getCookies();
+        
+        ConectorReceita conector = new ConectorReceita();
         
         PrintWriter out = response.getWriter();
+        
         try {
+            String resposta = conector.sendPost(cookies[0], parametros, nome_parametros);
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -80,10 +89,13 @@ public class ServletPostReceita extends HttpServlet {
             out.println("<title>Servlet ServletPostReceita</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println(request);  
+            out.println(resposta);  
             out.println("<h1>Servlet ServletPostReceita at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
+        } catch(Exception e){
+            // Always must return something
+            System.out.println(e);
         } finally {
             out.close();
         }
