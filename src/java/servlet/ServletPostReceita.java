@@ -38,6 +38,8 @@ public class ServletPostReceita extends HttpServlet {
         String[] parametros = new String[12];
         String[] nome_parametros = new String[12];
         
+        //ToDo: estudar a utilizacao do getParameterValues() para a variavel parametros
+                
         nome_parametros[0] = "__EVENTTARGET";
         parametros[0] = "";
         
