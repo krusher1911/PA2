@@ -33,8 +33,11 @@ public class Produto implements EntidadeBase {
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
-    @Column(name = "valor_estimado")
-    private double valorEstimado;
+    @Column(name = "valor_minimo")
+    private Double valorMinimo;
+
+    @Column(name = "valor_maximo")
+    private Double valorMaximo;
 
     @Column(name = "link")
     private String link;
@@ -107,5 +110,29 @@ public class Produto implements EntidadeBase {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-        
+
+    public Double getValorMinimo() {
+        return valorMinimo;
+    }
+
+    public void setValorMinimo(Double valorMinimo) {
+        this.valorMinimo = valorMinimo;
+    }
+
+    public Double getValorMaximo() {
+        return valorMaximo;
+    }
+
+    public void setValorMaximo(Double valorMaximo) {
+        this.valorMaximo = valorMaximo;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
 }

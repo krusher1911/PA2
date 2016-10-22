@@ -8,6 +8,10 @@
         <servlet-name>posteceita</servlet-name>
         <servlet-class>servlet.ServletPostReceita</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletBuscaPreco</servlet-name>
+        <servlet-class>servlet.ServletBuscaPreco</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Receita</servlet-name>
         <url-pattern>/Receita</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>posteceita</servlet-name>
         <url-pattern>/posteceita</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletBusca</servlet-name>
+        <url-pattern>/BuscaPreco</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
