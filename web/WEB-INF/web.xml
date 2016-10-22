@@ -21,7 +21,7 @@
         <url-pattern>/posteceita</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletBusca</servlet-name>
+        <servlet-name>ServletBuscaPreco</servlet-name>
         <url-pattern>/BuscaPreco</url-pattern>
     </servlet-mapping>
     <session-config>

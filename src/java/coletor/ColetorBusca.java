@@ -53,8 +53,8 @@ public class ColetorBusca {
             String menor = doc.select("article:lt(1) > div:eq(4) > p:eq(0) > a > span > strong").text();
             String maior = doc.select("article:lt(1) > div:eq(4) >  p:eq(1) > a > span").text();
 
-            Double minimo = Double.parseDouble(menor.substring(3).replace(",", "."));
-            Double maximo = Double.parseDouble(maior.substring(3).replace(",", "."));
+            Double minimo = Double.parseDouble(menor.substring(3).replace(".", "").replace(",", "."));
+            Double maximo = Double.parseDouble(maior.substring(3).replace(".", "").replace(",", "."));
 
             produto.setValorMinimo(minimo);
             produto.setValorMaximo(maximo);
