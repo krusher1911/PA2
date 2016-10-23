@@ -53,6 +53,17 @@ public class Produto implements EntidadeBase {
         this.codigNcm = codigoNcm;
         this.categoria = categoria;
     }
+    
+    
+    public Produto(Long id, String descricao, UnidadeMedida unidade, boolean permiteFracionar, String tipo, int codigoNcm, Categoria categoria) {
+        this.id = id;
+        this.descricao = descricao;
+        this.unidade = unidade;
+        this.permiteFracionar = permiteFracionar;
+        this.tipo = tipo;
+        this.codigNcm = codigoNcm;
+        this.categoria = categoria;
+    }
 
     @Override
     public Long getId() {

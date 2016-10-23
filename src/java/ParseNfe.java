@@ -7,14 +7,16 @@ import org.jsoup.select.Elements;
 
 import dao.DAOGenerica;
 import entity.entitys.*;
-import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.criterion.MatchMode;
 
 /**
  *
  * @author Gustavo
  */
 public class ParseNfe {
+
+    private static DAOGenerica dao = new DAOGenerica();
 
     String nfe_html;
     Document doc;
@@ -25,22 +27,24 @@ public class ParseNfe {
     }
 
     public void rodar() {
-        //cadastrarUnidade();
-        cadastrarProdutos();
 
     }
 
-    public void cadastrarProdutos() {
-        String codigo;
+    public List<Produto> produtosNota() {
+
+        List<Produto> produtoList = null;
+
         int ncm;
+        Long codigo;
         String descricao;
         String tipo = null;
-        UnidadeMedida unidade = new UnidadeMedida();
-        Categoria categoria = new Categoria("importacao");
+        String unidadeSigla;
         boolean permiteFracionar = true;
+
         Produto produto;
 
-        Elements tableTemp;
+        Categoria categoria = cadastrarCategoria("IMPORTACAO");
+        UnidadeMedida unidade = new UnidadeMedida();
         Element prodHeader;
         Element prodContent;
 
@@ -50,18 +54,68 @@ public class ParseNfe {
         boxes.remove(0);
 
         for (int i = 0; i < boxes.size(); i = i + 2) {
+
             prodHeader = boxes.get(i);
             prodContent = boxes.get(i + 1);
 
+            unidadeSigla = prodHeader.select(".fixo-prod-serv-uc").text();
+
             descricao = prodHeader.select(".fixo-prod-serv-descricao").text();
-            //unidade = prodHeader.select(".fixo-prod-serv-uc").text();
 
-            codigo = prodContent.select(":containsOwn(Código do Produto)").first().parent().child(1).text();
+            codigo = Long.parseLong(prodContent.select(":containsOwn(Código do Produto)").first().parent().child(1).text());
             ncm = Integer.parseInt(prodContent.select(":containsOwn(Código NCM)").first().parent().child(1).text());
-
-            produto = new Produto(descricao, unidade, permiteFracionar, tipo, ncm, categoria);
+            
+            unidade = cadastrarUnidade(unidadeSigla);
+            produto = cadastrarProduto(codigo, descricao, unidade, permiteFracionar, tipo, ncm, categoria);
+            produtoList.add(produto);
+            dao.save(produto);
 
         }
+        return produtoList;
+
+    }
+
+    public Produto cadastrarProduto(Long id, String descricao, UnidadeMedida unidade, boolean permiteFracionar, String tipo, int codigoNcm, Categoria categoria) {
+        Produto produto;
+
+        List<Produto> produtoList = dao.buscarPorPropriedade(Produto.class, "descricao", descricao, MatchMode.EXACT);
+
+        if (produtoList.isEmpty()) {
+            produto = new Produto(id, descricao, unidade, permiteFracionar, tipo, codigoNcm, categoria);
+        } else {
+            produto = produtoList.get(0);
+        }
+       
+        dao.save(produto);
+        return produto;
+    }
+
+    public UnidadeMedida cadastrarUnidade(String unidadeSigla) {
+        UnidadeMedida unidade;
+
+        List<UnidadeMedida> unidadeList = dao.buscarPorPropriedade(UnidadeMedida.class, "sigla", unidadeSigla, MatchMode.EXACT);
+
+        if (unidadeList.isEmpty()) {
+            unidade = new UnidadeMedida(unidadeSigla, unidadeSigla);
+        } else {
+            unidade = unidadeList.get(0);
+        }
+        dao.save(unidade);
+        return unidade;
+    }
+
+    public Categoria cadastrarCategoria(String categoriaDesc) {
+        Categoria categoria;
+
+        List<Categoria> categoriaList = dao.buscarPorPropriedade(Categoria.class, "nome", categoriaDesc, MatchMode.EXACT);
+
+        if (categoriaList.isEmpty()) {
+            categoria = new Categoria(categoriaDesc);
+        } else {
+            categoria = categoriaList.get(0);
+        }
+        dao.save(categoria);
+        return categoria;
     }
 
 }
