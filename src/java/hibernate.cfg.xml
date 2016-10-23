@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=controleestoque</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <property name="hibernate.c3p0.max_size">300</property>
+        <property name="hibernate.c3p0.min_size">0</property> 
+        <property name="hibernate.c3p0.timeout">5000</property>
+        <property name="hibernate.c3p0.max_statements">300</property>
+        <property name="hibernate.c3p0.idle_test_period">300</property>
+        <property name="hibernate.c3p0.acquire_increment">2</property>
+
+        <mapping class="entity.entitys.Usuario"/>
+        <mapping class="entity.entitys.Categoria"/>
+        <mapping class="entity.entitys.Endereco"/>
+        <mapping class="entity.entitys.Entidade"/>
+        <mapping class="entity.entitys.Cliente"/>
+        <mapping class="entity.entitys.Fornecedor"/>
+        <mapping class="entity.entitys.UnidadeMedida"/>
+        <mapping class="entity.entitys.Produto"/>
+        <mapping class="entity.entitys.Permissao"/>
+        <mapping class="entity.entitys.GrupoAcesso"/>
+        <mapping class="entity.entitys.Log"/>
+        <mapping class="entity.entitys.Movimentacao"/>
+        <mapping class="entity.entitys.NotaFiscal"/>
+
+  </session-factory>
+</hibernate-configuration>
