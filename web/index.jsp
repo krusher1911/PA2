@@ -13,10 +13,31 @@ pageEncoding="UTF-8"%>
         <script src="resources/js/bootstrap.js" type="text/javascript"></script>
     </head>
     <body>
-        <jsp:include page="master/headerOut.jspf"/>
- 
-        <jsp:include page="master/footer.jspf"/>
-        
+        <div>
+            <header id="top">
+                <nav class="navbar navbar-default navbar-fixed-top">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navHeaderCollapse">
+
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+
+                            </button>
+
+                            <a href="IndexController" class="navbar-brand">projeto UNA</a>
+                        </div>
+                        <div class="collapse navbar-collapse navHeaderCollapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a>${usuario}</a></li>
+                                <li><a href="LoginController"><span class="glyphicon glyphicon-user"></span>Sair</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+        </div>
         <div class="container-fluid">
                 <div class="row">
                         <div class="col-md-2">
@@ -172,10 +193,11 @@ pageEncoding="UTF-8"%>
                         </div>
                 </div>
         </div>
-                    
-<!-- Bootstrap core JavaScript -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        
+        <div class = "navbar navbar-default navbar-fixed-bottom">
+            <div class = "container-fluid">
+                <p class = "navbar-text pull-left">&copy; Projeto UNA. All rights reserved.</p>
+            </div>
+        </div>
     </body>
 </html>

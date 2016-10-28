@@ -12,6 +12,14 @@
         <servlet-name>ServletBuscaPreco</servlet-name>
         <servlet-class>servlet.ServletBuscaPreco</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>Controller.LoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IndexController</servlet-name>
+        <servlet-class>Controller.IndexController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Receita</servlet-name>
         <url-pattern>/Receita</url-pattern>
@@ -24,12 +32,20 @@
         <servlet-name>ServletBuscaPreco</servlet-name>
         <url-pattern>/BuscaPreco</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/LoginController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IndexController</servlet-name>
+        <url-pattern>/IndexController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>view/profile.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
