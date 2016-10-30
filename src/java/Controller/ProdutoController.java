@@ -18,6 +18,30 @@ import javax.servlet.http.HttpSession;
  */
 public class ProdutoController extends HttpServlet {
 
+    private static final DAOGenerica dao = new DAOGenerica();
+    private Produto produto;
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String method = req.getMethod();
+
+        if (method.equals("GET")) {
+            doGet(req, resp);
+        } else if (method.equals("POST")) {
+            doPost(req, resp);
+        } else if (method.equals("PUT")) {
+            doPut(req, resp);
+        } else {
+            // Servlet doesn't currently support
+            // other types of request.
+            String errMsg = "Method Not Supported";
+            resp.sendError(
+                    HttpServletResponse.SC_NOT_IMPLEMENTED, errMsg);
+        }
+    }
+
+
     // <editor-fold defaultstate="collapsed" desc="Javadoc GET">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -31,11 +55,12 @@ public class ProdutoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        DAOGenerica dao = new DAOGenerica();
         List<Produto> produtos = dao.buscarTudo(Produto.class);
 
         HttpSession session = request.getSession();
         session.setAttribute("produtos", produtos);
+
+        response.sendRedirect("index.jsp");
 
     }
 
@@ -52,24 +77,50 @@ public class ProdutoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        DAOGenerica dao = new DAOGenerica();
-
-        Produto produto = new Produto();
+        produto = new Produto();
         produto.setDescricao(request.getParameter("descricao"));
-        UnidadeMedida unidade = (UnidadeMedida) dao.buscarPorId(Produto.class, Long.parseLong(request.getParameter("unidade")));
-        produto.setUnidade(unidade);
+        String unidade = request.getParameter("unidade");
+        if (!unidade.equals("")) {
+            produto.setUnidade((UnidadeMedida) dao.buscarPorId(Produto.class, Long.parseLong(unidade)));
+        }
         produto.setPermiteFracionar(Boolean.parseBoolean(request.getParameter("permiteFracionar")));
         produto.setTipo(request.getParameter("tipo"));
         produto.setCodigNcm(Integer.parseInt(request.getParameter("codigoNcm")));
-        Categoria categoria = (Categoria) dao.buscarPorId(Categoria.class, Long.parseLong(request.getParameter("categoria")));
-        produto.setCategoria(categoria);
+        String categoria = request.getParameter("categoria");
+        if (!categoria.equals("")) {
+            produto.setCategoria((Categoria) dao.buscarPorId(Categoria.class, Long.parseLong(categoria)));
+        }
 
         dao.save(produto);
+        response.sendRedirect("index.jsp");
+
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        produto = (Produto) dao.buscarPorId(Produto.class, Long.parseLong(request.getParameter("id")));
+
+        produto.setDescricao(request.getParameter("descricao"));
+        String unidade = request.getParameter("unidade");
+        if (!unidade.equals("")) {
+            produto.setUnidade((UnidadeMedida) dao.buscarPorId(Produto.class, Long.parseLong(unidade)));
+        }
+        produto.setPermiteFracionar(Boolean.parseBoolean(request.getParameter("permiteFracionar")));
+        produto.setTipo(request.getParameter("tipo"));
+        produto.setCodigNcm(Integer.parseInt(request.getParameter("codigoNcm")));
+        String categoria = request.getParameter("categoria");
+        if (!categoria.equals("")) {
+            produto.setCategoria((Categoria) dao.buscarPorId(Categoria.class, Long.parseLong(categoria)));
+        }
+
+        dao.update(produto);
+        response.sendRedirect("index.jsp");
 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *

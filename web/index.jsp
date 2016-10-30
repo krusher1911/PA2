@@ -1,4 +1,5 @@
 <%@page import="java.time.LocalDate"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -43,16 +44,17 @@ pageEncoding="UTF-8"%>
                 <div class="row">
                         <div class="col-md-2">
                                 <ul class="nav nav-pills nav-stacked">
-                                        <li class="active"><a data-toggle="tab" href="#principal">Principal</a></li>
-                                        <li><a id="menu1" data-toggle="tab" href="#movimentacoes">Movimentações</a></li>
-                                        <li><a data-toggle="tab" href="#produtos">Produtos</a></li>
+                                    <li class="active"><a data-toggle="tab" href="#principal">Principal</a></li>
+                                    <li><a id="menu1" data-toggle="tab" href="#movimentacoes">Movimentações</a></li>
+                                    <li><a data-toggle="tab" href="#produtos">Produtos</a></li>
                                 </ul>
                         </div>
                         <div class="col-md-10">
-                                <div class="tab-content">
-                                        <div id="principal" class="tab-pane fade in active">
-                                                <div class="panel panel-primary">
-                                                        <div class="panel panel-heading">
+                            <div class="tab-content">
+                                <!-- conteudo principal -->
+                                <div id="principal" class="tab-pane fade in active">
+                                        <div class="panel panel-primary">
+                                            <div class="panel panel-heading">
                                                                 <center>
                                                                 <h3 class="panel-title">Principal</h3></center>
                                                         </div>
@@ -92,8 +94,12 @@ pageEncoding="UTF-8"%>
                                                                 </center>
                                                         </div>
                                                 </div>
-                                        </div>
-                                        <div id="movimentacoes" class="tab-pane fade">
+                                    </div>
+                                <!-- fim conteudo principal -->
+
+
+                                <!-- conteudo movimentações -->
+                                    <div id="movimentacoes" class="tab-pane fade">
                                                 <div class="panel panel-primary">
                                                         <div class="panel panel-heading">
                                                                 <center>
@@ -128,20 +134,51 @@ pageEncoding="UTF-8"%>
                                                         </div>
                                                 </div>
                                         </div>
+                                    <!-- fim conteudo movimentações -->
+
+
+                                    <!-- Conteudo produtos -->
                                         <div id="produtos" class="tab-pane fade">
-                                                <div class="panel panel-primary">
+                                        <div class="panel panel-primary">
                                                         <div class="panel panel-heading">
-                                                                <center><h3 class="panel-title">Produtos</h3></center>
+                                                            <center><h3 class="panel-title">Produtos</h3></center>
+                                                            <center><h3 class="panel-title"><a href="ProdutoController">Clique aqui para listar os produtos</a></h3></center>
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalCadastrar"><span class="glyphicon glyphicon-plus"></span></button>
                                                         </div>
                                                         <div class="panel-body">
                                                             <div class="container form-inline">
-                                                                <a><strong>Produto</strong></a>
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></button>
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span></button>
+                                                                <table border="1px">
+                                                                    <tr>
+                                                                        <th>Código</th>
+                                                                        <th>Descrição</th>
+                                                                        <th>Unidade de Medida</th>
+                                                                        <th>Permite Fracionar?</th>
+                                                                        <th>Tipo</th>
+                                                                        <th>Código NCM</th>
+                                                                        <th>Categoria</th>
+                                                                        <th>Ações</th>
+                                                                    </tr>
+                                                                    <c:forEach var="produto" items="${produtos}">
+                                                                        <tr>
+                                                                            <td>${produto.id}</td>
+                                                                            <td>${produto.descricao}</td>
+                                                                            <td>${produto.unidade}</td>
+                                                                            <td>${produto.permiteFracionar}</td>
+                                                                            <td>${produto.tipo}</td>
+                                                                            <td>${produto.codigNcm}</td>
+                                                                            <td>${produto.categoria}</td>
+                                                                            <td>
+                                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalEditar"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalEditar"><span class="glyphicon glyphicon-trash"></span></button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </c:forEach>
 
-                                                                <!-- Conteudo do modal -->
-                                                                <div class="modal fade" id="myModal" role="dialog">
+                                                                </table>
+
+
+                                                                <!-- Conteudo do modal cadastrar -->
+                                                                <div class="modal fade" id="modalCadastrar" role="dialog">
                                                                     <div class="modal-dialog">
 
                                                                         <!-- Modal content-->
@@ -149,22 +186,137 @@ pageEncoding="UTF-8"%>
                                                                             <div class="modal-header">
                                                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                                 <center><h4 class="modal-title">Cadastro de Produtos</h4></center>
+                                                                            </div>
+                                                                            <form class="form-group" action="ProdutoController" method="post">
+                                                                                <!--<div class="modal-body">-->
+
+
+                                                                                <div class="form-group">
+                                                                                    <label class="col-lg-2 control-label" for="inputDescricao">Descrição</label>
+                                                                                    <div class="col-lg-10">
+                                                                                        <input class="form-control" id="inputDescricao" name="descricao" placeholder="Descrição" type="text" data-toggle="tootip" data-placement="top" title="Descrição:">
+                                                                                    </div>
                                                                                 </div>
-                                                                            <div class="modal-body">
-                                                                                
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                <button type="submit" class="btn btn-default" data-dismiss="modal">Salvar</button>
-                                                                            </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-lg-2 control-label" for="inputUnidade">Unidade</label>
+                                                                                    <div class="col-lg-10">
+                                                                                        <input class="form-control" id="inputUnidade" name="unidade" placeholder="Unidade" type="text" data-toggle="tootip" data-placement="top" title="Unidade">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-lg-2 control-label" for="inputPermiteFracionar">Permite Fracionar?</label>
+                                                                                    <div class="col-lg-10">
+                                                                                        <input class="form-control" id="inputPermiteFracionar" name="permiteFracionar" placeholder="Permite Fracionar?" type="text" data-toggle="tootip" data-placement="top" title="Permite Fracionar?">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-lg-2 control-label" for="inputTipo">Tipo</label>
+                                                                                    <div class="col-lg-10">
+                                                                                        <input class="form-control" id="inputTipo" name="tipo" placeholder="Tipo" type="text" data-toggle="tootip" data-placement="top" title="Tipo">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-lg-2 control-label" for="inputCodigNcm">Código NCM</label>
+                                                                                    <div class="col-lg-10">
+                                                                                        <input class="form-control" id="inputCodigNcm" name="codigoNcm" placeholder="Código NCM" type="text" data-toggle="tootip" data-placement="top" title="Código NCM">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-lg-2 control-label" for="inputCategoria">Categoria</label>
+                                                                                    <div class="col-lg-10">
+                                                                                        <input class="form-control" id="inputCategoria" name="categoria" placeholder="Categoria" type="text" data-toggle="tootip" data-placement="top" title="Categoria">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!--                                                                            </div>
+                                                                                                                                                            <div class="modal-footer">-->
+                                                                                <div class="form-group">
+                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                    <button type="submit" class="btn btn-default" >Salvar</button>
+                                                                                </div>
+                                                                                <!--</div>-->
+                                                                            </form>
                                                                         </div>
 
                                                                     </div>
                                                                 </div>
+                                                                <!--fim modal cadastrar -->
+
+                                                                <!-- Conteudo do modal editar -->
+                                                                <div class="modal fade" id="modalEditar" role="dialog">
+                                                                    <div class="modal-dialog">
+
+                                                                        <!-- Modal content-->
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                <center><h4 class="modal-title">Editar de Produto</h4></center>
+                                                                            </div>
+                                                                            <form class="form-group" action="ProdutoController" nctype="multipart/form-data" method="PUT">
+                                                                                <!--<div class="modal-body">-->
+
+                                                                                <input type="hidden" name="_method" value="PUT">
+                                                                                <div class="form-group">
+                                                                                    <label class="col-lg-2 control-label" for="inputId">ID</label>
+                                                                                    <div class="col-lg-10">
+                                                                                        <input class="form-control" id="inputId" name="id" placeholder="${produto.descricao}" type="text" data-toggle="tootip" data-placement="top" title="ID">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-lg-2 control-label" for="inputDescricao">Descrição</label>
+                                                                                    <div class="col-lg-10">
+                                                                                        <input class="form-control" id="inputDescricao" name="descricao" placeholder="${produto.descricao}" type="text" data-toggle="tootip" data-placement="top" title="Descrição:">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-lg-2 control-label" for="inputUnidade">Unidade</label>
+                                                                                    <div class="col-lg-10">
+                                                                                        <input class="form-control" id="inputUnidade" name="unidade" placeholder="Unidade" type="text" data-toggle="tootip" data-placement="top" title="Unidade">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-lg-2 control-label" for="inputPermiteFracionar">Permite Fracionar?</label>
+                                                                                    <div class="col-lg-10">
+                                                                                        <input class="form-control" id="inputPermiteFracionar" name="permiteFracionar" placeholder="Permite Fracionar?" type="text" data-toggle="tootip" data-placement="top" title="Permite Fracionar?">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-lg-2 control-label" for="inputTipo">Tipo</label>
+                                                                                    <div class="col-lg-10">
+                                                                                        <input class="form-control" id="inputTipo" name="tipo" placeholder="Tipo" type="text" data-toggle="tootip" data-placement="top" title="Tipo">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-lg-2 control-label" for="inputCodigNcm">Código NCM</label>
+                                                                                    <div class="col-lg-10">
+                                                                                        <input class="form-control" id="inputCodigNcm" name="codigoNcm" placeholder="Código NCM" type="text" data-toggle="tootip" data-placement="top" title="Código NCM">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-lg-2 control-label" for="inputCategoria">Categoria</label>
+                                                                                    <div class="col-lg-10">
+                                                                                        <input class="form-control" id="inputCategoria" name="categoria" placeholder="Categoria" type="text" data-toggle="tootip" data-placement="top" title="Categoria">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!--                                                                            </div>
+                                                                                                                                                            <div class="modal-footer">-->
+                                                                                <div class="form-group">
+                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                    <button type="submit" class="btn btn-default" >Salvar</button>
+                                                                                </div>
+                                                                                <!--</div>-->
+                                                                            </form>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <!--fim modal-->
+
                                                             </div>
                                                         </div>
                                                 </div>
                                         </div>
+
+                                        <!-- fim conteudo produtos -->
                                 </div>
                         </div>
                 </div>
