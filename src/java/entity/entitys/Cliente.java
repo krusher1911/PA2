@@ -22,6 +22,7 @@ public class Cliente extends Entidade implements EntidadeBase {
     }
 
     public Cliente(String nome, Long cpf, String apelido, Endereco endereco, ModoCadastro modoCadastro, Usuario usuario) {
+        super(TipoEntidade.FÍSICA, apelido, endereco, modoCadastro, usuario);
        this.nome = nome;
        this.cpf = cpf;
    }

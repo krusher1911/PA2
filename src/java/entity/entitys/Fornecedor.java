@@ -25,6 +25,7 @@ public class Fornecedor extends Entidade implements EntidadeBase {
     }
     
     public Fornecedor(String razaoSocial, Long cnpj, String nomeFantasia, String apelido, Endereco endereco, ModoCadastro modoCadastro, Usuario usuario) {
+        super(TipoEntidade.JURIDICA, apelido, endereco, modoCadastro, usuario);
         this.razaoSocial = razaoSocial;
        this.cnpj = cnpj;
         this.nomeFantasia = nomeFantasia;
