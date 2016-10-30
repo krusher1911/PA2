@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -130,62 +131,40 @@ pageEncoding="UTF-8"%>
                                         <div id="produtos" class="tab-pane fade">
                                                 <div class="panel panel-primary">
                                                         <div class="panel panel-heading">
-                                                                <center><h3 class="panel-title">Produtos</h3></center>
+                                                            <center><h3 class="panel-title">Produtos</h3></center>
                                                         </div>
                                                         <div class="panel-body">
-                                                                <table class="table">
-                                                                        <thead class="thead-inverse">
-                                                                            <tr>
-                                                                                        <th>#</th>
-                                                                                        <th>First Name</th>
-                                                                                        <th>Last Name</th>
-                                                                                        <th>Username</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                        <th scope="row">1</th>
-                                                                                        <td>Mark</td>
-                                                                                        <td>Otto</td>
-                                                                                        <td>@mdo</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                        <th scope="row">2</th>
-                                                                                        <td>Jacob</td>
-                                                                                        <td>Thornton</td>
-                                                                                        <td>@fat</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                        <th scope="row">3</th>
-                                                                                        <td>Larry</td>
-                                                                                        <td>the Bird</td>
-                                                                                        <td>@twitter</td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                </table>
+                                                            <div class="container form-inline">
+                                                                <a><strong>Produto</strong></a>
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></button>
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span></button>
+
+                                                                <!-- Conteudo do modal -->
+                                                                <div class="modal fade" id="myModal" role="dialog">
+                                                                    <div class="modal-dialog">
+
+                                                                        <!-- Modal content-->
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                <center><h4 class="modal-title">Cadastro de Produtos</h4></center>
+                                                                                </div>
+                                                                            <div class="modal-body">
+                                                                                
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                <button type="submit" class="btn btn-default" data-dismiss="modal">Salvar</button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
                                                         </div>
-                                                        <div class="panel-footer">
-                                                                <center>
-                                                                        <nav aria-label="Page navigation">
-                                                                                <ul class="pagination">
-                                                                                        <li>
-                                                                                                <a href="#" aria-label="Previous">
-                                                                                                <span aria-hidden="true">&laquo;</span>
-                                                                                                </a>
-                                                                                        </li>
-                                                                                    <li><a href="#">1</a></li>
-                                                                                    <li><a href="#">2</a></li>
-                                                                                    <li><a href="#">3</a></li>
-                                                                                    <li><a href="#">4</a></li>
-                                                                                    <li><a href="#">5</a></li>
-                                                                                    <li>
-                                                                                                <a href="#" aria-label="Next">
-                                                                                        <span aria-hidden="true">&raquo;</span>
-                                                                                                </a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                        </nav>
-                                                                </center>
                                                         </div>
                                                 </div>
                                         </div>
@@ -196,7 +175,7 @@ pageEncoding="UTF-8"%>
         
         <div class = "navbar navbar-default navbar-fixed-bottom">
             <div class = "container-fluid">
-                <p class = "navbar-text pull-left">&copy; Projeto UNA. All rights reserved.</p>
+                <p class = "navbar-text pull-left">&copy; <% out.print(LocalDate.now().getYear()); %>, Projeto UNA. All rights reserved.</p>
             </div>
         </div>
     </body>
