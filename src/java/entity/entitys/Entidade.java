@@ -18,8 +18,17 @@ public class Entidade implements EntidadeBase {
     private Long id;
         
     @Enumerated(EnumType.STRING)
-    @Column(name="tipo_entidade")
-    private TipoEntidade tipo;
+    @Column(name="tipopessoa_entidade")
+    private TipoEntidade tipoPessoa;
+    
+    @Column(name="nome", length=100)
+    private String nome;
+    
+    @Column(name="nome_fantasia", length=100)
+    private String nomeFantasia;
+    
+    @Column(name="cnpjCpf")
+    private Long cnpjCpf;
 
     @Column(name="apelido", length=100)
     private String apelido;
@@ -43,14 +52,19 @@ public class Entidade implements EntidadeBase {
     public Entidade() {
     }
 
-    public Entidade(TipoEntidade tipo, String apelido, Endereco endereco, ModoCadastro modoInsercao, Usuario usuario) {
-        this.tipo = tipo;
+    public Entidade(TipoEntidade tipoPessoa, String nome, String nomeFantasia, Long cnpjCpf, String apelido, Endereco endereco, LocalDateTime dataCadastro, ModoCadastro modoCadastro, Usuario usuario) {
+        this.tipoPessoa = tipoPessoa;
+        this.nome = nome;
+        this.nomeFantasia = nomeFantasia;
+        this.cnpjCpf = cnpjCpf;
         this.apelido = apelido;
         this.endereco = endereco;
-        this.dataCadastro = LocalDateTime.now();
-        this.modoCadastro = modoInsercao;
+        this.dataCadastro = dataCadastro;
+        this.modoCadastro = modoCadastro;
         this.usuario = usuario;
     }
+
+
 
     @Override
     public Long getId() {
@@ -62,11 +76,11 @@ public class Entidade implements EntidadeBase {
     }
 
     public TipoEntidade getTipo() {
-        return tipo;
+        return tipoPessoa;
     }
 
-    public void setTipo(TipoEntidade tipo) {
-        this.tipo = tipo;
+    public void setTipo(TipoEntidade tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
     }
 
     public Endereco getEndereco() {
@@ -81,8 +95,58 @@ public class Entidade implements EntidadeBase {
         return usuario;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNomeFantasia() {
+        return nomeFantasia;
+    }
+
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
+    }
+
+    public Long getCpfCnpj() {
+        return cnpjCpf;
+    }
+
+    public void setCpfCnpj(Long cnpjCpf) {
+        this.cnpjCpf = cnpjCpf;
+    }
+
+    public String getApelido() {
+        return apelido;
+    }
+
+    public void setApelido(String apelido) {
+        this.apelido = apelido;
+    }
+
+    public LocalDateTime getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDateTime dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public ModoCadastro getModoCadastro() {
+        return modoCadastro;
+    }
+
+    public void setModoCadastro(ModoCadastro modoCadastro) {
+        this.modoCadastro = modoCadastro;
+    }
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+
 
 }

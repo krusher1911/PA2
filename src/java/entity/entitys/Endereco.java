@@ -37,12 +37,12 @@ public class Endereco implements EntidadeBase {
     private String cidade;
     
     @Column(name="estado")
-    private char estado;
+    private String estado;
 
     public Endereco() {
     }
 
-    public Endereco(TipoLogadouro tipo_logadouro, String logadouro, int numero, String complemento, String cidade, char estado) {
+    public Endereco(TipoLogadouro tipo_logadouro, String logadouro, int numero, String complemento, String cidade, String estado) {
         this.tipo_logadouro = tipo_logadouro;
         this.logadouro = logadouro;
         this.numero = numero;
@@ -87,7 +87,7 @@ public class Endereco implements EntidadeBase {
     public String getComplemento() {
         return complemento;
     }
-
+    
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
@@ -108,11 +108,11 @@ public class Endereco implements EntidadeBase {
         this.cidade = cidade;
     }
 
-    public char getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(char estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

@@ -1,6 +1,7 @@
 package entity.entitys;
 
 //importações para o Hibernate e JPA
+// classes cliente e fornecedor podem ser tanto PF quanto PJ!
 import entity.EntidadeBase;
 import entity.enums.ModoCadastro;
 import entity.enums.TipoEntidade;
