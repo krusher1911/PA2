@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -196,7 +197,7 @@ pageEncoding="UTF-8"%>
         
         <div class = "navbar navbar-default navbar-fixed-bottom">
             <div class = "container-fluid">
-                <p class = "navbar-text pull-left">&copy; Projeto UNA. All rights reserved.</p>
+                <p class = "navbar-text pull-left">&copy; <% out.print(LocalDate.now().getYear()); %> - Projeto UNA. All rights reserved.</p>
             </div>
         </div>
     </body>
