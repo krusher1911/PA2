@@ -13,6 +13,7 @@ pageEncoding="UTF-8"%>
         <link href="resources/css/cssLayout.css" rel="stylesheet" type="text/css"/>
         <script src="resources/js/jquery-1.11.2.min.js" type="text/javascript"></script>
         <script src="resources/js/bootstrap.js" type="text/javascript"></script>
+        <script src="resources/js/customScripts.js" type="text/javascript"></script>
     </head>
     <body>
         <div>
@@ -142,38 +143,38 @@ pageEncoding="UTF-8"%>
                                         <div class="panel panel-primary">
                                                         <div class="panel panel-heading">
                                                             <center><h3 class="panel-title">Produtos</h3></center>
-                                                            <center><h3 class="panel-title"><a href="ProdutoController">Clique aqui para listar os produtos</a></h3></center>
+                                                            <a class="btn btn-default btn-sm" href="ProdutoController">Clique aqui para listar os produtos</a>
                                                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalCadastrar"><span class="glyphicon glyphicon-plus"></span></button>
                                                         </div>
                                                         <div class="panel-body">
-                                                            <div class="container form-inline">
-                                                                <table border="1px">
-                                                                    <tr>
-                                                                        <th>Código</th>
-                                                                        <th>Descrição</th>
-                                                                        <th>Unidade de Medida</th>
-                                                                        <th>Permite Fracionar?</th>
-                                                                        <th>Tipo</th>
-                                                                        <th>Código NCM</th>
-                                                                        <th>Categoria</th>
-                                                                        <th>Ações</th>
-                                                                    </tr>
-                                                                    <c:forEach var="produto" items="${produtos}">
+                                                                <table id="jsGrid" class="table" action="ajax.">
+                                                                    <thead class="thead-inverse">
                                                                         <tr>
-                                                                            <td>${produto.id}</td>
-                                                                            <td>${produto.descricao}</td>
-                                                                            <td>${produto.unidade}</td>
-                                                                            <td>${produto.permiteFracionar}</td>
-                                                                            <td>${produto.tipo}</td>
-                                                                            <td>${produto.codigNcm}</td>
-                                                                            <td>${produto.categoria}</td>
-                                                                            <td>
-                                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalEditar"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalEditar"><span class="glyphicon glyphicon-trash"></span></button>
-                                                                            </td>
+                                                                            <th>Código</th>
+                                                                            <th>Descrição</th>
+                                                                            <th>Unidade de Medida</th>
+                                                                            <th>Fracionavel</th>
+                                                                            <th>Tipo</th>
+                                                                            <th>Código NCM</th>
+                                                                            <th>Categoria</th>
+                                                                            <th>Ações</th>
+                                                                            <th> </th>
                                                                         </tr>
-                                                                    </c:forEach>
-
+                                                                        <c:forEach var="produto" items="${produtos}">
+                                                                            <tr>
+                                                                                <td>${produto.id}</td>
+                                                                                <td>${produto.descricao}</td>
+                                                                                <td>${produto.unidade}</td>
+                                                                                <td>${produto.permiteFracionar}</td>
+                                                                                <td>${produto.tipo}</td>
+                                                                                <td>${produto.codigNcm}</td>
+                                                                                <td>${produto.categoria}</td>
+                                                                                <td>
+                                                                                    sadad
+                                                                                </td>
+                                                                            </tr>
+                                                                        </c:forEach>
+                                                                    </tbody>
                                                                 </table>
 
 
