@@ -8,14 +8,14 @@ $(document).ready(function () {
             url: 'ProdutoController',
             type: 'GET',
             async: false,
-            statusCode: {
-                404: function () {
-                    alert('Página não encontrada.');
-                },
-                500: function () {
-                    alert('Erro no servidor.');
-                }
-            },
+//            statusCode: {
+//                404: function () {
+//                    alert('Página não encontrada.');
+//                },
+//                500: function () {
+//                    alert('Erro no servidor.');
+//                }
+//            },
             success: function (data) {
                 if (data.isValid) {
                     $('#principal').removeClass('in');

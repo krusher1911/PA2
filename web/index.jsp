@@ -47,9 +47,9 @@ pageEncoding="UTF-8"%>
                 <div class="row">
                         <div class="col-md-2">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a id="menuPrincipal" data-toggle="tab" href="#principal">Principal</a></li>
-                                    <li><a id="menuMovimentacoes" data-toggle="tab" href="#movimentacoes">Movimentações</a></li>
-                                    <li><a id="menuProdutos" data-toggle="tab" href="#produtos">Produtos</a></li>
+                                    <li class="active"><a id="menuPrincipal" data-toggle="tab" class="btn btn-link" href="#principal">Principal</a></li>
+                                    <li><a id="menuMovimentacoes" data-toggle="tab" class="btn btn-link" href="#movimentacoes">Movimentações</a></li>
+                                    <li><a id="menuProdutos" data-toggle="tab" class="btn btn-link">Produtos</a></li>
                                 </ul>
                         </div>
                         <div class="col-md-10">
@@ -311,7 +311,7 @@ pageEncoding="UTF-8"%>
                                                                                     <div class="form-group">
                                                                                         <div class="row">
                                                                                             <div class="col-md-4 col-lg-offset-7">
-                                                                                                <button type="submit" class="btn btn-primary btn-block active" >Salvar</button>
+                                                                                                <button type="submit" class="btn btn-primary btn-lg btn-block active" >Salvar</button>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
