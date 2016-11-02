@@ -1,9 +1,12 @@
 package entity.entitys;
 
-//importações para o Hibernate e JPA
 import entity.EntidadeBase;
 import javax.persistence.*;
 
+/**
+ *
+ * @author Bruna
+ */
 @Entity
 @Table(name = "permissao")
 public class Permissao implements EntidadeBase {

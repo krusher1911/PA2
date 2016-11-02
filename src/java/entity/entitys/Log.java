@@ -1,10 +1,13 @@
 package entity.entitys;
 
-//importações para o Hibernate e JPA
 import entity.EntidadeBase;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
+/**
+ *
+ * @author Bruna
+ */
 @Entity
 @Table(name="registo")
 public class Log implements EntidadeBase {
@@ -17,7 +20,7 @@ public class Log implements EntidadeBase {
     @Column(name = "data")
     private LocalDateTime data_hora;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 

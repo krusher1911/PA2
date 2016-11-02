@@ -1,9 +1,12 @@
 package entity.entitys;
 
-//importações para o Hibernate e JPA
 import entity.EntidadeBase;
 import javax.persistence.*;
 
+/**
+ *
+ * @author Bruna
+ */
 @Entity
 @Table(name = "produto")
 public class Produto implements EntidadeBase {
@@ -16,7 +19,7 @@ public class Produto implements EntidadeBase {
     @Column(name = "descricao")
     private String descricao;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_unidade")
     private UnidadeMedida unidade;
 
@@ -29,7 +32,7 @@ public class Produto implements EntidadeBase {
     @Column(name = "codigo_ncm")
     private int codigNcm;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 

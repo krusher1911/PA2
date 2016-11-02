@@ -1,6 +1,5 @@
 package entity.entitys;
 
-//importações para o Hibernate e JPA
 import entity.EntidadeBase;
 import entity.enums.ModoCadastro;
 import entity.enums.Natureza;
@@ -10,6 +9,10 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
+/**
+ *
+ * @author Bruna
+ */
 @Entity
 @Table(name = "nota_fiscal")
 public class NotaFiscal implements EntidadeBase {
@@ -28,7 +31,7 @@ public class NotaFiscal implements EntidadeBase {
     @Column(name = "valor_nota")
     private double valorTotal;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="id_envolvido")
     private Entidade entidade;
     
@@ -56,7 +59,7 @@ public class NotaFiscal implements EntidadeBase {
     @Column(name="modo_insercao")
     private ModoCadastro modoCadastro;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
             

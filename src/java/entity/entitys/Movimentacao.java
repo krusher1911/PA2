@@ -1,11 +1,14 @@
 package entity.entitys;
 
-//importações para o Hibernate e JPA
 import entity.EntidadeBase;
 import entity.enums.ModoCadastro;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
+/**
+ *
+ * @author Bruna
+ */
 @Entity
 @Table(name = "movimentacao")
 public class Movimentacao implements EntidadeBase {
@@ -15,18 +18,18 @@ public class Movimentacao implements EntidadeBase {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_produto")
     private Produto produto;
 
     @Column(name = "quantidade")
     private int quantidade;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_unidade")
     private UnidadeMedida unidade;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_nota")
     private NotaFiscal notaFiscal;
 
@@ -46,7 +49,7 @@ public class Movimentacao implements EntidadeBase {
     @Column(name = "modo_insercao")
     private ModoCadastro modoCadastro;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 

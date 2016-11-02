@@ -1,12 +1,13 @@
 package entity.entitys;
 
-//poderia ser @Embedded
-
-//importações para o Hibernate e JPA
 import entity.EntidadeBase;
 import entity.enums.TipoLogadouro;
 import javax.persistence.*;
 
+/**
+ *
+ * @author Bruna
+ */
 @Entity
 @Table(name = "endereco")
 public class Endereco implements EntidadeBase {
