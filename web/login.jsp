@@ -40,12 +40,12 @@ pageEncoding="UTF-8"%>
         <!-- Form Entrar -->
         <div class="row">
             <div class="col-md-4 col-md-offset-4 well">
-                <center><h1 class="h1">Entrar</h1></center>
+                <center><h1 class="h1"><strong>Entrar</strong></h1></center>
                 <form class="form-horizontal" action="LoginController" method="post">
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputUsuario">Usuário</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="inputEmail" name="usuario" placeholder="Usuário" type="text" data-toggle="tootip" data-placement="top" title="Informe o usuário de acesso">
+                            <input class="form-control" id="inputUsuario" name="usuario" placeholder="Usuário" type="text" data-toggle="tootip" data-placement="top" title="Informe o usuário de acesso">
                         </div>
                     </div>
                     <div class="form-group">
@@ -55,7 +55,9 @@ pageEncoding="UTF-8"%>
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary pull-right">Entrar</button>
+                        <div class="row">
+                            <center><button type="submit" class="btn btn-primary btn-lg"><strong>Entrar</strong></button></center>
+                        </div>
                     </div>
                 </form>
             </div>
