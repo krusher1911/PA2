@@ -194,7 +194,7 @@ pageEncoding="UTF-8"%>
                                                                                     <div class="form-group">
                                                                                         <label class="col-lg-2 control-label" for="inputDescricao">Descrição:</label>
                                                                                         <div class="col-lg-10">
-                                                                                            <input class="form-control" id="inputDescricao" name="descricao" placeholder="Descrição" type="text" data-toggle="tootip" data-placement="top" title="Descrição do produto">
+                                                                                            <input class="form-control" id="inputDescricao" name="descricao" placeholder="Descrição" type="text" data-toggle="tooltip" data-placement="top" title="Descrição do produto">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-group">
@@ -207,21 +207,21 @@ pageEncoding="UTF-8"%>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-group">
-                                                                                        <label class="col-lg-2 control-label" for="inputPermiteFracionar">Permite Fracionar?</label>
-                                                                                        <div class="col-lg-10">
-                                                                                            <input class="form-control" id="inputPermiteFracionar" name="permiteFracionar" placeholder="Permite Fracionar?" type="text" data-toggle="tootip" data-placement="top" title="Permite Fracionar?">
+                                                                                        <label class="col-lg-2 control-label" for="inputFracionavel">Fracionável</label>
+                                                                                        <div class="checkbox form-group">
+                                                                                            <input id="inputFracionavel" type="checkbox">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         <label class="col-lg-2 control-label" for="inputTipo">Tipo</label>
                                                                                         <div class="col-lg-10">
-                                                                                            <input class="form-control" id="inputTipo" name="tipo" placeholder="Tipo" type="text" data-toggle="tootip" data-placement="top" title="Tipo">
+                                                                                            <input class="form-control" id="inputTipo" name="tipo" placeholder="Tipo" type="text" data-toggle="tooltip" data-placement="top" title="Tipo">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         <label class="col-lg-2 control-label" for="inputCodigNcm">Código NCM</label>
                                                                                         <div class="col-lg-10">
-                                                                                            <input class="form-control" id="inputCodigNcm" name="codigoNcm" placeholder="Código NCM" type="text" data-toggle="tootip" data-placement="top" title="Código NCM">
+                                                                                            <input class="form-control" id="inputCodigNcm" name="codigoNcm" placeholder="Código NCM" type="text" data-toggle="tooltip" data-placement="top" title="Código NCM">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-group">
@@ -263,13 +263,13 @@ pageEncoding="UTF-8"%>
                                                                                     <div class="form-group">
                                                                                         <label class="col-lg-2 control-label" for="inputId">ID</label>
                                                                                         <div class="col-lg-10">
-                                                                                            <input class="form-control" id="inputId" name="id" placeholder="${produto.descricao}" type="text" data-toggle="tootip" data-placement="top" title="ID">
+                                                                                            <input class="form-control" id="inputId" name="id" placeholder="${produto.descricao}" type="text" data-toggle="tooltip" data-placement="top" title="ID">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         <label class="col-lg-2 control-label" for="inputDescricao">Descrição</label>
                                                                                         <div class="col-lg-10">
-                                                                                            <input class="form-control" id="inputDescricao" name="descricao" placeholder="${produto.descricao}" type="text" data-toggle="tootip" data-placement="top" title="Descrição">
+                                                                                            <input class="form-control" id="inputDescricao" name="descricao" placeholder="${produto.descricao}" type="text" data-toggle="tooltip" data-placement="top" title="Descrição">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-group">
@@ -284,19 +284,19 @@ pageEncoding="UTF-8"%>
                                                                                     <div class="form-group">
                                                                                         <label class="col-lg-2 control-label" for="inputPermiteFracionar">Permite Fracionar?</label>
                                                                                         <div class="col-lg-10">
-                                                                                            <input class="form-control" id="inputPermiteFracionar" name="permiteFracionar" placeholder="Permite Fracionar?" type="text" data-toggle="tootip" data-placement="top" title="Permite Fracionar?">
+                                                                                            <input class="form-control" id="inputPermiteFracionar" name="permiteFracionar" placeholder="Permite Fracionar?" type="text" data-toggle="tooltip" data-placement="top" title="Permite Fracionar?">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         <label class="col-lg-2 control-label" for="inputTipo">Tipo</label>
                                                                                         <div class="col-lg-10">
-                                                                                            <input class="form-control" id="inputTipo" name="tipo" placeholder="Tipo" type="text" data-toggle="tootip" data-placement="top" title="Tipo">
+                                                                                            <input class="form-control" id="inputTipo" name="tipo" placeholder="Tipo" type="text" data-toggle="tooltip" data-placement="top" title="Tipo">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         <label class="col-lg-2 control-label" for="inputCodigNcm">Código NCM</label>
                                                                                         <div class="col-lg-10">
-                                                                                            <input class="form-control" id="inputCodigNcm" name="codigoNcm" placeholder="Código NCM" type="text" data-toggle="tootip" data-placement="top" title="Código NCM">
+                                                                                            <input class="form-control" id="inputCodigNcm" name="codigoNcm" placeholder="Código NCM" type="text" data-toggle="tooltip" data-placement="top" title="Código NCM">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-group">
@@ -322,6 +322,28 @@ pageEncoding="UTF-8"%>
                                                                     </div>
                                                                 </div>
                                                                 <!--fim modal-->
+                                                                
+                                                                <div class="modal fade" id="modalRemover" role="dialog">
+                                                                    <div class="modal-dialog">
+
+                                                                        <!-- Modal content-->
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                <center><h4 class="modal-title">Excluir Produto</h4></center>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <center><h5><strong>Deseja realmente excluir este produto?</strong></h5></center>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <center>
+                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                                                                                    <button type="submit" class="btn btn-primary">Sim</button>
+                                                                                </center>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
                                                             </div>
                                                         </div>
