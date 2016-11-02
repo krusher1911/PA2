@@ -14,6 +14,8 @@ pageEncoding="UTF-8"%>
         <script src="resources/js/jquery-1.11.2.min.js" type="text/javascript"></script>
         <script src="resources/js/bootstrap.js" type="text/javascript"></script>
         <script src="resources/js/customScripts.js" type="text/javascript"></script>
+
+        <script src="resources/js/ajax.js" ></script>
     </head>
     <body>
         <div>
@@ -45,9 +47,9 @@ pageEncoding="UTF-8"%>
                 <div class="row">
                         <div class="col-md-2">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a data-toggle="tab" href="#principal">Principal</a></li>
-                                    <li><a id="menu1" data-toggle="tab" href="#movimentacoes">Movimentações</a></li>
-                                    <li><a data-toggle="tab" href="#produtos">Produtos</a></li>
+                                    <li class="active"><a id="menuPrincipal" data-toggle="tab" href="#principal">Principal</a></li>
+                                    <li><a id="menuMovimentacoes" data-toggle="tab" href="#movimentacoes">Movimentações</a></li>
+                                    <li><a id="menuProdutos" data-toggle="tab">Produtos</a></li>
                                 </ul>
                         </div>
                         <div class="col-md-10">
@@ -143,8 +145,7 @@ pageEncoding="UTF-8"%>
                                         <div class="panel panel-primary">
                                                         <div class="panel panel-heading">
                                                             <center><h3 class="panel-title">Produtos</h3></center>
-                                                            <a class="btn btn-default btn-sm" href="ProdutoController">Clique aqui para listar os produtos</a>
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalCadastrar"><span class="glyphicon glyphicon-plus"></span></button>
+                                                            <button id="cadastrarProduto" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalCadastrar"><span class="glyphicon glyphicon-plus"></span></button>
                                                         </div>
                                                         <div class="panel-body">
                                                                 <table id="jsGrid" class="table" action="ajax.">
@@ -153,7 +154,7 @@ pageEncoding="UTF-8"%>
                                                                             <th>Código</th>
                                                                             <th>Descrição</th>
                                                                             <th>Unidade de Medida</th>
-                                                                            <th>Fracionavel</th>
+                                                                            <th>Fracionavel?</th>
                                                                             <th>Tipo</th>
                                                                             <th>Código NCM</th>
                                                                             <th>Categoria</th>
@@ -162,15 +163,16 @@ pageEncoding="UTF-8"%>
                                                                         </tr>
                                                                         <c:forEach var="produto" items="${produtos}">
                                                                             <tr>
-                                                                                <td>${produto.id}</td>
-                                                                                <td>${produto.descricao}</td>
-                                                                                <td>${produto.unidade}</td>
-                                                                                <td>${produto.permiteFracionar}</td>
-                                                                                <td>${produto.tipo}</td>
-                                                                                <td>${produto.codigNcm}</td>
-                                                                                <td>${produto.categoria}</td>
+                                                                                <td>${produto.getId()}</td>
+                                                                                <td>${produto.getDescricao()}</td>
+                                                                                <td>${produto.getUnidade().getDescricao()}</td>
+                                                                                <td>${produto.getPermiteFracionar()}</td>
+                                                                                <td>${produto.getTipo()}</td>
+                                                                                <td>${produto.getCodigNcm()}</td>
+                                                                                <td>${produto.getCategoria().getNome()}</td>
                                                                                 <td>
-                                                                                    sadad
+                                                                                    <button id="editarProduto" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalEditar"><span class="glyphicon glyphicon-edit"></span></button>
+                                                                                    <button id="removerProduto" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalRemover"><span class="glyphicon glyphicon-remove"></span></button>
                                                                                 </td>
                                                                             </tr>
                                                                         </c:forEach>
@@ -201,7 +203,10 @@ pageEncoding="UTF-8"%>
                                                                                 <div class="form-group">
                                                                                     <label class="col-lg-2 control-label" for="inputUnidade">Unidade</label>
                                                                                     <div class="col-lg-10">
-                                                                                        <input class="form-control" id="inputUnidade" name="unidade" placeholder="Unidade" type="text" data-toggle="tootip" data-placement="top" title="Unidade">
+                                                                                        <!--<input class="form-control" id="inputUnidade" name="unidade" placeholder="Unidade" type="text" data-toggle="tootip" data-placement="top" title="Unidade">-->
+                                                                                        <select name="unidades" id="unidades">
+                                                                                            <option value ="">------------------</option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group">
@@ -225,7 +230,10 @@ pageEncoding="UTF-8"%>
                                                                                 <div class="form-group">
                                                                                     <label class="col-lg-2 control-label" for="inputCategoria">Categoria</label>
                                                                                     <div class="col-lg-10">
-                                                                                        <input class="form-control" id="inputCategoria" name="categoria" placeholder="Categoria" type="text" data-toggle="tootip" data-placement="top" title="Categoria">
+                                                                                        <!--<input class="form-control" id="inputCategoria" name="categoria" placeholder="Categoria" type="text" data-toggle="tootip" data-placement="top" title="Categoria">-->
+                                                                                        <select name="categorias" id="categorias">
+                                                                                            <option value ="">------------------</option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                                 <!--                                                                            </div>
@@ -252,10 +260,7 @@ pageEncoding="UTF-8"%>
                                                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                                 <center><h4 class="modal-title">Editar de Produto</h4></center>
                                                                             </div>
-                                                                            <form class="form-group" action="ProdutoController" nctype="multipart/form-data" method="PUT">
-                                                                                <!--<div class="modal-body">-->
-
-                                                                                <input type="hidden" name="_method" value="PUT">
+                                                                            <form class="form-group" action="ProdutoController" >
                                                                                 <div class="form-group">
                                                                                     <label class="col-lg-2 control-label" for="inputId">ID</label>
                                                                                     <div class="col-lg-10">
@@ -271,7 +276,10 @@ pageEncoding="UTF-8"%>
                                                                                 <div class="form-group">
                                                                                     <label class="col-lg-2 control-label" for="inputUnidade">Unidade</label>
                                                                                     <div class="col-lg-10">
-                                                                                        <input class="form-control" id="inputUnidade" name="unidade" placeholder="Unidade" type="text" data-toggle="tootip" data-placement="top" title="Unidade">
+                                                                                        <!--<input class="form-control" id="inputUnidade" name="unidade" placeholder="Unidade" type="text" data-toggle="tootip" data-placement="top" title="Unidade">-->
+                                                                                        <select name="unidades" id="unidades">
+                                                                                            <option value ="">------------------</option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group">
@@ -295,7 +303,10 @@ pageEncoding="UTF-8"%>
                                                                                 <div class="form-group">
                                                                                     <label class="col-lg-2 control-label" for="inputCategoria">Categoria</label>
                                                                                     <div class="col-lg-10">
-                                                                                        <input class="form-control" id="inputCategoria" name="categoria" placeholder="Categoria" type="text" data-toggle="tootip" data-placement="top" title="Categoria">
+                                                                                        <!--<input class="form-control" id="inputCategoria" name="categoria" placeholder="Categoria" type="text" data-toggle="tootip" data-placement="top" title="Categoria">-->
+                                                                                        <select name="categorias" id="categorias">
+                                                                                            <option value ="">------------------</option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                                 <!--                                                                            </div>

@@ -16,7 +16,7 @@ public class Produto implements EntidadeBase {
     @Column(name = "descricao")
     private String descricao;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_unidade")
     private UnidadeMedida unidade;
 
@@ -29,7 +29,7 @@ public class Produto implements EntidadeBase {
     @Column(name = "codigo_ncm")
     private int codigNcm;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
@@ -86,12 +86,28 @@ public class Produto implements EntidadeBase {
         return unidade;
     }
 
+    public Long gettUnidadeId() {
+        return unidade.getId();
+    }
+
+    public String gettUnidadeDescricao() {
+        return unidade.getDescricao();
+    }
+
+    public String gettUnidadeSigla() {
+        return unidade.getSigla();
+    }
+
     public void setUnidade(UnidadeMedida unidade) {
         this.unidade = unidade;
     }
 
-    public boolean isPermiteFracionar() {
-        return permiteFracionar;
+    public String getPermiteFracionar() {
+        if (permiteFracionar) {
+            return "Sim";
+        } else {
+            return "Não";
+        }
     }
 
     public void setPermiteFracionar(boolean permiteFracionar) {

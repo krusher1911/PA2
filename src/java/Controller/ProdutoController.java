@@ -1,11 +1,14 @@
 package Controller;
 
+import com.google.gson.Gson;
 import dao.DAOGenerica;
 import entity.entitys.Categoria;
 import entity.entitys.Produto;
 import entity.entitys.UnidadeMedida;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,28 +23,7 @@ public class ProdutoController extends HttpServlet {
 
     private static final DAOGenerica dao = new DAOGenerica();
     private Produto produto;
-
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        String method = req.getMethod();
-
-        if (method.equals("GET")) {
-            doGet(req, resp);
-        } else if (method.equals("POST")) {
-            doPost(req, resp);
-        } else if (method.equals("PUT")) {
-            doPut(req, resp);
-        } else {
-            // Servlet doesn't currently support
-            // other types of request.
-            String errMsg = "Method Not Supported";
-            resp.sendError(
-                    HttpServletResponse.SC_NOT_IMPLEMENTED, errMsg);
-        }
-    }
-
-
+    boolean isValid = false;
     // <editor-fold defaultstate="collapsed" desc="Javadoc GET">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -56,11 +38,17 @@ public class ProdutoController extends HttpServlet {
             throws ServletException, IOException {
 
         List<Produto> produtos = dao.buscarTudo(Produto.class);
-
-        HttpSession session = request.getSession();
-        session.setAttribute("produtos", produtos);
-
-        response.sendRedirect("index.jsp");
+        if (!produtos.isEmpty()) {
+            HttpSession session = request.getSession();
+            session.setAttribute("produtos", produtos);
+            isValid = true;
+        }
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("isValid", isValid);
+        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(new Gson().toJson(map));
 
     }
 

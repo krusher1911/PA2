@@ -24,6 +24,14 @@
         <servlet-name>ProdutoController</servlet-name>
         <servlet-class>Controller.ProdutoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CategoriaController</servlet-name>
+        <servlet-class>Controller.CategoriaController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UnidadeController</servlet-name>
+        <servlet-class>Controller.UnidadeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Receita</servlet-name>
         <url-pattern>/Receita</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>ProdutoController</servlet-name>
         <url-pattern>/ProdutoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoriaController</servlet-name>
+        <url-pattern>/CategoriaController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UnidadeController</servlet-name>
+        <url-pattern>/UnidadeController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
