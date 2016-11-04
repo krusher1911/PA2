@@ -3,6 +3,16 @@
  */
 
 $(document).ready(function () {
+    
+    $('.editarProduto').click(function () {
+        debugger;
+        var myBookId = $('.editarProduto').data('id');
+        $("#modalEditar .modal-body #inputId").val( myBookId );
+        // As pointed out in comments, 
+        // it is superfluous to have to manually call the modal.
+        $('#modalEditar').modal('show');
+});
+    
     $('#menuProdutos').click(function () {
         $.ajax({
             url: 'ProdutoController',
@@ -17,7 +27,7 @@ $(document).ready(function () {
 //                }
 //            },
             success: function (data) {
-                if (data.isValid) {
+                //if (data.isValid) {
                     $('#principal').removeClass('in');
                     $('#principal').removeClass('active');
                     $('#menuPrincipal').removeClass('active');
@@ -29,10 +39,11 @@ $(document).ready(function () {
                     $('#produtos').addClass('in');
                     $('#produtos').addClass('active');
                     $('#menuProdutos').addClass('active');
-                } else {
-                    alert('Não há produtos cadastrados.');
-                }
+                //} else {
+                    //alert('Não há produtos cadastrados.');
+                //}
             }
+            
         });
     });
 
