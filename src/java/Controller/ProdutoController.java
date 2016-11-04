@@ -67,14 +67,14 @@ public class ProdutoController extends HttpServlet {
 
         produto = new Produto();
         produto.setDescricao(request.getParameter("descricao"));
-        String unidade = request.getParameter("unidade");
+        String unidade = request.getParameter("unidades");
         if (!unidade.equals("")) {
             produto.setUnidade((UnidadeMedida) dao.buscarPorId(Produto.class, Long.parseLong(unidade)));
         }
         produto.setPermiteFracionar(Boolean.parseBoolean(request.getParameter("permiteFracionar")));
         produto.setTipo(request.getParameter("tipo"));
         produto.setCodigNcm(Integer.parseInt(request.getParameter("codigoNcm")));
-        String categoria = request.getParameter("categoria");
+        String categoria = request.getParameter("categorias");
         if (!categoria.equals("")) {
             produto.setCategoria((Categoria) dao.buscarPorId(Categoria.class, Long.parseLong(categoria)));
         }

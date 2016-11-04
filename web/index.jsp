@@ -191,7 +191,7 @@ pageEncoding="UTF-8"%>
                                                         <td>${produto.getCodigNcm()}</td>
                                                         <td>${produto.getCategoria().getNome()}</td>
                                                         <td>
-                                                            <button id="editarProduto" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEditar"><span class="glyphicon glyphicon-edit"></span></button>
+                                                            <button id="editarProduto" type="button" class="editarProduto btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></button>
                                                             <button id="removerProduto" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalRemover"><span class="glyphicon glyphicon-remove"></span></button>
                                                         </td>
                                                     </tr>
