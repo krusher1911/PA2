@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputId">ID</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="inputId" name="id" type="text" data-toggle="tooltip" data-placement="top" title="ID">
+                            <input class="form-control" id="inputId" name="id" placeholder="${produto.descricao}" type="text" data-toggle="tooltip" data-placement="top" title="ID">
                         </div>
                     </div>
                     <div class="form-group">
@@ -26,15 +26,16 @@
                         <label class="col-lg-2 control-label" for="inputUnidade">Unidade</label>
                         <div class="col-lg-10">
                             <!--<input class="form-control" id="inputUnidade" name="unidade" placeholder="Unidade" type="text" data-toggle="tootip" data-placement="top" title="Unidade">-->
-                            <select name="unidades" id="unidades">
-                                <option value ="">------------------</option>
+                            <select class="form-control" name="unidades" id="unidades">
+                                <option value =""></option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="inputPermiteFracionar">Permite Fracionar?</label>
-                        <div class="col-lg-10">
-                            <input class="form-control" id="inputPermiteFracionar" name="permiteFracionar" placeholder="Permite Fracionar?" type="text" data-toggle="tooltip" data-placement="top" title="Permite Fracionar?">
+                        <label class="col-lg-2 control-label" for="inputFracionavel">Fracionável</label>
+                        <div class="col-lg-6">
+                            <label class="radio-inline"><input type="radio" name="fracionavel">Sim</label>
+                            <label class="radio-inline"><input type="radio" name="fracionavel">Não</label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -53,8 +54,8 @@
                         <label class="col-lg-2 control-label" for="inputCategoria">Categoria</label>
                         <div class="col-lg-10">
                             <!--<input class="form-control" id="inputCategoria" name="categoria" placeholder="Categoria" type="text" data-toggle="tootip" data-placement="top" title="Categoria">-->
-                            <select name="categorias" id="categorias">
-                                <option value ="">------------------</option>
+                            <select class="form-control" name="categorias" id="categorias">
+                                <option value =""></option>
                             </select>
                         </div>
                     </div>
