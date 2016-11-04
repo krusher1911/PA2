@@ -58,8 +58,7 @@ pageEncoding="UTF-8"%>
                             <div id="principal" class="tab-pane fade in active">
                                 <div class="panel panel-primary">
                                     <div class="panel panel-heading">
-                                        <center>
-                                        <h3 class="panel-title">Principal</h3></center>
+                                        <p class="panel-title" align="center"><strong>Principal</strong></p>
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">
@@ -105,48 +104,71 @@ pageEncoding="UTF-8"%>
                                 <div id="movimentacoes" class="tab-pane fade">
                                     <div class="panel panel-primary">
                                         <div class="panel panel-heading">
-                                            <center>
-                                                    <h3 class="panel-title">Movimentações</h3>
-                                            </center>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <a id="cadastrarMovimentacao" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastrarMovimentacao"><span class="glyphicon glyphicon-plus"></span></a>
+                                                </div>
+                                                <div class="col-md-4 ">
+                                                        <p class="panel-title" align="center"><strong>Movimentações</strong></p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="panel-body">
-                                                Panel content
-                                        </div>
-                                        <div class="panel-footer">
-                                            <center>
-                                                <nav aria-label="Page navigation">
-                                                    <ul class="pagination">
-                                                            <li>
-                                                                    <a href="#" aria-label="Previous">
-                                                                    <span aria-hidden="true">&laquo;</span>
-                                                                    </a>
-                                                        </li>
-                                                        <li><a href="#">1</a></li>
-                                                        <li><a href="#">2</a></li>
-                                                        <li><a href="#">3</a></li>
-                                                        <li><a href="#">4</a></li>
-                                                        <li><a href="#">5</a></li>
-                                                        <li>
-                                                            <a href="#" aria-label="Next">
-                                                            <span aria-hidden="true">&raquo;</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
-                                            </center>
+                                            <table id="jsGrid" class="table" action="ajax.">
+                                                <thead class="thead-inverse">
+                                                    <tr>
+                                                        <th>Data</th>
+                                                        <th>ID Nota</th>
+                                                        <th>Descrição</th>
+                                                        <th>Quantidade</th>
+                                                        <th>Valor Desconto</th>
+                                                        <th>Valor Unitário</th>
+                                                        <th>Valor Total</th>
+                                                        
+                                                    </tr>
+                                                    <c:forEach var="movimentacao" items="${movimentacoes}">
+                                                        <tr>
+                                                            <td>${movimentacao.getId()}</td>
+                                                            <td>${movimentacao.getDescricao()}</td>
+                                                            <td>${movimentacao.getUnidade().getDescricao()}</td>
+                                                            <td>${movimentacao.getPermiteFracionar()}</td>
+                                                            <td>${movimentacao.getTipo()}</td>
+                                                            <td>${movimentacao.getCodigNcm()}</td>
+                                                            <td>${movimentacao.getCategoria().getNome()}</td>
+                                                            <td>
+                                                                <button id="editarProduto" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEditar"><span class="glyphicon glyphicon-edit"></span></button>
+                                                                <button id="removerProduto" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalRemover"><span class="glyphicon glyphicon-remove"></span></button>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             <!-- fim conteudo movimentações -->
 
-
                             <!-- Conteudo produtos -->
                                 <div id="produtos" class="tab-pane fade">
                                 <div class="panel panel-primary">
                                     <div class="panel panel-heading">
-                                        <center><h3 class="panel-title">Produtos</h3></center>
+                                        <div class="row">
+                                                <div class="col-md-4">
+                                                <a id="cadastrarProduto" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastrar"><span class="glyphicon glyphicon-plus"></span></a>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                    <p class="panel-title" align="center"><strong>Produtos</strong></p>
+                                            </div>
+                                            <div class="col-md-4">
+
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="panel-body">
+                                        
                                         <table id="jsGrid" class="table" action="ajax.">
                                             <thead class="thead-inverse">
                                                 <tr>
@@ -158,7 +180,6 @@ pageEncoding="UTF-8"%>
                                                     <th>Código NCM</th>
                                                     <th>Categoria</th>
                                                     <th>Ações</th>
-                                                    <th> </th>
                                                 </tr>
                                                 <c:forEach var="produto" items="${produtos}">
                                                     <tr>
@@ -177,13 +198,12 @@ pageEncoding="UTF-8"%>
                                                 </c:forEach>
                                             </tbody>
                                         </table>
-                                    <button id="cadastrarProduto" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastrar">Novo Produto</button>
+                                        
+                                        <jsp:include page="WEB-INF/Includes/modalCadatroProduto.jsp"/>
 
-                                    <jsp:include page="WEB-INF/Includes/modalCadatroProduto.jsp"/>
+                                        <jsp:include page="WEB-INF/Includes/modalEdicaoProduto.jsp"/>
 
-                                    <jsp:include page="WEB-INF/Includes/modalEdicaoProduto.jsp"/>
-
-                                    <jsp:include page="WEB-INF/Includes/modalExclusaoProduto.jsp"/>
+                                        <jsp:include page="WEB-INF/Includes/modalExclusaoProduto.jsp"/>
 
                                     </div>
                                 </div>
