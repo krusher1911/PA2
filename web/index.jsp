@@ -199,11 +199,11 @@ pageEncoding="UTF-8"%>
                                             </tbody>
                                         </table>
                                         
-                                        <jsp:include page="WEB-INF/Includes/modalCadatroProduto.jsp"/>
+                                        <jsp:include page="WEB-INF/includes/modalCadastroProduto.jsp"/>
 
-                                        <jsp:include page="WEB-INF/Includes/modalEdicaoProduto.jsp"/>
+                                        <jsp:include page="WEB-INF/includes/modalEdicaoProduto.jsp"/>
 
-                                        <jsp:include page="WEB-INF/Includes/modalExclusaoProduto.jsp"/>
+                                        <jsp:include page="WEB-INF/includes/modalExclusaoProduto.jsp"/>
 
                                     </div>
                                 </div>
