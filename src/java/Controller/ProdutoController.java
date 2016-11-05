@@ -45,12 +45,11 @@ public class ProdutoController extends HttpServlet {
         }
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("isValid", isValid);
-        map.put("isValid", produtos);
+        map.put("produtos", produtos);
         
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(map));
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="Javadoc POST">
@@ -70,7 +69,7 @@ public class ProdutoController extends HttpServlet {
         produto.setDescricao(request.getParameter("descricao"));
         String unidade = request.getParameter("unidades");
         if (!unidade.equals("")) {
-            produto.setUnidade((UnidadeMedida) dao.buscarPorId(Produto.class, Long.parseLong(unidade)));
+            produto.setUnidade((UnidadeMedida) dao.buscarPorId(UnidadeMedida.class, Long.parseLong(unidade)));
         }
         produto.setPermiteFracionar(Boolean.parseBoolean(request.getParameter("permiteFracionar")));
         produto.setTipo(request.getParameter("tipo"));

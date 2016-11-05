@@ -4,8 +4,7 @@
 
 $(document).ready(function () {
 
-    $('#menuProdutos').click(function () {
-        alert('${produtos}');
+    $('#contentProduto').ready(function () {
         $.ajax({
             url: 'ProdutoController',
             type: 'GET',
@@ -19,25 +18,24 @@ $(document).ready(function () {
                 }
             },
             success: function (data) {
-                //if (data.isValid) {
-                    $('#principal').removeClass('in');
-                    $('#principal').removeClass('active');
-                    $('#menuPrincipal').removeClass('active');
-
-                    $('#movimentacoes').removeClass('in');
-                    $('#movimentacoes').removeClass('active');
-                    $('#menuMovimentacoes').removeClass('active');
-
-                    $('#produtos').addClass('in');
-                    $('#produtos').addClass('active');
-                    $('#menuProdutos').addClass('active');
-                    
-                    $("#produtos").load("contentProduto.jsp");
-                //} else {
-                    //alert('Não há produtos cadastrados.');
-                //}
-            }
-            
+//                //if (data.isValid) {
+//                    $('#principal').removeClass('in');
+//                    $('#principal').removeClass('active');
+//                    $('#menuPrincipal').removeClass('active');
+//
+//                    $('#movimentacoes').removeClass('in');
+//                    $('#movimentacoes').removeClass('active');
+//                    $('#menuMovimentacoes').removeClass('active');
+//
+//                    $('#produtos').addClass('in');
+//                    $('#produtos').addClass('active');
+//                    $('#menuProdutos').addClass('active');
+//                    
+//                    $("#produtos").load("contentProduto.jsp");
+//                //} else {
+//                    //alert('Não há produtos cadastrados.');
+//                //}
+            } 
         });
     });
 

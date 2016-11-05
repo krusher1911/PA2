@@ -61,4 +61,13 @@ h1{
   text-decoration : none;
 }
 
+a.list-group-item:hover, button.list-group-item:hover, a.list-group-item:focus, button.list-group-item:focus {
+    background-color: #036fab;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+a.list-group-item, button.list-group-item {
+    color: #337ab7;
+}
 
