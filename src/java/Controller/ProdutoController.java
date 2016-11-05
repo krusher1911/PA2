@@ -54,7 +54,7 @@ public class ProdutoController extends HttpServlet {
             isValid = true;
         }
         map.put("isValid", isValid);
-        
+
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(map));
@@ -78,7 +78,7 @@ public class ProdutoController extends HttpServlet {
         produto.setDescricao(request.getParameter("descricao"));
         String unidade = request.getParameter("unidades");
         if (!unidade.equals("")) {
-            produto.setUnidade((UnidadeMedida) dao.buscarPorId(Produto.class, Long.parseLong(unidade)));
+            produto.setUnidade((UnidadeMedida) dao.buscarPorId(UnidadeMedida.class, Long.parseLong(unidade)));
         }
         produto.setPermiteFracionar(Boolean.parseBoolean(request.getParameter("permiteFracionar")));
         produto.setTipo(request.getParameter("tipo"));
