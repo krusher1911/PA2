@@ -62,7 +62,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-4 col-lg-offset-7">
-                                <button type="submit" class="btn btn-primary btn-lg btn-block active" >Salvar</button>
+                                <button type="submit" id="salvar" class="btn btn-primary btn-lg btn-block active" >Salvar</button>
                             </div>
                         </div>
                     </div>

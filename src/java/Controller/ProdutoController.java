@@ -45,6 +45,7 @@ public class ProdutoController extends HttpServlet {
         }
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("isValid", isValid);
+        map.put("isValid", produtos);
         
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

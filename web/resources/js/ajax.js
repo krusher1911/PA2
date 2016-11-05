@@ -3,17 +3,9 @@
  */
 
 $(document).ready(function () {
-    
-    $('.editarProduto').click(function () {
-        debugger;
-        var myBookId = $('.editarProduto').data('id');
-        $("#modalEditar .modal-body #inputId").val( myBookId );
-        // As pointed out in comments, 
-        // it is superfluous to have to manually call the modal.
-        $('#modalEditar').modal('show');
-});
-    
+
     $('#menuProdutos').click(function () {
+        alert('${produtos}');
         $.ajax({
             url: 'ProdutoController',
             type: 'GET',
@@ -39,6 +31,8 @@ $(document).ready(function () {
                     $('#produtos').addClass('in');
                     $('#produtos').addClass('active');
                     $('#menuProdutos').addClass('active');
+                    
+                    $("#produtos").load("contentProduto.jsp");
                 //} else {
                     //alert('Não há produtos cadastrados.');
                 //}

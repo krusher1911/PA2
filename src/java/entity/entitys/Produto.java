@@ -27,7 +27,7 @@ public class Produto implements EntidadeBase {
     private String tipo;
 
     @Column(name = "codigo_ncm")
-    private int codigNcm;
+    private Integer codigNcm;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_categoria")
