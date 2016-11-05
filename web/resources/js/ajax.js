@@ -77,7 +77,6 @@ function carregarSelect(unidades, categorias) {
 $(document).ready(function () {
 
     $('#contentProduto').ready(function () {
-    $('#menuProdutos').click(function () {
         $.ajax({
             url: 'ProdutoController',
             type: 'GET',
