@@ -25,7 +25,7 @@ public class Endereco implements EntidadeBase {
     
     @Column(name="numero")
     //verificar no bd está varchar
-    private int numero;
+    private Integer numero;
     
     @Column(name="complemento")
     private String complemento;
@@ -42,7 +42,7 @@ public class Endereco implements EntidadeBase {
     public Endereco() {
     }
 
-    public Endereco(TipoLogadouro tipo_logadouro, String logadouro, int numero, String complemento, String cidade, String estado) {
+    public Endereco(TipoLogadouro tipo_logadouro, String logadouro, Integer numero, String complemento, String cidade, String estado) {
         this.tipo_logadouro = tipo_logadouro;
         this.logadouro = logadouro;
         this.numero = numero;

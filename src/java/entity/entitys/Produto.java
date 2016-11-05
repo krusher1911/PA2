@@ -21,13 +21,13 @@ public class Produto implements EntidadeBase {
     private UnidadeMedida unidade;
 
     @Column(name = "permite_fracionamento")
-    private boolean permiteFracionar;
+    private Boolean permiteFracionar;
 
     @Column(name = "tipo")
     private String tipo;
 
     @Column(name = "codigo_ncm")
-    private int codigNcm;
+    private Integer codigoNcm;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_categoria")
@@ -50,7 +50,7 @@ public class Produto implements EntidadeBase {
         this.unidade = unidade;
         this.permiteFracionar = permiteFracionar;
         this.tipo = tipo;
-        this.codigNcm = codigoNcm;
+        this.codigoNcm = codigoNcm;
         this.categoria = categoria;
     }
     
@@ -61,7 +61,7 @@ public class Produto implements EntidadeBase {
         this.unidade = unidade;
         this.permiteFracionar = permiteFracionar;
         this.tipo = tipo;
-        this.codigNcm = codigoNcm;
+        this.codigoNcm = codigoNcm;
         this.categoria = categoria;
     }
 
@@ -123,11 +123,11 @@ public class Produto implements EntidadeBase {
     }
 
     public int getCodigNcm() {
-        return codigNcm;
+        return codigoNcm;
     }
 
     public void setCodigNcm(int codigNcm) {
-        this.codigNcm = codigNcm;
+        this.codigoNcm = codigNcm;
     }
 
     public Categoria getCategoria() {

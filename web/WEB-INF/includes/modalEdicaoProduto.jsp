@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputId">ID</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="inputId" name="id" placeholder="${produto.descricao}" type="text" data-toggle="tooltip" data-placement="top" title="ID">
+                            <input class="form-control" id="inputId" name="id" placeholder="" type="text" data-toggle="tooltip" data-placement="top" title="ID" disabled>
                         </div>
                     </div>
                     <div class="form-group">
@@ -34,8 +34,8 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputFracionavel">Fracionável</label>
                         <div class="col-lg-6">
-                            <label class="radio-inline"><input type="radio" name="fracionavel">Sim</label>
-                            <label class="radio-inline"><input type="radio" name="fracionavel">Não</label>
+                            <label class="radio-inline"><input type="radio" id="true">Sim</label>
+                            <label class="radio-inline"><input type="radio" id="false">Não</label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -45,9 +45,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="inputCodigNcm">Código NCM</label>
+                        <label class="col-lg-2 control-label" for="inputCodigoNcm">Código NCM</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="inputCodigNcm" name="codigoNcm" placeholder="Código NCM" type="text" data-toggle="tooltip" data-placement="top" title="Código NCM">
+                            <input class="form-control" id="inputCodigoNcm" name="codigoNcm" placeholder="Código NCM" type="text" data-toggle="tooltip" data-placement="top" title="Código NCM">
                         </div>
                     </div>
                     <div class="form-group">

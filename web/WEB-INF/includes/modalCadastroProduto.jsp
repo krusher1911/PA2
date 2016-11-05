@@ -39,9 +39,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="inputCodigNcm">Código NCM</label>
+                        <label class="col-lg-2 control-label" for="inputCodigoNcm">Código NCM</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="inputCodigNcm" name="codigoNcm" placeholder="Código NCM" type="text" data-toggle="tooltip" data-placement="top" title="Código NCM">
+                            <input class="form-control" id="inputCodigoNcm" name="codigoNcm" placeholder="Código NCM" type="text" data-toggle="tooltip" data-placement="top" title="Código NCM">
                         </div>
                     </div>
                     <div class="form-group">

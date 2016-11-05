@@ -21,7 +21,7 @@ public class Usuario implements EntidadeBase, Serializable {
     @Column(name = "senha")
     private String senha;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_grupo")
     private GrupoAcesso grupoAcesso;
 

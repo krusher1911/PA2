@@ -20,7 +20,7 @@ public class Movimentacao implements EntidadeBase {
     private Produto produto;
 
     @Column(name = "quantidade")
-    private int quantidade;
+    private Integer quantidade;
 
     @OneToOne
     @JoinColumn(name = "id_unidade")
@@ -31,13 +31,13 @@ public class Movimentacao implements EntidadeBase {
     private NotaFiscal notaFiscal;
 
     @Column(name = "valor_total")
-    private double total;
+    private Double total;
 
     @Column(name = "valor_unitario")
-    private double unitario;
+    private Double unitario;
 
     @Column(name = "valor_desconto")
-    private double desconto;
+    private Double desconto;
 
     @Column(name = "data_hora")
     private LocalDateTime dataCadastro;
@@ -54,7 +54,7 @@ public class Movimentacao implements EntidadeBase {
         this.dataCadastro = LocalDateTime.now();
     }
 
-    public Movimentacao(Produto produto, int quantidade, UnidadeMedida unidade, NotaFiscal notaFiscal, double total, double unitario, double desconto, ModoCadastro modoCadastro, Usuario usuario) {
+    public Movimentacao(Produto produto, Integer quantidade, UnidadeMedida unidade, NotaFiscal notaFiscal, Double total, Double unitario, Double desconto, ModoCadastro modoCadastro, Usuario usuario) {
         this.produto = produto;
         this.quantidade = quantidade;
         this.unidade = unidade;

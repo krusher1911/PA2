@@ -37,13 +37,22 @@ public class ProdutoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Produto> produtos = dao.buscarTudo(Produto.class);
-        if (!produtos.isEmpty()) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (request.getParameter("id").equals("")) {
+            List<Produto> produtos = dao.buscarTudo(Produto.class);
+            if (!produtos.isEmpty()) {
+                HttpSession session = request.getSession();
+                session.setAttribute("produtos", produtos);
+                map.put("produtos", produtos);
+                isValid = true;
+            }
+        } else {
+            produto = (Produto) dao.buscarPorId(Produto.class, Long.parseLong(request.getParameter("id")));
             HttpSession session = request.getSession();
-            session.setAttribute("produtos", produtos);
+            session.setAttribute("produto", produto);
+            map.put("produto", produto);
             isValid = true;
         }
-        Map<String, Object> map = new HashMap<String, Object>();
         map.put("isValid", isValid);
         
         response.setContentType("application/json");

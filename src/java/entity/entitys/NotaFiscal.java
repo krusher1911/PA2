@@ -36,7 +36,7 @@ public class NotaFiscal implements EntidadeBase {
     private Long numero;
     
     @Column(name = "serie")
-    private int serie;
+    private Integer serie;
     
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "tipo")
@@ -56,7 +56,7 @@ public class NotaFiscal implements EntidadeBase {
     @Column(name="modo_insercao")
     private ModoCadastro modoCadastro;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
             
