@@ -17,7 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -43,12 +42,11 @@ public class UnidadeController extends HttpServlet {
 
         List<UnidadeMedida> unidades = dao.buscarTudo(UnidadeMedida.class);
         if (!unidades.isEmpty()) {
-            HttpSession session = request.getSession();
-            session.setAttribute("unidades", unidades);
-            isValid = true;
+
+            Map<String, Object> map = new HashMap<String, Object>();
+
+            map.put("unidades", unidades);
         }
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("isValid", isValid);
 
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();

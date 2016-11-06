@@ -16,7 +16,7 @@ pageEncoding="UTF-8"%>
         <script src="resources/js/bootstrap.js" type="text/javascript"></script>
         <script src="resources/js/customScripts.js" type="text/javascript"></script>
         <script src="resources/js/app.js" type="text/javascript"></script>
-        <script src="resources/js/ajax.js" ></script>
+        <!--<script src="resources/js/ajax.js" ></script>-->
     </head>
     <body ng-app="myModule">
         <div>

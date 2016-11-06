@@ -1,6 +1,8 @@
 package Controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import dao.DAOGenerica;
 import entity.entitys.Categoria;
 import entity.entitys.Produto;
@@ -13,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -41,15 +42,11 @@ public class ProdutoController extends HttpServlet {
         if (request.getParameter("id").equals("")) {
             List<Produto> produtos = dao.buscarTudo(Produto.class);
             if (!produtos.isEmpty()) {
-                HttpSession session = request.getSession();
-                session.setAttribute("produtos", produtos);
                 map.put("produtos", produtos);
                 isValid = true;
             }
         } else {
             produto = (Produto) dao.buscarPorId(Produto.class, Long.parseLong(request.getParameter("id")));
-            HttpSession session = request.getSession();
-            session.setAttribute("produto", produto);
             map.put("produto", produto);
             isValid = true;
         }
@@ -73,46 +70,38 @@ public class ProdutoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
         produto = new Produto();
-        produto.setDescricao(request.getParameter("descricao"));
-        String unidade = request.getParameter("unidades");
-        if (!unidade.equals("")) {
-            produto.setUnidade((UnidadeMedida) dao.buscarPorId(UnidadeMedida.class, Long.parseLong(unidade)));
-        }
-        produto.setPermiteFracionar(Boolean.parseBoolean(request.getParameter("permiteFracionar")));
-        produto.setTipo(request.getParameter("tipo"));
-        produto.setCodigNcm(Integer.parseInt(request.getParameter("codigoNcm")));
-        String categoria = request.getParameter("categorias");
-        if (!categoria.equals("")) {
-            produto.setCategoria((Categoria) dao.buscarPorId(Categoria.class, Long.parseLong(categoria)));
-        }
-
+        montarProduto(request, obj);
         dao.save(produto);
-        response.sendRedirect("index.jsp");
 
     }
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        produto = (Produto) dao.buscarPorId(Produto.class, Long.parseLong(request.getParameter("id")));
+        JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
 
-        produto.setDescricao(request.getParameter("descricao"));
-        String unidade = request.getParameter("unidade");
+        produto = (Produto) dao.buscarPorId(Produto.class, Long.parseLong(obj.get("id").toString()));
+        montarProduto(request, obj);
+        dao.update(produto);
+
+    }
+
+    private void montarProduto(HttpServletRequest request, JsonObject obj) throws IOException {
+
+        produto.setDescricao(obj.get("descricao").getAsString());
+        String unidade = obj.get("unidade").getAsString();
         if (!unidade.equals("")) {
-            produto.setUnidade((UnidadeMedida) dao.buscarPorId(Produto.class, Long.parseLong(unidade)));
+            produto.setUnidade((UnidadeMedida) dao.buscarPorId(UnidadeMedida.class, Long.parseLong(unidade)));
         }
-        produto.setPermiteFracionar(Boolean.parseBoolean(request.getParameter("permiteFracionar")));
-        produto.setTipo(request.getParameter("tipo"));
-        produto.setCodigNcm(Integer.parseInt(request.getParameter("codigoNcm")));
-        String categoria = request.getParameter("categoria");
+        produto.setPermiteFracionar(Boolean.parseBoolean(obj.get("permiteFracionar").getAsString()));
+        produto.setTipo(obj.get("tipo").getAsString());
+        produto.setCodigNcm(obj.get("codigoNcm").getAsInt());
+        String categoria = obj.get("categoria").getAsString();
         if (!categoria.equals("")) {
             produto.setCategoria((Categoria) dao.buscarPorId(Categoria.class, Long.parseLong(categoria)));
         }
-
-        dao.update(produto);
-        response.sendRedirect("index.jsp");
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
