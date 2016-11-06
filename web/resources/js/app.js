@@ -68,22 +68,8 @@ var app = angular.module("myModule", []).controller("myController", function($sc
         $scope.carregarSelect();
         $('#modalCadastrar').modal('show');
     }
-
-    $scope.abrirEditarProduto = function (id) {
-
-        $http({
-            method: 'GET',
-            url: 'ProdutoController',
-            params: {id: id}
-        }).then(function sucess(rs) {
-            $scope.carregarSelect();
-            $scope.produto = rs.data.produto;
-            $('#modalEditar').modal('show');
-        });
-    }
-
+    
     $scope.cadastrarProduto = function (produto, method) {
-        debugger;
         var data = {
             id: produto.id,
             descricao: produto.descricao,
@@ -105,4 +91,42 @@ var app = angular.module("myModule", []).controller("myController", function($sc
             $scope.togglePro();
         }))
     }
+
+    $scope.abrirEditarProduto = function (id) {
+
+        $http({
+            method: 'GET',
+            url: 'ProdutoController',
+            params: {id: id}
+        }).then(function sucess(rs) {
+            $scope.carregarSelect();
+            $scope.produto = rs.data.produto;
+            $('#modalEditar').modal('show');
+        });
+    }
+    
+    $scope.editarProduto = function (produto, method) {
+        var data = {
+            id: produto.id,
+            descricao: produto.descricao,
+            unidade: produto.unidade.id,
+            permiteFracionar: produto.permiteFracionar,
+            tipo: produto.tipo,
+            codigoNcm: produto.codigoNcm,
+            categoria: produto.categoria.id
+        };
+        $http({
+            method: method,
+            url: 'ProdutoController',
+            data: data,
+            headers: {"Content-Type": "application/json;charset=UTF-8"}
+        }).then(function success(rs){
+            $scope.togglePro();
+        }(function error(rs){
+            alert('Erro ao editar produto');
+            $scope.togglePro();
+        }))
+    }
+
+    
 });

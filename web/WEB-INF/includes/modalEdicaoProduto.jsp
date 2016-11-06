@@ -8,7 +8,7 @@
                 <center><h4 class="modal-title">Editar de Produto</h4></center>
             </div>
             
-            <form class="form-horizontal" ng-modal="produto" ng-submit="editarProduto(produto, 'PUT')" >
+            <form class="form-horizontal" ng-modal="produto">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputId">Código</label>
@@ -60,7 +60,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-4 col-lg-offset-7">
-                                <button type="submit" id="salvar" class="btn btn-primary btn-lg btn-block active" >Salvar</button>
+                                <button type="submit" id="salvar" class="btn btn-primary btn-lg btn-block active" data-dismiss="modal" ng-click="editarProduto(produto, 'PUT')">Salvar</button>
                             </div>
                         </div>
                     </div>
