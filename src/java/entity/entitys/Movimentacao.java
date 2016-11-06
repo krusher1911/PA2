@@ -100,6 +100,14 @@ public class Movimentacao implements EntidadeBase {
         this.unidade = unidade;
     }
 
+    public NotaFiscal getNotaFiscal() {
+        return notaFiscal;
+    }
+
+    public void setNotaFiscal(NotaFiscal notaFiscal) {
+        this.notaFiscal = notaFiscal;
+    }
+
     public double getTotal() {
         return total;
     }

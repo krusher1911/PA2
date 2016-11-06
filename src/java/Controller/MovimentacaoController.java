@@ -4,7 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dao.DAOGenerica;
-import entity.entitys.Categoria;
+import entity.entitys.Movimentacao;
+import entity.entitys.NotaFiscal;
 import entity.entitys.Produto;
 import entity.entitys.UnidadeMedida;
 import java.io.IOException;
@@ -18,12 +19,12 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Hygor Azevedo
+ * @author Bruna
  */
-public class ProdutoController extends HttpServlet {
+public class MovimentacaoController extends HttpServlet {
 
     private static final DAOGenerica dao = new DAOGenerica();
-    private Produto produto;
+    private Movimentacao movimentacao;
     boolean isValid = false;
 
     @Override
@@ -31,14 +32,14 @@ public class ProdutoController extends HttpServlet {
             throws ServletException, IOException {
         Map<String, Object> map = new HashMap<String, Object>();
         if (request.getParameter("id").equals("")) {
-            List<Produto> produtos = dao.buscarTudo(Produto.class);
-            if (!produtos.isEmpty()) {
-                map.put("produtos", produtos);
+            List<Movimentacao> movimentacoes = dao.buscarTudo(Movimentacao.class);
+            if (!movimentacoes.isEmpty()) {
+                map.put("movimentacoes", movimentacoes);
                 isValid = true;
             }
         } else {
-            produto = (Produto) dao.buscarPorId(Produto.class, Long.parseLong(request.getParameter("id")));
-            map.put("produto", produto);
+            movimentacao = (Movimentacao) dao.buscarPorId(Movimentacao.class, Long.parseLong(request.getParameter("id")));
+            map.put("movimentacao", movimentacao);
             isValid = true;
         }
         map.put("isValid", isValid);
@@ -52,9 +53,9 @@ public class ProdutoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
-        produto = new Produto();
-        montarProduto(request, obj);
-        dao.save(produto);
+        movimentacao = new Movimentacao();
+        montarMovimentacao(request, obj);
+        dao.save(movimentacao);
 
     }
 
@@ -63,25 +64,29 @@ public class ProdutoController extends HttpServlet {
             throws ServletException, IOException {
         JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
 
-        produto = (Produto) dao.buscarPorId(Produto.class, obj.get("id").getAsLong());
-        montarProduto(request, obj);
-        dao.update(produto);
+        movimentacao = (Movimentacao) dao.buscarPorId(Movimentacao.class, obj.get("id").getAsLong());
+        montarMovimentacao(request, obj);
+        dao.update(movimentacao);
 
     }
 
-    private void montarProduto(HttpServletRequest request, JsonObject obj) throws IOException {
-        produto.setDescricao(obj.get("descricao").getAsString());
+    private void montarMovimentacao(HttpServletRequest request, JsonObject obj) throws IOException {
+        Long produto = obj.get("produto").getAsLong();
+        if (!produto.equals("")) {
+            movimentacao.setProduto((Produto) dao.buscarPorId(Produto.class, produto));
+        }
+        movimentacao.setQuantidade(obj.get("quantidade").getAsInt());
         Long unidade = obj.get("unidade").getAsLong();
         if (!unidade.equals("")) {
-            produto.setUnidade((UnidadeMedida) dao.buscarPorId(UnidadeMedida.class, unidade));
+            movimentacao.setUnidade((UnidadeMedida) dao.buscarPorId(UnidadeMedida.class, unidade));
         }
-        produto.setPermiteFracionar(obj.get("permiteFracionar").getAsBoolean());
-        produto.setTipo(obj.get("tipo").getAsString());
-        produto.setCodigNcm(obj.get("codigoNcm").getAsInt());
-        Long categoria = obj.get("categoria").getAsLong();
-        if (!categoria.equals("")) {
-            produto.setCategoria((Categoria) dao.buscarPorId(Categoria.class, categoria));
+        Long notaFiscal = obj.get("notaFiscal").getAsLong();
+        if (!unidade.equals("")) {
+            movimentacao.setNotaFiscal((NotaFiscal) dao.buscarPorId(NotaFiscal.class, unidade));
         }
+        movimentacao.setTotal(obj.get("total").getAsDouble());
+        movimentacao.setUnitario(obj.get("unitario").getAsDouble());
+        movimentacao.setDesconto(obj.get("desconto").getAsDouble());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -28,23 +28,13 @@ public class UnidadeController extends HttpServlet {
     private UnidadeMedida unidade;
     boolean isValid = false;
 
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         List<UnidadeMedida> unidades = dao.buscarTudo(UnidadeMedida.class);
         if (!unidades.isEmpty()) {
-
             Map<String, Object> map = new HashMap<String, Object>();
-
             map.put("unidades", unidades);
         }
 
