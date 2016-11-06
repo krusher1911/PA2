@@ -39,7 +39,7 @@ public class NotaFiscal implements EntidadeBase {
     private Long numero;
     
     @Column(name = "serie")
-    private int serie;
+    private String serie;
     
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "tipo")
@@ -66,7 +66,7 @@ public class NotaFiscal implements EntidadeBase {
     public NotaFiscal() {
     }
 
-    public NotaFiscal(String chave, Date emissao, double valorTotal, Entidade entidade, Long numero, int serie, TipoNota tipo, Natureza natureza, List<Movimentacao> itens, ModoCadastro modoCadastro, Usuario usuario) {
+    public NotaFiscal(String chave, Date emissao, double valorTotal, Entidade entidade, Long numero, String serie, TipoNota tipo, Natureza natureza, List<Movimentacao> itens, ModoCadastro modoCadastro, Usuario usuario) {
 
         this.chave = chave;
         this.emissao = emissao;
@@ -131,11 +131,11 @@ public class NotaFiscal implements EntidadeBase {
         this.numero = numero;
     }
 
-    public int getSerie() {
+    public String getSerie() {
         return serie;
     }
 
-    public void setSerie(int serie) {
+    public void setSerie(String serie) {
         this.serie = serie;
     }
 

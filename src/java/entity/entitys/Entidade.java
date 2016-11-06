@@ -34,7 +34,7 @@ public class Entidade implements EntidadeBase {
     private Long cnpjCpf;
 
     @Column(name = "empresa")
-    private static boolean empresa = false;
+    private boolean empresa = false;
 
     @Column(name="apelido", length=100)
     private String apelido;
@@ -67,6 +67,7 @@ public class Entidade implements EntidadeBase {
         this.endereco = endereco;
         this.dataCadastro = LocalDateTime.now();
         this.modoCadastro = modoCadastro;
+        this.empresa = false;
     }
 
     @Override

@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import coletor.ParseNfe;
 import coletor.ConectorReceita;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -92,6 +93,7 @@ public class ServletPostReceita extends HttpServlet {
 
         try {
             resposta = conector.sendPost(cookies[0], parametros, nome_parametros);
+            
             doc = Jsoup.parse(resposta, "UTF-8", Parser.xmlParser());
             prod = doc.select("#Prod");
 
@@ -99,7 +101,9 @@ public class ServletPostReceita extends HttpServlet {
             // Always must return something
             System.out.println(e);
         }
-
+        
+        ParseNfe teste = new ParseNfe(resposta);
+        teste.rodar();
         try {
             /* TODO output your page here. You may use following sample code. */
             if ("".equals(prod.toString())) {

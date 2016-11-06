@@ -68,6 +68,18 @@ public class DAOGenerica<T extends EntidadeBase> {
     public <T extends EntidadeBase> T buscarPorId(Class<T> classe, Long id) {
         return (T) sessao.get(classe, id);
     }
+    
+    
+    public <T extends EntidadeBase> List<T> buscarPorPropriedade(Class<T> classe, String nomesPropriedades, Object valores) {
+        try{
+            Criteria criteria = sessao.createCriteria(classe);
+            criteria.add(Restrictions.eq(nomesPropriedades, valores));
+            return criteria.list();
+        } catch (Exception e){
+            return null;
+        }
+
+    }
 
     //Encontrar entidades por uma ou mais de suas propriedades
     public <T extends EntidadeBase> List<T> buscarPorPropriedade(Class<T> classe, String[] nomesPropriedades, Object[] valores) throws NotFoundException {

@@ -23,7 +23,7 @@ public class Movimentacao implements EntidadeBase {
     private Produto produto;
 
     @Column(name = "quantidade")
-    private int quantidade;
+    private double quantidade;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_unidade")
@@ -57,7 +57,7 @@ public class Movimentacao implements EntidadeBase {
         this.dataCadastro = LocalDateTime.now();
     }
 
-    public Movimentacao(Produto produto, int quantidade, UnidadeMedida unidade, NotaFiscal notaFiscal, double total, double unitario, double desconto, ModoCadastro modoCadastro, Usuario usuario) {
+    public Movimentacao(Produto produto, double quantidade, UnidadeMedida unidade, NotaFiscal notaFiscal, double total, double unitario, double desconto, ModoCadastro modoCadastro, Usuario usuario) {
         this.produto = produto;
         this.quantidade = quantidade;
         this.unidade = unidade;
@@ -87,7 +87,7 @@ public class Movimentacao implements EntidadeBase {
         this.produto = produto;
     }
 
-    public int getQuantidade() {
+    public double getQuantidade() {
         return quantidade;
     }
 
