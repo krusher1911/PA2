@@ -1,11 +1,11 @@
 <!-- Conteudo do modal editar -->
-<div class="modal fade" id="modalEditar" role="dialog">
-    <div class="modal-dialog">
-
+<div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modalCadastrarLabel">
+    <div class="modal-dialog" role="document">
+        
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <center><h4 class="modal-title">Editar de Produto</h4></center>
             </div>
             <div class="modal-body">

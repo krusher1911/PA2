@@ -1,12 +1,13 @@
 <!-- Conteudo do modal cadastrar -->
 <div class="modal fade" id="modalCadastrar" tabindex="-1" role="dialog" aria-labelledby="modalCadastrarLabel">
-    <div class="modal-dialog" role="document"><!-- Modal content-->
+    <div class="modal-dialog" role="document">
+        
+        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <center><h4 class="modal-title">Cadastro de Produtos</h4></center>
             </div>
-            <!--<div class="modal-body">-->
 
             <form class="form-horizontal" action="ProdutoController" method="post">
                 <div class="modal-body">

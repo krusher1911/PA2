@@ -9,30 +9,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javassist.NotFoundException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Hygor Azevedo
- */
 public class ProdutoController extends HttpServlet {
 
     private static final DAOGenerica dao = new DAOGenerica();
     private Produto produto;
     boolean isValid = false;
-    // <editor-fold defaultstate="collapsed" desc="Javadoc GET">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */// </editor-fold>
+ 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -72,22 +63,31 @@ public class ProdutoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         produto = new Produto();
-        produto.setDescricao(request.getParameter("descricao"));
-        String unidade = request.getParameter("unidades");
-        if (!unidade.equals("")) {
-            produto.setUnidade((UnidadeMedida) dao.buscarPorId(UnidadeMedida.class, Long.parseLong(unidade)));
+        if (request.getParameter("del").equals("false")){
+            produto.setDescricao(request.getParameter("descricao"));
+            String unidade = request.getParameter("unidades");
+            if (!unidade.equals("")) {
+                produto.setUnidade((UnidadeMedida) dao.buscarPorId(UnidadeMedida.class, Long.parseLong(unidade)));
+            }
+            produto.setPermiteFracionar(Boolean.parseBoolean(request.getParameter("permiteFracionar")));
+            produto.setTipo(request.getParameter("tipo"));
+            produto.setCodigNcm(Integer.parseInt(request.getParameter("codigoNcm")));
+            String categoria = request.getParameter("categorias");
+            if (!categoria.equals("")) {
+                produto.setCategoria((Categoria) dao.buscarPorId(Categoria.class, Long.parseLong(categoria)));
+            }
+            dao.save(produto);
         }
-        produto.setPermiteFracionar(Boolean.parseBoolean(request.getParameter("permiteFracionar")));
-        produto.setTipo(request.getParameter("tipo"));
-        produto.setCodigNcm(Integer.parseInt(request.getParameter("codigoNcm")));
-        String categoria = request.getParameter("categorias");
-        if (!categoria.equals("")) {
-            produto.setCategoria((Categoria) dao.buscarPorId(Categoria.class, Long.parseLong(categoria)));
+        else{
+            produto = (Produto) dao.buscarPorId(Produto.class, Long.parseLong(request.getParameter("id")));
+            try {
+                dao.delete(produto.getClass(), Long.parseLong(request.getParameter("id")));
+            } catch (NotFoundException ex) {
+                Logger.getLogger(ProdutoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
-        dao.save(produto);
+        
         response.sendRedirect("index.jsp");
 
     }
@@ -114,17 +114,6 @@ public class ProdutoController extends HttpServlet {
         response.sendRedirect("index.jsp");
 
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

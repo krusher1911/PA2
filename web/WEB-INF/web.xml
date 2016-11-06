@@ -32,6 +32,10 @@
         <servlet-name>UnidadeController</servlet-name>
         <servlet-class>Controller.UnidadeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MovimentacaoController</servlet-name>
+        <servlet-class>Controller.MovimentacaoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Receita</servlet-name>
         <url-pattern>/Receita</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>UnidadeController</servlet-name>
         <url-pattern>/UnidadeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MovimentacaoController</servlet-name>
+        <url-pattern>/MovimentacaoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

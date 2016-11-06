@@ -14,7 +14,7 @@
     </div>
     <div class="panel-body">
 
-        <table id="jsGrid" class="table">
+        <table id="jsGrid" class="table table-hover">
             <thead class="thead-inverse">
                 <tr>
                     <th>Código</th>
@@ -26,6 +26,8 @@
                     <th>Categoria</th>
                     <th>Ações</th>
                 </tr>
+            </thead>
+            <tbody>
                 <tr ng-repeat="p in produtos.data.produtos">
                     <td>{{p.id}}</td>
                     <td>{{p.descricao}}</td>
@@ -35,8 +37,8 @@
                     <td>{{p.codigNcm}}</td>
                     <td>{{p.categoria.nome}}</td>
                     <td>
-                        <button id="editarProduto" type="button" class="editarProduto btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></button>
-                        <button id="removerProduto" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalRemover"><span class="glyphicon glyphicon-remove"></span></button>
+                        <button id="editarProduto" type="button" class="editarProduto btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEditar"><span class="glyphicon glyphicon-edit"></span></button>
+                        <button id="removerProduto" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalRemover" ng-click="confirmDel(p.id)"><span class="glyphicon glyphicon-remove"></span></button>
                     </td>
                 </tr>
                 </c:forEach>
