@@ -3,6 +3,7 @@ package Controller;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.genericBooleanType;
 import dao.DAOGenerica;
 import entity.entitys.Categoria;
 import entity.entitys.Produto;
@@ -50,22 +51,10 @@ public class ProdutoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
         produto = new Produto();
-
-        if (request.getParameter("del").equals("false")){
-            produto.setDescricao(request.getParameter("descricao"));
-            String unidade = request.getParameter("unidades");
-            if (!unidade.equals("")) {
-                produto.setUnidade((UnidadeMedida) dao.buscarPorId(UnidadeMedida.class, Long.parseLong(unidade)));
-            }
-            produto.setPermiteFracionar(Boolean.parseBoolean(request.getParameter("permiteFracionar")));
-            produto.setTipo(request.getParameter("tipo"));
-            produto.setCodigNcm(Integer.parseInt(request.getParameter("codigoNcm")));
-            String categoria = request.getParameter("categorias");
-            if (!categoria.equals("")) {
-                produto.setCategoria((Categoria) dao.buscarPorId(Categoria.class, Long.parseLong(categoria)));
-            }
+        String delete = request.getParameter("del");
+        if (delete == null){
+            JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
             montarProduto(request, obj);
             dao.save(produto);
         }

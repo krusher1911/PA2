@@ -38,11 +38,16 @@ var app = angular.module("myModule", []).controller("myController", function($sc
                 method : 'POST',    
                 url: 'ProdutoController',
                 params: {id:$scope.idDel, del:'true'}
-            });
-            $scope.togglePro();
+            }).then(function sucess(rs){
+                $scope.togglePro();
+            }(function error(rs){
+                alert('Erro ao deletar produto');
+                $scope.togglePro();
+            }))
         }
     }
     //===========FIM==========//
+    
     $scope.carregarSelect = function () {
         $http({
             method: 'GET',
@@ -77,7 +82,8 @@ var app = angular.module("myModule", []).controller("myController", function($sc
         });
     }
 
-    $scope.editarProduto = function (produto, method) {
+    $scope.cadastrarProduto = function (produto, method) {
+        debugger;
         var data = {
             id: produto.id,
             descricao: produto.descricao,
@@ -92,14 +98,11 @@ var app = angular.module("myModule", []).controller("myController", function($sc
             url: 'ProdutoController',
             data: data,
             headers: {"Content-Type": "application/json;charset=UTF-8"}
-        }).then(function (rs) {
-            if (method == 'PUT') {
-                alert("Put Data Method Executed Successfully!");
-                $('#modalEditar').modal('hide');
-            } else {
-                $('#modalCadastrar').modal('hide');
-            }
+        }).then(function success(rs){
             $scope.togglePro();
-        });
+        }(function error(rs){
+            alert('Erro ao cadastrar produto');
+            $scope.togglePro();
+        }))
     }
 });

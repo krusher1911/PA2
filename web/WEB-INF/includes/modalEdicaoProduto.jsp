@@ -1,15 +1,15 @@
 <!-- Conteudo do modal editar -->
 <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modalCadastrarLabel">
     <div class="modal-dialog" role="document">
-        
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <center><h4 class="modal-title">Editar de Produto</h4></center>
             </div>
-            <div class="modal-body">
-                <form class="form-horizontal" ng-modal="produto" ng-submit="editarProduto(produto, 'PUT')" >
+            
+            <form class="form-horizontal" ng-modal="produto" ng-submit="editarProduto(produto, 'PUT')" >
+                <div class="modal-body">
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputId">Código</label>
                         <div class="col-lg-10">
@@ -29,6 +29,7 @@
                                      ng-options="unidade.sigla for unidade in unidades track by unidade.id">
                             </select>
                         </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputFracionavel">Fracionável</label>
                         <div class="col-lg-6">
@@ -63,10 +64,9 @@
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>  
+            </form>
         </div>
-
     </div>
 </div>
 <!--fim modal-->

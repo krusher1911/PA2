@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer">
                 <center>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click=" del('false')">Não</button>
                     <button type="submit" class="btn btn-primary" ng-click=" del('true')" data-dismiss="modal">Sim</button>
                 </center>
             </div>

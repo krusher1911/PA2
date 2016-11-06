@@ -1,9 +1,5 @@
 package dao;
 
-/**
- *
- * @author Bruna
- */
 public enum Ordem {
 
     ASC,
@@ -12,6 +8,4 @@ public enum Ordem {
     public boolean isOrdemASC() {
         return ASC.equals(this);
     }
-
-
 }
