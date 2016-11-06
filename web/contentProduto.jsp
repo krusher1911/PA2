@@ -34,7 +34,7 @@
                     <td>{{p.unidade.sigla}}</td>
                     <td>{{p.permiteFracionar}}</td>
                     <td>{{p.tipo}}</td>
-                    <td>{{p.codigNcm}}</td>
+                    <td>{{p.codigoNcm}}</td>
                     <td>{{p.categoria.nome}}</td>
                     <td>
                         <button id="editarProduto" ng-click="abrirEditarProduto(p.id)" type="button" class="editarProduto btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></button>

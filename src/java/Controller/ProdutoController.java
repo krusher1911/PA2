@@ -26,6 +26,7 @@ public class ProdutoController extends HttpServlet {
     private Produto produto;
     boolean isValid = false;
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -50,30 +51,27 @@ public class ProdutoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        produto = new Produto();
+        
         String delete = request.getParameter("del");
         if (delete == null){
+            produto = new Produto();
             JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
             montarProduto(request, obj);
             dao.save(produto);
         }
         else{
-            produto = (Produto) dao.buscarPorId(Produto.class, Long.parseLong(request.getParameter("id")));
             try {
-                dao.delete(produto.getClass(), Long.parseLong(request.getParameter("id")));
+                dao.delete(Produto.class, Long.parseLong(request.getParameter("id")));
             } catch (NotFoundException ex) {
                 Logger.getLogger(ProdutoController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        response.sendRedirect("index.jsp");
     }
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
-
         produto = (Produto) dao.buscarPorId(Produto.class, obj.get("id").getAsLong());
         montarProduto(request, obj);
         dao.update(produto);

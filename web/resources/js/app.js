@@ -6,12 +6,12 @@ var app = angular.module("myModule", []).controller("myController", function($sc
     $scope.toggled=1;
     $scope.togglePri=function(){
         $scope.toggled=1;
-    }
+    };
     
     //===INICIO TAB MOVIMENTAÇÕES===//
     $scope.toggleMov=function(){
         $scope.toggled=2;
-    }
+    };
     //===========FIM==========//
     
     //===INICIO TAB PRODUTOS===//
@@ -20,18 +20,19 @@ var app = angular.module("myModule", []).controller("myController", function($sc
             method : 'GET',    
             url: 'ProdutoController',
             params: {id: ''}
-        }).then(function sucess(rs) {
+        }).then(function success(rs) {
             $scope.produtos = rs.data.produtos;
+            $scope.toggled=3;
         });
-        $scope.toggled=3;
-    }
+    };
     //===========FIM==========//
     
     //===INICIO DELETE ITEM===//
     $scope.idDel = 0;
     $scope.confirmDel = function(id){
         $scope.idDel = id;
-    }
+    };
+    
     $scope.del = function(confirm){
         if(confirm === 'true'){
             $http({
@@ -40,34 +41,31 @@ var app = angular.module("myModule", []).controller("myController", function($sc
                 params: {id:$scope.idDel, del:'true'}
             }).then(function sucess(rs){
                 $scope.togglePro();
-            }(function error(rs){
-                alert('Erro ao deletar produto');
-                $scope.togglePro();
-            }))
+            });
         }
-    }
+    };
     //===========FIM==========//
     
     $scope.carregarSelect = function () {
         $http({
             method: 'GET',
             url: 'UnidadeController'
-        }).then(function sucess(rs) {
+        }).then(function success(rs) {
             $scope.unidades = rs.data;
         });
         $http({
             method: 'GET',
             url: 'CategoriaController'
-        }).then(function sucess(rs) {
+        }).then(function success(rs) {
             $scope.categorias = rs.data;
         });
-}
+    };
 
     $scope.abrirCadastrarProduto = function () {
         $scope.produto = null;
         $scope.carregarSelect();
         $('#modalCadastrar').modal('show');
-    }
+    };
     
     $scope.cadastrarProduto = function (produto, method) {
         var data = {
@@ -86,11 +84,8 @@ var app = angular.module("myModule", []).controller("myController", function($sc
             headers: {"Content-Type": "application/json;charset=UTF-8"}
         }).then(function success(rs){
             $scope.togglePro();
-        }(function error(rs){
-            alert('Erro ao cadastrar produto');
-            $scope.togglePro();
-        }))
-    }
+        });
+    };
 
     $scope.abrirEditarProduto = function (id) {
 
@@ -98,12 +93,12 @@ var app = angular.module("myModule", []).controller("myController", function($sc
             method: 'GET',
             url: 'ProdutoController',
             params: {id: id}
-        }).then(function sucess(rs) {
+        }).then(function success(rs) {
             $scope.carregarSelect();
             $scope.produto = rs.data.produto;
             $('#modalEditar').modal('show');
         });
-    }
+    };
     
     $scope.editarProduto = function (produto, method) {
         var data = {
@@ -122,11 +117,6 @@ var app = angular.module("myModule", []).controller("myController", function($sc
             headers: {"Content-Type": "application/json;charset=UTF-8"}
         }).then(function success(rs){
             $scope.togglePro();
-        }(function error(rs){
-            alert('Erro ao editar produto');
-            $scope.togglePro();
-        }))
-    }
-
-    
+        });
+    };
 });
