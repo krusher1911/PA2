@@ -45,7 +45,7 @@ public class Produto implements EntidadeBase {
     public Produto() {
     }
 
-    public Produto(String descricao, UnidadeMedida unidade, boolean permiteFracionar, String tipo, int codigoNcm, Categoria categoria) {
+    public Produto(String descricao, UnidadeMedida unidade, Boolean permiteFracionar, String tipo, Integer codigoNcm, Categoria categoria) {
         this.descricao = descricao;
         this.unidade = unidade;
         this.permiteFracionar = permiteFracionar;
@@ -55,7 +55,7 @@ public class Produto implements EntidadeBase {
     }
     
     
-    public Produto(Long id, String descricao, UnidadeMedida unidade, boolean permiteFracionar, String tipo, int codigoNcm, Categoria categoria) {
+    public Produto(Long id, String descricao, UnidadeMedida unidade, Boolean permiteFracionar, String tipo, Integer codigoNcm, Categoria categoria) {
         this.id = id;
         this.descricao = descricao;
         this.unidade = unidade;
@@ -122,11 +122,11 @@ public class Produto implements EntidadeBase {
         this.tipo = tipo;
     }
 
-    public int getCodigNcm() {
+    public Integer getCodigNcm() {
         return codigoNcm;
     }
 
-    public void setCodigNcm(int codigNcm) {
+    public void setCodigNcm(Integer codigNcm) {
         this.codigoNcm = codigNcm;
     }
 

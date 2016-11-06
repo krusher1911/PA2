@@ -9,53 +9,50 @@
                 <center><h4 class="modal-title">Editar de Produto</h4></center>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" action="ProdutoController" >
+                <form class="form-horizontal" ng-modal="produto" ng-submit="editarProduto(produto, 'PUT')" >
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="inputId">ID</label>
+                        <label class="col-lg-2 control-label" for="inputId">Código</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="inputId" name="id" placeholder="" type="text" data-toggle="tooltip" data-placement="top" title="ID" disabled>
+                            <input ng-model="produto.id" class="form-control" id="inputId" name="id" type="text" data-toggle="tooltip" data-placement="top" title="Código" disabled>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputDescricao">Descrição</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="inputDescricao" name="descricao" placeholder="${produto.descricao}" type="text" data-toggle="tooltip" data-placement="top" title="Descrição">
+                            <input ng-model="produto.descricao" class="form-control" id="inputDescricao" name="descricao" value="" type="text" data-toggle="tooltip" data-placement="top" title="Descrição">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputUnidade">Unidade</label>
                         <div class="col-lg-10">
-                            <!--<input class="form-control" id="inputUnidade" name="unidade" placeholder="Unidade" type="text" data-toggle="tootip" data-placement="top" title="Unidade">-->
-                            <select class="form-control" name="unidades" id="unidades">
-                                <option value =""></option>
+                            <select  class="form-control" ng-model="produto.unidade" id="selectUnidades"
+                                     ng-options="unidade.sigla for unidade in unidades track by unidade.id">
                             </select>
                         </div>
-                    </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputFracionavel">Fracionável</label>
                         <div class="col-lg-6">
-                            <label class="radio-inline"><input type="radio" id="true">Sim</label>
-                            <label class="radio-inline"><input type="radio" id="false">Não</label>
+                            <label class="radio-inline"><input ng-model="produto.permiteFracionar" ng-value="true" ng-checked="(produto.permiteFracionar == true)" type="radio" id="true">Sim</label>
+                            <label class="radio-inline"><input ng-model="produto.permiteFracionar" ng-value="false" ng-checked="(produto.permiteFracionar == false)" type="radio" id="false">Não</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputTipo">Tipo</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="inputTipo" name="tipo" placeholder="Tipo" type="text" data-toggle="tooltip" data-placement="top" title="Tipo">
+                            <input ng-model="produto.tipo"  class="form-control" id="inputTipo" name="tipo" value="${produto.tipo}" type="text" data-toggle="tooltip" data-placement="top" title="Tipo">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputCodigoNcm">Código NCM</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="inputCodigoNcm" name="codigoNcm" placeholder="Código NCM" type="text" data-toggle="tooltip" data-placement="top" title="Código NCM">
+                            <input ng-model="produto.codigoNcm" class="form-control" id="inputCodigoNcm" name="codigoNcm" value="${produto.tipo}" type="text" data-toggle="tooltip" data-placement="top" title="Código NCM">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputCategoria">Categoria</label>
                         <div class="col-lg-10">
-                            <!--<input class="form-control" id="inputCategoria" name="categoria" placeholder="Categoria" type="text" data-toggle="tootip" data-placement="top" title="Categoria">-->
-                            <select class="form-control" name="categorias" id="categorias">
-                                <option value =""></option>
+                            <select  class="form-control" ng-model="produto.categoria" id="selectUnidades"
+                                     ng-options="categoria.nome for categoria in categorias track by categoria.id">
                             </select>
                         </div>
                     </div>
