@@ -1,58 +1,65 @@
-var app = angular.module("myModule", []).controller("myController", function($scope, $http ){
-    
+var app = angular.module("myModule", []).controller("myController", function ($scope, $http) {
+
     $scope.status = '  ';
     $scope.customFullscreen = false;
-    
-    $scope.toggled=1;
-    $scope.togglePri=function(){
-        $scope.toggled=1;
+
+    $scope.toggled = 1;
+    $scope.togglePri = function () {
+        $scope.toggled = 1;
     };
-    
+
     //===INICIO TAB MOVIMENTAÇÕES===//
-    $scope.toggleMov=function(){
-        $scope.toggled=2;
+    $scope.toggleMov = function () {
+        $http({
+            method: 'GET',
+            url: 'MovimentacaoController',
+            params: {id: ''}
+        }).then(function success(rs) {
+            $scope.movimentacoes = rs.data.movimentacoes;
+            $scope.toggled = 2;
+        });
     };
     //===========FIM==========//
-    
+
     //===INICIO TAB PRODUTOS===//
-    $scope.togglePro=function(){
+    $scope.togglePro = function () {
         $http({
-            method : 'GET',    
+            method: 'GET',
             url: 'ProdutoController',
             params: {id: ''}
         }).then(function success(rs) {
             $scope.produtos = rs.data.produtos;
-            $scope.toggled=3;
+            $scope.toggled = 3;
         });
     };
     //===========FIM==========//
-    
+
     //===INICIO DELETE ITEM===//
-    $scope.idDel = 0;
-    $scope.confirmDel = function(id){
-        $scope.idDel = id;
+    $scope.id = 0;
+    $scope.confirmacao = function (id) {
+        $scope.id = id;
     };
-    
-    $scope.del = function(confirm){
-        if(confirm === 'true'){
-            $http({
-                method : 'POST',    
-                url: 'ProdutoController',
-                params: {id:$scope.idDel, del:'true'}
-            }).then(function sucess(rs){
-                $scope.togglePro();
-            });
-        }
+
+    $scope.deletarProduto = function () {
+        $http({
+            method: 'DELETE',
+            url: 'ProdutoController',
+            params: {id: $scope.id}
+        }).then(function sucess(rs) {
+            $scope.togglePro();
+        });
     };
     //===========FIM==========//
-    
-    $scope.carregarSelect = function () {
+    $scope.carregarUnidades = function () {
         $http({
             method: 'GET',
             url: 'UnidadeController'
         }).then(function success(rs) {
             $scope.unidades = rs.data;
         });
+    };
+
+    $scope.carregarCategorias = function () {
         $http({
             method: 'GET',
             url: 'CategoriaController'
@@ -64,6 +71,9 @@ var app = angular.module("myModule", []).controller("myController", function($sc
     $scope.abrirCadastrarProduto = function () {
         $scope.produto = null;
         $scope.carregarSelect();
+        $scope.carregarUnidades();
+        $scope.carregarCategorias();
+        $('#modalCadastrarProduto').modal('show');
     };
     
     $scope.cadastrarProduto = function (produto, method, valid) {
@@ -91,6 +101,26 @@ var app = angular.module("myModule", []).controller("myController", function($sc
         }
     };
 
+    $scope.cadastrarProduto = function (produto, method) {
+        var data = {
+            id: produto.id,
+            descricao: produto.descricao,
+            unidade: produto.unidade.id,
+            permiteFracionar: produto.permiteFracionar,
+            tipo: produto.tipo,
+            codigoNcm: produto.codigoNcm,
+            categoria: produto.categoria.id
+        };
+        $http({
+            method: method,
+            url: 'ProdutoController',
+            data: data,
+            headers: {"Content-Type": "application/json;charset=UTF-8"}
+        }).then(function success(rs) {
+            $scope.togglePro();
+        });
+    };
+
     $scope.abrirEditarProduto = function (id) {
 
         $http({
@@ -98,9 +128,10 @@ var app = angular.module("myModule", []).controller("myController", function($sc
             url: 'ProdutoController',
             params: {id: id}
         }).then(function success(rs) {
-            $scope.carregarSelect();
+            $scope.carregarUnidades();
+            $scope.carregarCategorias();
             $scope.produto = rs.data.produto;
-            $('#modalEditar').modal('show');
+            $('#modalEditarProduto').modal('show');
         });
     };
     
@@ -128,4 +159,104 @@ var app = angular.module("myModule", []).controller("myController", function($sc
             
         }
     };
-});
+    
+    $scope.editarProduto = function (produto, method) {
+        var data = {
+            id: produto.id,
+            descricao: produto.descricao,
+            unidade: produto.unidade.id,
+            permiteFracionar: produto.permiteFracionar,
+            tipo: produto.tipo,
+            codigoNcm: produto.codigoNcm,
+            categoria: produto.categoria.id
+        };
+        $http({
+            method: method,
+            url: 'ProdutoController',
+            data: data,
+            headers: {"Content-Type": "application/json;charset=UTF-8"}
+        }).then(function success(rs) {
+            $scope.togglePro();
+        });
+    };
+
+    //=== MOVIMENTACAO ===//
+
+    $scope.carregarProdutos = function (id) {
+        $http({
+            method: 'GET',
+            url: 'ProdutoController',
+            params: {id: id}
+        }).then(function success(rs) {
+            $scope.produtos = rs.data.produtos;
+        });
+    };
+
+    $scope.carregarNotasFiscais = function () {
+        $http({
+            method: 'GET',
+            url: 'NotaFiscalController'
+        }).then(function success(rs) {
+            $scope.notasFiscais = rs.data;
+        });
+    };
+
+    $scope.abrirCadastrarMovimentacao = function () {
+        $scope.movimentacao = null;
+//        $scope.carregarNotasFiscais();
+        $scope.carregarProdutos('');
+        $scope.carregarUnidades();
+        $('#modalCadastrarMovimentacao').modal('show');
+    };
+
+    $scope.cadastrarMovimentacao = function (movimentacao) {
+        var data = {
+            id: movimentacao.id,
+            notaFiscal: movimentacao.notaFiscal,
+            produto: movimentacao.produto.id,
+            unidade: movimentacao.unidade.id,
+            quantidade: movimentacao.quantidade,
+            unitario: movimentacao.unitario,
+            desconto: movimentacao.desconto,
+            total: movimentacao.total
+        };
+        $http({
+            method: 'POST',
+            url: 'MovimentacaoController',
+            data: data,
+            headers: {"Content-Type": "application/json;charset=UTF-8"}
+        }).then(function success(rs) {
+            $scope.toggleMov();
+        });
+    };
+
+    $scope.abrirEditarrMovimentacao = function () {
+        $scope.movimentacao = null;
+        $scope.carregarUnidades();
+        $scope.carregarProdutos('');
+//        $scope.carregarNotasFiscais();
+        $('#modalEditarMovimentacao').modal('show');
+    };
+
+    $scope.editarMovimentacao = function (movimentacao) {
+        var data = {
+            id: movimentacao.id,
+            notaFiscal: movimentacao.notaFiscal,
+            produto: movimentacao.produto.id,
+            unidade: movimentacao.unidade.id,
+            quantidade: movimentacao.quantidade,
+            unitario: movimentacao.unitario,
+            desconto: movimentacao.desconto,
+            total: movimentacao.total
+        };
+        $http({
+            method: 'PUT',
+            url: 'MovimentacaoController',
+            data: data,
+            headers: {"Content-Type": "application/json;charset=UTF-8"}
+        }).then(function success(rs) {
+            $scope.toggleMov();
+        });
+    };
+})
+

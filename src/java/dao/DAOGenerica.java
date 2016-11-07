@@ -45,7 +45,7 @@ public class DAOGenerica<T extends EntidadeBase> {
         HibernateUtil.closeSession(sessao);
     }
 
-    //Listar uma entidade em ordem ASC ou DESC
+    //Listar uma entidade
     public <T extends EntidadeBase> List<T> buscarTudo(Class<T> classe) {
         return sessao.createCriteria(classe).list();
     }

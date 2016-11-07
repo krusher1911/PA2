@@ -26,7 +26,7 @@ public class Movimentacao implements EntidadeBase {
     @JoinColumn(name = "id_unidade")
     private UnidadeMedida unidade;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_nota")
     private NotaFiscal notaFiscal;
 

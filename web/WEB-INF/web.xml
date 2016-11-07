@@ -29,6 +29,10 @@
         <servlet-class>Controller.CategoriaController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>NotaFiscalController</servlet-name>
+        <servlet-class>Controller.NotaFiscalController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UnidadeController</servlet-name>
         <servlet-class>Controller.UnidadeController</servlet-class>
     </servlet>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>CategoriaController</servlet-name>
         <url-pattern>/CategoriaController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotaFiscalController</servlet-name>
+        <url-pattern>/NotaFiscalController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UnidadeController</servlet-name>

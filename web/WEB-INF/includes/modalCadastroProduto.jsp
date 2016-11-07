@@ -1,5 +1,5 @@
 <!-- Conteudo do modal cadastrar -->
-<div class="modal fade" id="modalCadastrar" tabindex="-1" role="dialog" aria-labelledby="modalCadastrarLabel">
+<div class="modal fade" id="modalCadastrarProduto" tabindex="-1" role="dialog" aria-labelledby="modalCadastrarLabel">
     <div class="modal-dialog" role="document">
         <!-- Modal content-->
         <div class="modal-content">
