@@ -1,4 +1,3 @@
-<!-- Conteudo do modal cadastrar -->
 <div class="modal fade" id="modalCadastrarProduto" tabindex="-1" role="dialog" aria-labelledby="modalCadastrarLabel">
     <div class="modal-dialog" role="document">
         <!-- Modal content-->
@@ -57,7 +56,7 @@
                         <div class="col-lg-10">
                             <input ng-model="produto.tipo" required ng-maxlength="1" class="form-control" id="inputTipo" name="tipo" placeholder="A" type="text" data-toggle="tooltip" data-placement="top" title="Por favor, insira apenas uma letra.">
                             <p class="help-block" ng-show="formCadastroProduto.tipo.$error.required">
-                                Informe o tipo do produto.
+                                Informe o tipo do produto. Apenas uma letra.
                             </p>
                         </div>
                     </div>
@@ -69,7 +68,7 @@
                         <div class="col-lg-10">
                             <input ng-model="produto.codigoNcm" required class="form-control" id="inputCodigoNcm" name="codigoNcm" placeholder="12345" type="number" data-toggle="tooltip" data-placement="top" title="For favor, insira um número.">
                             <p class="help-block" ng-show="formCadastroProduto.codigoNcm.$error.required">
-                                Informe o codigo do produto.
+                                Informe o codigo do produto. Apenas números.
                             </p>
                         </div>
                     </div>
