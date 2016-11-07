@@ -2,7 +2,7 @@
     <div class="panel panel-heading">
         <div class="row">
                 <div class="col-md-4">
-                    <a id="cadastrarProduto" type="button" class="btn btn-primary" ng-click="abrirCadastrarProduto()"><span class="glyphicon glyphicon-plus"></span></a>
+                    <a id="cadastrarProduto" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastrar" ng-click="abrirCadastrarProduto()"><span class="glyphicon glyphicon-plus"></span></a>
                 </div>
             <div class="col-md-4 ">
                     <p class="panel-title" align="center"><strong>Produtos</strong></p>

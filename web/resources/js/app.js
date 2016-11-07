@@ -64,27 +64,31 @@ var app = angular.module("myModule", []).controller("myController", function($sc
     $scope.abrirCadastrarProduto = function () {
         $scope.produto = null;
         $scope.carregarSelect();
-        $('#modalCadastrar').modal('show');
     };
     
-    $scope.cadastrarProduto = function (produto, method) {
-        var data = {
-            id: produto.id,
-            descricao: produto.descricao,
-            unidade: produto.unidade.id,
-            permiteFracionar: produto.permiteFracionar,
-            tipo: produto.tipo,
-            codigoNcm: produto.codigoNcm,
-            categoria: produto.categoria.id
-        };
-        $http({
-            method: method,
-            url: 'ProdutoController',
-            data: data,
-            headers: {"Content-Type": "application/json;charset=UTF-8"}
-        }).then(function success(rs){
-            $scope.togglePro();
-        });
+    $scope.cadastrarProduto = function (produto, method, valid) {
+        if(valid){
+            var data = {
+                id: produto.id,
+                descricao: produto.descricao,
+                unidade: produto.unidade.id,
+                permiteFracionar: produto.permiteFracionar,
+                tipo: produto.tipo,
+                codigoNcm: produto.codigoNcm,
+                categoria: produto.categoria.id
+            };
+            $http({
+                method: method,
+                url: 'ProdutoController',
+                data: data,
+                headers: {"Content-Type": "application/json;charset=UTF-8"}
+            }).then(function success(rs){
+                $scope.togglePro();
+            });
+        }
+        else{
+            
+        }
     };
 
     $scope.abrirEditarProduto = function (id) {
@@ -100,23 +104,28 @@ var app = angular.module("myModule", []).controller("myController", function($sc
         });
     };
     
-    $scope.editarProduto = function (produto, method) {
-        var data = {
-            id: produto.id,
-            descricao: produto.descricao,
-            unidade: produto.unidade.id,
-            permiteFracionar: produto.permiteFracionar,
-            tipo: produto.tipo,
-            codigoNcm: produto.codigoNcm,
-            categoria: produto.categoria.id
-        };
-        $http({
-            method: method,
-            url: 'ProdutoController',
-            data: data,
-            headers: {"Content-Type": "application/json;charset=UTF-8"}
-        }).then(function success(rs){
-            $scope.togglePro();
-        });
+    $scope.editarProduto = function (produto, method,  valid) {
+        if(valid){
+            var data = {
+                id: produto.id,
+                descricao: produto.descricao,
+                unidade: produto.unidade.id,
+                permiteFracionar: produto.permiteFracionar,
+                tipo: produto.tipo,
+                codigoNcm: produto.codigoNcm,
+                categoria: produto.categoria.id
+            };
+            $http({
+                method: method,
+                url: 'ProdutoController',
+                data: data,
+                headers: {"Content-Type": "application/json;charset=UTF-8"}
+            }).then(function success(rs){
+                $scope.togglePro();
+            });
+        }
+        else{
+            
+        }
     };
 });
