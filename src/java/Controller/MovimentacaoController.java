@@ -8,6 +8,7 @@ import entity.entitys.Movimentacao;
 import entity.entitys.NotaFiscal;
 import entity.entitys.Produto;
 import entity.entitys.UnidadeMedida;
+import entity.enums.ModoCadastro;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -54,7 +55,7 @@ public class MovimentacaoController extends HttpServlet {
             throws ServletException, IOException {
         JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
         movimentacao = new Movimentacao();
-        montarMovimentacao(request, obj);
+        montarMovimentacao(obj);
         dao.save(movimentacao);
 
     }
@@ -65,28 +66,30 @@ public class MovimentacaoController extends HttpServlet {
         JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
 
         movimentacao = (Movimentacao) dao.buscarPorId(Movimentacao.class, obj.get("id").getAsLong());
-        montarMovimentacao(request, obj);
+        montarMovimentacao(obj);
         dao.update(movimentacao);
 
     }
 
-    private void montarMovimentacao(HttpServletRequest request, JsonObject obj) throws IOException {
+    private void montarMovimentacao(JsonObject obj) throws IOException {
         Long produto = obj.get("produto").getAsLong();
-        if (!produto.equals("")) {
+        if (produto != null) {
             movimentacao.setProduto((Produto) dao.buscarPorId(Produto.class, produto));
         }
         movimentacao.setQuantidade(obj.get("quantidade").getAsInt());
         Long unidade = obj.get("unidade").getAsLong();
-        if (!unidade.equals("")) {
+        if (unidade != null) {
+        } else {
             movimentacao.setUnidade((UnidadeMedida) dao.buscarPorId(UnidadeMedida.class, unidade));
         }
         Long notaFiscal = obj.get("notaFiscal").getAsLong();
-        if (!unidade.equals("")) {
-            movimentacao.setNotaFiscal((NotaFiscal) dao.buscarPorId(NotaFiscal.class, unidade));
+        if (notaFiscal != null) {
+            movimentacao.setNotaFiscal((NotaFiscal) dao.buscarPorId(NotaFiscal.class, notaFiscal));
         }
         movimentacao.setTotal(obj.get("total").getAsDouble());
         movimentacao.setUnitario(obj.get("unitario").getAsDouble());
         movimentacao.setDesconto(obj.get("desconto").getAsDouble());
+        movimentacao.setModoCadastro(ModoCadastro.MANUALMENTE);
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

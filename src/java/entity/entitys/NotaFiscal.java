@@ -7,7 +7,6 @@ import entity.enums.Natureza;
 import entity.enums.TipoNota;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -26,7 +25,7 @@ public class NotaFiscal implements EntidadeBase {
     private Date emissao;
     
     @Column(name = "valor_nota")
-    private double valorTotal;
+    private Double valorTotal;
     
     @OneToOne
     @JoinColumn(name ="id_envolvido")
@@ -46,8 +45,8 @@ public class NotaFiscal implements EntidadeBase {
     @Column(name = "natureza")
     private Natureza natureza; //Indica se � Venda/Bonifica��o/Devolu��o
     
-    @OneToMany(mappedBy = "id", targetEntity = NotaFiscal.class, fetch = FetchType.LAZY)
-    private List<Movimentacao> itens;
+//    @OneToMany(mappedBy = "id", targetEntity = NotaFiscal.class, fetch = FetchType.LAZY)
+//    private List<Movimentacao> itens;
     
     @Column(name="data_hora")
     private LocalDateTime dataCadastro;
@@ -63,7 +62,7 @@ public class NotaFiscal implements EntidadeBase {
     public NotaFiscal() {
     }
 
-    public NotaFiscal(String chave, Date emissao, double valorTotal, Entidade entidade, Long numero, int serie, TipoNota tipo, Natureza natureza, List<Movimentacao> itens, ModoCadastro modoCadastro, Usuario usuario) {
+    public NotaFiscal(String chave, Date emissao, Double valorTotal, Entidade entidade, Long numero, Integer serie, TipoNota tipo, Natureza natureza, ModoCadastro modoCadastro, Usuario usuario) {
 
         this.chave = chave;
         this.emissao = emissao;
@@ -73,7 +72,7 @@ public class NotaFiscal implements EntidadeBase {
         this.serie = serie;
         this.tipo = tipo;
         this.natureza = natureza;
-        this.itens = itens;
+//        this.itens = itens;
         this.modoCadastro = modoCadastro;
         this.usuario = usuario;
         this.dataCadastro = LocalDateTime.now();
@@ -147,14 +146,14 @@ public class NotaFiscal implements EntidadeBase {
     public Natureza getNatureza() {
         return natureza;
     }
-
-    public List<Movimentacao> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<Movimentacao> itens) {
-        this.itens = itens;
-    }
+//
+//    public List<Movimentacao> getItens() {
+//        return itens;
+//    }
+//
+//    public void setItens(List<Movimentacao> itens) {
+//        this.itens = itens;
+//    }
 
     public void setNatureza(Natureza natureza) {
         this.natureza = natureza;

@@ -3,7 +3,6 @@ package Controller;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.genericBooleanType;
 import dao.DAOGenerica;
 import entity.entitys.Categoria;
 import entity.entitys.Produto;
@@ -51,21 +50,11 @@ public class ProdutoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String delete = request.getParameter("del");
-        if (delete == null){
-            produto = new Produto();
-            JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
-            montarProduto(request, obj);
-            dao.save(produto);
-        }
-        else{
-            try {
-                dao.delete(Produto.class, Long.parseLong(request.getParameter("id")));
-            } catch (NotFoundException ex) {
-                Logger.getLogger(ProdutoController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+
+        produto = new Produto();
+        JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
+        montarProduto(request, obj);
+        dao.save(produto);
     }
 
     @Override
@@ -76,6 +65,16 @@ public class ProdutoController extends HttpServlet {
         montarProduto(request, obj);
         dao.update(produto);
 
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            dao.delete(Produto.class, Long.parseLong(request.getParameter("id")));
+        } catch (NotFoundException ex) {
+            Logger.getLogger(ProdutoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void montarProduto(HttpServletRequest request, JsonObject obj) throws IOException {

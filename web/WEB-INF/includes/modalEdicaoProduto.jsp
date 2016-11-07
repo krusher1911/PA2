@@ -1,5 +1,5 @@
 <!-- Conteudo do modal editar -->
-<div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modalCadastrarLabel">
+<div class="modal fade" id="modalEditarProduto" tabindex="-1" role="dialog" aria-labelledby="modalCadastrarLabel">
     <div class="modal-dialog" role="document">
         <!-- Modal content-->
         <div class="modal-content">
