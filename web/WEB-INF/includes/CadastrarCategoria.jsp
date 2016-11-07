@@ -10,8 +10,8 @@
             <form class="form-horizontal" name="formCadastroCategoria" ng-modal="produto" novalidate>
                 <div class="modal-body">
                     <div class="form-group" ng-class="
-                        {'has-error':!formCadastroProduto.descricao.$valid,
-                         'has-success':formCadastroProduto.descricao.$valid
+                        {'has-error':!formCadastroCategoria.descricao.$valid,
+                         'has-success':formCadastroCategoria.descricao.$valid
                             }">
                         <label class="col-lg-2 control-label" for="inputDescricao">Descrição:</label>
                         <div class="col-lg-10">

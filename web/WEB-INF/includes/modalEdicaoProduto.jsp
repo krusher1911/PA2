@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <center><h4 class="modal-title">Editar de Produto</h4></center>
+                <center><h4 class="modal-title">Editar Produto</h4></center>
             </div>
             
             <form class="form-horizontal" name="formEdicaoProduto" ng-modal="produto" novalidate="novalidate">

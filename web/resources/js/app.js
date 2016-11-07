@@ -156,13 +156,16 @@ var app = angular.module("myModule", []).controller("myController", function ($s
     
     //=== MOVIMENTACAO ===//
 
-    $scope.carregarProdutos = function (id) {
+    $scope.carregarProdutos = function (redirect, id) {
         $http({
             method: 'GET',
             url: 'ProdutoController',
             params: {id: id}
         }).then(function success(rs) {
             $scope.produtos = rs.data.produtos;
+            if(redirect){
+                $scope.toggled = 3;
+            }
         });
     };
 
