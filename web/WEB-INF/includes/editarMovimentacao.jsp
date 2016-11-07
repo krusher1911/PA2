@@ -17,7 +17,7 @@
                         </div>
                     </div><div class="form-group">
                         <label class="col-lg-2 control-label" for="inputNotaFiscal">Nota Fiscal:</label>
-                        <div class="col-lg-10">
+                        <div class="col-lg-10">  <!--nnota fiscal nao é obrigatório-->
                             <input ng-model="movimentacao.notaFiscal" class="form-control" id="inputNotaFiscal" name="notaFiscal" placeholder="Nota Fiscal" type="text" data-toggle="tooltip" data-placement="top" title="Nota Fiscal referente a movimentação">
                         </div>
                     </div>
