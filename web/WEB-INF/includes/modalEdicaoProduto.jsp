@@ -17,7 +17,7 @@
                         <label class="col-lg-2 control-label" for="inputId">Código</label>
                         <div class="col-lg-10">
                             <input ng-model="produto.id" required class="form-control" id="inputId" name="id" type="text" data-toggle="tooltip" data-placement="top" title="Código" disabled>
-                            <p class="help-block" id="avisoDescricao"style="color:red;" ng-show="formEdicaoProduto.id.$error.required">
+                            <p class="help-block" ng-show="formEdicaoProduto.id.$error.required">
                                 Informe o id do produto.
                             </p>
                         </div>

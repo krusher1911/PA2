@@ -10,8 +10,8 @@
 
             <form class="form-horizontal">
                 <div class="modal-body">
-                </div><div class="form-group">
-                    <label class="col-lg-2 control-label" for="inputNotaFiscal">Nota Fiscal:</label>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="inputNotaFiscal">Nota Fiscal:</label>
                     <div class="col-lg-10">
                         <input ng-model="movimentacao.notaFiscal" class="form-control" id="inputNotaFiscal" name="notaFiscal" placeholder="Nota Fiscal" type="text" data-toggle="tooltip" data-placement="top" title="Nota Fiscal referente a movimentação">
                     </div>
@@ -67,7 +67,6 @@
                 </div>
             </form>
         </div>
-
     </div>
 </div>
 <!--fim modal cadastrar -->

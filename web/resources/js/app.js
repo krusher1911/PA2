@@ -34,6 +34,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
     };
     //===========FIM==========//
 
+
     //===INICIO DELETE ITEM===//
     $scope.id = 0;
     $scope.confirmacao = function (id) {
@@ -50,30 +51,34 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         });
     };
     //===========FIM==========//
-    $scope.carregarUnidades = function () {
+    $scope.carregarUnidades = function (redirect) {
         $http({
             method: 'GET',
             url: 'UnidadeController'
         }).then(function success(rs) {
             $scope.unidades = rs.data;
+            if(redirect){
+                $scope.toggled = 5;
+            }
         });
     };
 
-    $scope.carregarCategorias = function () {
+    $scope.carregarCategorias = function (redirect) {
         $http({
             method: 'GET',
             url: 'CategoriaController'
         }).then(function success(rs) {
             $scope.categorias = rs.data;
+            if(redirect){
+                $scope.toggled = 4;
+            }
         });
     };
 
     $scope.abrirCadastrarProduto = function () {
         $scope.produto = null;
-        $scope.carregarSelect();
         $scope.carregarUnidades();
         $scope.carregarCategorias();
-        $('#modalCadastrarProduto').modal('show');
     };
     
     $scope.cadastrarProduto = function (produto, method, valid) {
@@ -131,7 +136,6 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             $scope.carregarUnidades();
             $scope.carregarCategorias();
             $scope.produto = rs.data.produto;
-            $('#modalEditarProduto').modal('show');
         });
     };
     
@@ -206,7 +210,6 @@ var app = angular.module("myModule", []).controller("myController", function ($s
 //        $scope.carregarNotasFiscais();
         $scope.carregarProdutos('');
         $scope.carregarUnidades();
-        $('#modalCadastrarMovimentacao').modal('show');
     };
 
     $scope.cadastrarMovimentacao = function (movimentacao) {

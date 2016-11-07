@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalRemover" role="dialog">
+<div class="modal fade" id="modalRemoverProduto" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->

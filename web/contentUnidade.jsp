@@ -1,11 +1,11 @@
-<div ng-controller="myController" id="contentCategoria" class="panel panel-primary">
+<div ng-controller="myController" id="contentUnidade" class="panel panel-primary">
     <div class="panel panel-heading">
         <div class="row">
             <div class="col-md-4">
-                <a id="cadastrarCategoria" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastrarCategoria" ><span class="glyphicon glyphicon-plus"></span></a>
+                <a id="cadastrarUnidade" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastrarUnidade" ><span class="glyphicon glyphicon-plus"></span></a>
             </div>
             <div class="col-md-4 ">
-                <p class="panel-title" align="center"><strong>Categoria</strong></p>
+                <p class="panel-title" align="center"><strong>Unidade</strong></p>
             </div>
             <div class="col-md-4">
 
