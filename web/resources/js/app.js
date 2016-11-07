@@ -4,35 +4,70 @@ var app = angular.module("myModule", []).controller("myController", function ($s
     $scope.customFullscreen = false;
 
     $scope.toggled = 1;
-    $scope.togglePri = function () {
+
+    $scope.carregarPrincipal = function () {
         $scope.toggled = 1;
     };
 
-    //===INICIO TAB MOVIMENTAÇÕES===//
-    $scope.toggleMov = function () {
+    $scope.carregarMovimentacoes = function (redirect, id) {
         $http({
             method: 'GET',
             url: 'MovimentacaoController',
-            params: {id: ''}
+            params: {id: id}
         }).then(function success(rs) {
             $scope.movimentacoes = rs.data.movimentacoes;
-            $scope.toggled = 2;
+            if (redirect) {
+                $scope.toggled = 2;
+            }
         });
     };
-    //===========FIM==========//
 
-    //===INICIO TAB PRODUTOS===//
-    $scope.togglePro = function () {
+    $scope.carregarProdutos = function (redirect, id) {
         $http({
             method: 'GET',
             url: 'ProdutoController',
-            params: {id: ''}
+            params: {id: id}
         }).then(function success(rs) {
             $scope.produtos = rs.data.produtos;
-            $scope.toggled = 3;
+            if (redirect) {
+                $scope.toggled = 3;
+            }
         });
     };
-    //===========FIM==========//
+
+    $scope.carregarCategorias = function (redirect) {
+        $http({
+            method: 'GET',
+            url: 'CategoriaController'
+        }).then(function success(rs) {
+            $scope.categorias = rs.data;
+            if (redirect) {
+                $scope.toggled = 4;
+            }
+        });
+    };
+
+    $scope.carregarUnidades = function (redirect) {
+        $http({
+            method: 'GET',
+            url: 'UnidadeController'
+        }).then(function success(rs) {
+            $scope.unidades = rs.data;
+            if (redirect) {
+                $scope.toggled = 5;
+            }
+        });
+    };
+
+    $scope.carregarNotasFiscais = function () {
+        $http({
+            method: 'GET',
+            url: 'NotaFiscalController'
+        }).then(function success(rs) {
+            $scope.notasFiscais = rs.data;
+        });
+    };
+
 
 
     //===INICIO DELETE ITEM===//
@@ -47,31 +82,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             url: 'ProdutoController',
             params: {id: $scope.id}
         }).then(function sucess(rs) {
-            $scope.togglePro();
-        });
-    };
-    //===========FIM==========//
-    $scope.carregarUnidades = function (redirect) {
-        $http({
-            method: 'GET',
-            url: 'UnidadeController'
-        }).then(function success(rs) {
-            $scope.unidades = rs.data;
-            if(redirect){
-                $scope.toggled = 5;
-            }
-        });
-    };
-
-    $scope.carregarCategorias = function (redirect) {
-        $http({
-            method: 'GET',
-            url: 'CategoriaController'
-        }).then(function success(rs) {
-            $scope.categorias = rs.data;
-            if(redirect){
-                $scope.toggled = 4;
-            }
+            $scope.carregarProdutos(true, '');
         });
     };
 
@@ -98,7 +109,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
                 data: data,
                 headers: {"Content-Type": "application/json;charset=UTF-8"}
             }).then(function success(rs){
-                $scope.togglePro();
+                $scope.carregarProdutos(true, '');
             });
         }
         else{
@@ -106,28 +117,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         }
     };
 
-    $scope.cadastrarProduto = function (produto, method) {
-        var data = {
-            id: produto.id,
-            descricao: produto.descricao,
-            unidade: produto.unidade.id,
-            permiteFracionar: produto.permiteFracionar,
-            tipo: produto.tipo,
-            codigoNcm: produto.codigoNcm,
-            categoria: produto.categoria.id
-        };
-        $http({
-            method: method,
-            url: 'ProdutoController',
-            data: data,
-            headers: {"Content-Type": "application/json;charset=UTF-8"}
-        }).then(function success(rs) {
-            $scope.togglePro();
-        });
-    };
-
     $scope.abrirEditarProduto = function (id) {
-
         $http({
             method: 'GET',
             url: 'ProdutoController',
@@ -156,59 +146,17 @@ var app = angular.module("myModule", []).controller("myController", function ($s
                 data: data,
                 headers: {"Content-Type": "application/json;charset=UTF-8"}
             }).then(function success(rs){
-                $scope.togglePro();
+                $scope.carregarProdutos(true, '');
             });
         }
         else{
             
         }
     };
-    
-    $scope.editarProduto = function (produto, method) {
-        var data = {
-            id: produto.id,
-            descricao: produto.descricao,
-            unidade: produto.unidade.id,
-            permiteFracionar: produto.permiteFracionar,
-            tipo: produto.tipo,
-            codigoNcm: produto.codigoNcm,
-            categoria: produto.categoria.id
-        };
-        $http({
-            method: method,
-            url: 'ProdutoController',
-            data: data,
-            headers: {"Content-Type": "application/json;charset=UTF-8"}
-        }).then(function success(rs) {
-            $scope.togglePro();
-        });
-    };
-
-    //=== MOVIMENTACAO ===//
-
-    $scope.carregarProdutos = function (id) {
-        $http({
-            method: 'GET',
-            url: 'ProdutoController',
-            params: {id: id}
-        }).then(function success(rs) {
-            $scope.produtos = rs.data.produtos;
-        });
-    };
-
-    $scope.carregarNotasFiscais = function () {
-        $http({
-            method: 'GET',
-            url: 'NotaFiscalController'
-        }).then(function success(rs) {
-            $scope.notasFiscais = rs.data;
-        });
-    };
 
     $scope.abrirCadastrarMovimentacao = function () {
         $scope.movimentacao = null;
-//        $scope.carregarNotasFiscais();
-        $scope.carregarProdutos('');
+        $scope.carregarProdutos(false, '');
         $scope.carregarUnidades();
     };
 
@@ -229,16 +177,14 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             data: data,
             headers: {"Content-Type": "application/json;charset=UTF-8"}
         }).then(function success(rs) {
-            $scope.toggleMov();
+            $scope.carregarMovimentacoes(true, '');
         });
     };
 
     $scope.abrirEditarrMovimentacao = function () {
         $scope.movimentacao = null;
         $scope.carregarUnidades();
-        $scope.carregarProdutos('');
-//        $scope.carregarNotasFiscais();
-        $('#modalEditarMovimentacao').modal('show');
+        $scope.carregarProdutos(false, '');
     };
 
     $scope.editarMovimentacao = function (movimentacao) {
@@ -258,7 +204,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             data: data,
             headers: {"Content-Type": "application/json;charset=UTF-8"}
         }).then(function success(rs) {
-            $scope.toggleMov();
+            $scope.carregarMovimentacoes(true, '');
         });
     };
 })

@@ -15,7 +15,8 @@
                     <div class="col-lg-10">
                         <input ng-model="movimentacao.notaFiscal" class="form-control" id="inputNotaFiscal" name="notaFiscal" placeholder="Nota Fiscal" type="text" data-toggle="tooltip" data-placement="top" title="Nota Fiscal referente a movimentação">
                     </div>
-                </div>
+                    <!--nnota fiscal nao é obrigatório-->
+                    </div>
                 <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputProduto">Produto</label>
                         <div class="col-lg-10">
@@ -53,8 +54,8 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputValorTotal">Valor Total</label>
                         <div class="col-lg-10">
-                            <!--calcular de acordo com a quantidade, valor unitario e desconto-->
-                            <input ng-model="movimentacao.total" class="form-control" id="inputValorTotal" name="total" placeholder="Valor Total" type="text" data-toggle="tooltip" data-placement="top" title="Valor Total" disabled>
+                            <!--calcular de acordo com a quantidade, valor unitario e desconto e colocar desabilitado-->
+                            <input ng-model="movimentacao.total" class="form-control" id="inputValorTotal" name="total" placeholder="Valor Total" type="text" data-toggle="tooltip" data-placement="top" title="Valor Total">
                         </div>
                     </div>
                     <div class="form-group">

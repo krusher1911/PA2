@@ -1,6 +1,7 @@
 package Controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dao.DAOGenerica;
@@ -82,9 +83,9 @@ public class MovimentacaoController extends HttpServlet {
         } else {
             movimentacao.setUnidade((UnidadeMedida) dao.buscarPorId(UnidadeMedida.class, unidade));
         }
-        Long notaFiscal = obj.get("notaFiscal").getAsLong();
+        JsonElement notaFiscal = obj.get("notaFiscal");
         if (notaFiscal != null) {
-            movimentacao.setNotaFiscal((NotaFiscal) dao.buscarPorId(NotaFiscal.class, notaFiscal));
+            movimentacao.setNotaFiscal((NotaFiscal) dao.buscarPorId(NotaFiscal.class, notaFiscal.getAsLong()));
         }
         movimentacao.setTotal(obj.get("total").getAsDouble());
         movimentacao.setUnitario(obj.get("unitario").getAsDouble());

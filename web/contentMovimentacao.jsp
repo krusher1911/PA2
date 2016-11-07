@@ -2,7 +2,7 @@
     <div class="panel panel-heading">
         <div class="row">
             <div class="col-md-4">
-                <a id="cadastrarMovimentacao" ng-click="abrirCadastrarMovimentacao()" type="button" class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></a>
+                <a id="cadastrarMovimentacao" ng-click="abrirCadastrarMovimentacao()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastrarMovimentacao"><span class="glyphicon glyphicon-plus"></span></a>
             </div>
             <div class="col-md-4 ">
                 <p class="panel-title" align="center"><strong>Movimentações</strong></p>
@@ -38,7 +38,7 @@
                     <td>{{m.desconto}}</td>
                     <td>{{m.total}}</td>
                     <td>
-                        <button id="editarProduto" type="button" class="btn btn-primary btn-sm" data-toggle="modal"><span class="glyphicon glyphicon-edit"></span></button>
+                        <button id="editarProduto" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEditarMovimentacao"><span class="glyphicon glyphicon-edit"></span></button>
                         <button id="removerProduto" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalRemoverMovimentacao"><span class="glyphicon glyphicon-remove"></span></button>
                     </td>
                 </tr>
