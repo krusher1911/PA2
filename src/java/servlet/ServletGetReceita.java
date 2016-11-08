@@ -1,115 +1,95 @@
 package servlet;
 
 import coletor.ColetorReceita;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-
-
-/**
- *
- * @author Gustavo
- */
 @WebServlet(name = "Receita", urlPatterns = {"/Receita"})
 public class ServletGetReceita extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        Map<String, Object> map = new HashMap<String, Object>();
+        
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        
-        
+    
         ColetorReceita coletor2 = new ColetorReceita();
         coletor2.rodar();
         
         response.addCookie(coletor2.getCookie_session());
+        String btnConsultar =coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_btnConsultar");
+        String btnLimpar = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_btnLimpar");
+        String imagemCaptcha = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_imgCaptcha");
+        String chaveCompleta = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_txtChaveAcessoCompleta");
+        String chaveCaptcha = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_txtCaptcha");
+        btnConsultar = btnConsultar.replace("class=\"botao\"", "class=\"btn btn-primary\"");
+        btnLimpar = btnLimpar.replace("class=\"botao\"", "class=\"btn btn-default\"");
+        chaveCompleta = chaveCompleta.replace("class=\"txtChaveAcesso\"", "class=\"form-control\" placeholder=\"chave completa\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"chave completa da nota\"");
+        chaveCaptcha = chaveCaptcha.replace("class=\"txtCaptcha\"", "class=\"form-control\" placeholder=\"chave captcha\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"chave de validação\"");
         
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Receita</title>");
-            out.println("<link href=\"css/main.css\"rel=\"stylesheet\"type=\"text/css\"/>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<form name=\"form_coletor\" action=\"posteceita\" method=\"POST\">");
-            out.println("   <table class=\"tg\">");
-            out.println("   <tr>");
-            out.println("       <th rowspan=\"2\">" + coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_imgCaptcha") + "</th>");
-            out.println("       <th colspan=\"2\">"+ coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_txtChaveAcessoCompleta") + "</th>");
-            out.println("     </tr>");
-            out.println("     <tr>");
-            out.println("       <td colspan=\"2\">"+ coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_txtCaptcha") + "</td>");
-            out.println("     </tr>");
-            out.println("     <tr>");
-            out.println("       <td></td>");
-            out.println("       <td>" + coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_btnConsultar") + " " +  coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_btnLimpar") + "</td>");
-            out.println("       <td></td>");
-            out.println("     </tr>");
-            out.println(    "</table>");
-            out.println("</from>");
-            out.println(coletor2.getElementoPorID("[name=__VIEWSTATE]"));
-            out.println(coletor2.getElementoPorID("[name=__VIEWSTATEGENERATOR]"));
-            out.println(coletor2.getElementoPorID("[name=__EVENTVALIDATION]"));
-            out.println(coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_token"));
-            out.println(coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_captchaSom"));
-            
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
-    }
+        
+        String viewstate = coletor2.getElementoPorID("[name=__VIEWSTATE]");
+        String viewstatgen = coletor2.getElementoPorID("[name=__VIEWSTATEGENERATOR]");
+        String eventval = coletor2.getElementoPorID("[name=__EVENTVALIDATION]");
+        String contenttoken = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_token");
+        String contentcapsom = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_captchaSom");
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String captcha ="<form class=\"form-horizontal\" name=\"form_coletor\" action=\"posteceita\" method=\"POST\">"+
+                    "       <div class=\"form-group\">"+
+                                "<center>"+ imagemCaptcha + "</center>"+
+                    "       </div>"+        
+                    "       <div class=\"form-group\">"+
+                    "           <label class=\"col-lg-2 control-label\" for=\"ctl00_ContentPlaceHolder1_txtChaveAcessoCompleta\">Chave completa</label>"+
+                    "           <div class=\"col-lg-10\">"+
+                                    chaveCompleta +
+                    "           </div>"+
+                    "       </div>"+
+                    "       <div class=\"form-group\">"+
+                    "           <label class=\"col-lg-2 control-label\" for=\"ctl00_ContentPlaceHolder1_txtCaptcha\">Chave captcha</label>"+
+                    "           <div class=\"col-lg-10\">"+
+                                    chaveCaptcha+
+                                    "<center>"+btnLimpar + btnConsultar +"</center>"+
+                    "           </div>"+
+                    "       </div>"+
+                        "</from>"+
+                        viewstate +
+                        viewstatgen+
+                        eventval+
+                        contenttoken+
+                        contentcapsom ;
+        
+        map.put("capt", captcha);
+        
+        HttpSession session = request.getSession();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(new Gson().toJson(map));
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
