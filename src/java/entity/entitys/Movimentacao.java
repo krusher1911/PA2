@@ -1,11 +1,14 @@
 package entity.entitys;
 
-//importações para o Hibernate e JPA
 import entity.EntidadeBase;
 import entity.enums.ModoCadastro;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
+/**
+ *
+ * @author Bruna
+ */
 @Entity
 @Table(name = "movimentacao")
 public class Movimentacao implements EntidadeBase {
@@ -15,18 +18,18 @@ public class Movimentacao implements EntidadeBase {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_produto")
     private Produto produto;
 
     @Column(name = "quantidade")
-    private Integer quantidade;
+    private double quantidade;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_unidade")
     private UnidadeMedida unidade;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_nota")
     private NotaFiscal notaFiscal;
 
@@ -46,7 +49,7 @@ public class Movimentacao implements EntidadeBase {
     @Column(name = "modo_insercao")
     private ModoCadastro modoCadastro;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
@@ -54,7 +57,7 @@ public class Movimentacao implements EntidadeBase {
         this.dataCadastro = LocalDateTime.now();
     }
 
-    public Movimentacao(Produto produto, Integer quantidade, UnidadeMedida unidade, NotaFiscal notaFiscal, Double total, Double unitario, Double desconto, ModoCadastro modoCadastro, Usuario usuario) {
+    public Movimentacao(Produto produto, double quantidade, UnidadeMedida unidade, NotaFiscal notaFiscal, double total, double unitario, double desconto, ModoCadastro modoCadastro, Usuario usuario) {
         this.produto = produto;
         this.quantidade = quantidade;
         this.unidade = unidade;
@@ -84,7 +87,7 @@ public class Movimentacao implements EntidadeBase {
         this.produto = produto;
     }
 
-    public int getQuantidade() {
+    public double getQuantidade() {
         return quantidade;
     }
 

@@ -23,6 +23,20 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         });
     };
     
+    $scope.salvarNota= function(){
+        $http({
+            method: 'POST',
+            url: 'posteceita'
+        }).then(function success(rs) {
+            $scope.erroPost = rs.data.erroPost;
+            if(erroPost != null || erroPost != ''){
+                
+            }
+            $scope.carregarPrincipal();
+            
+        });
+    }
+    
     $scope.carregarNotasFiscais = function (redirect, id) {
         //debugger;
         $http({

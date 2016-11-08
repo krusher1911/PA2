@@ -1,10 +1,13 @@
 package entity.entitys;
 
-//importações para o Hibernate e JPA
 import entity.EntidadeBase;
 import java.util.List;
 import javax.persistence.*;
 
+/**
+ *
+ * @author Bruna
+ */
 @Entity
 @Table(name = "grupo_acesso")
 public class GrupoAcesso implements EntidadeBase {
