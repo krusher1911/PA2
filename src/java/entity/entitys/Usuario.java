@@ -20,19 +20,14 @@ public class Usuario implements EntidadeBase, Serializable {
     
     @Column(name = "senha")
     private String senha;
-    
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_grupo")
-    private GrupoAcesso grupoAcesso;
 
     public Usuario() {
     }
 
-    public Usuario(String nome, String login, String senha, GrupoAcesso grupoAcesso) {
+    public Usuario(String nome, String login, String senha) {
         this.nome = nome;
         this.login = login;
         this.senha = senha;
-        this.grupoAcesso = grupoAcesso;;
     }
 
     public Long getId() {
@@ -65,14 +60,6 @@ public class Usuario implements EntidadeBase, Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public GrupoAcesso getGrupoAcesso() {
-        return grupoAcesso;
-    }
-
-    public void setGrupAcesso(GrupoAcesso grupoAcesso) {
-        this.grupoAcesso = grupoAcesso;
     }
 
 }

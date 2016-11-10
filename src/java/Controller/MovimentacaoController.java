@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javassist.NotFoundException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -92,14 +95,15 @@ public class MovimentacaoController extends HttpServlet {
         movimentacao.setDesconto(obj.get("desconto").getAsDouble());
         movimentacao.setModoCadastro(ModoCadastro.MANUALMENTE);
     }
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
 
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            dao.delete(Movimentacao.class, Long.parseLong(request.getParameter("id")));
+        } catch (NotFoundException ex) {
+            Logger.getLogger(UnidadeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

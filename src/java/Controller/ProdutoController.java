@@ -66,16 +66,6 @@ public class ProdutoController extends HttpServlet {
         dao.update(produto);
 
     }
-
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            dao.delete(Produto.class, Long.parseLong(request.getParameter("id")));
-        } catch (NotFoundException ex) {
-            Logger.getLogger(ProdutoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     private void montarProduto(HttpServletRequest request, JsonObject obj) throws IOException {
         produto.setDescricao(obj.get("descricao").getAsString());
@@ -92,14 +82,14 @@ public class ProdutoController extends HttpServlet {
         }
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
-
     @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            dao.delete(Produto.class, Long.parseLong(request.getParameter("id")));
+        } catch (NotFoundException ex) {
+            Logger.getLogger(ProdutoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }
