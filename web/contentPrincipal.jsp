@@ -1,18 +1,16 @@
-<div id="principal" class="fade in active">
-    <div class="panel panel-primary">
-        <div class="panel panel-heading">
-            <p class="panel-title" align="center"><strong>Principal</strong></p>
+<div ng-controller="myController" class="panel panel-primary">
+    <div class="panel panel-heading">
+        <p class="panel-title" align="center"><strong>Principal</strong></p>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <form class="form-horizontal col-lg-3 col-lg-offset-1" name="form_coletor" action="Receita" method="POST">
+                <p class="centro"><a class="btn btn-primary" type="submit" name="botao" ng-click="buscarNota()">Pesquisar</a></p>
+            </form>
         </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-offset-1">
-                    <label class="checkbox-inline"><input type="checkbox" value="">Receita</label>
-                    <button type="submit" method="post" class="btn btn-primary">Pesquisar</button>
-                </div></br>
-                <div class="col-md-offset-1">
-                    <label class="checkbox-inline"><input type="checkbox" value="">Option 2</label>
-                    <button type="submit" method="post" class="btn btn-primary">Pesquisar</button>
-                </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" id="dicCaptcha">
+                
             </div>
         </div>
     </div>

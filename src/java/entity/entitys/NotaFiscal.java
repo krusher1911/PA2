@@ -1,14 +1,18 @@
 package entity.entitys;
 
-//importações para o Hibernate e JPA
 import entity.EntidadeBase;
 import entity.enums.ModoCadastro;
 import entity.enums.Natureza;
 import entity.enums.TipoNota;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
+/**
+ *
+ * @author Bruna
+ */
 @Entity
 @Table(name = "nota_fiscal")
 public class NotaFiscal implements EntidadeBase {
@@ -27,7 +31,7 @@ public class NotaFiscal implements EntidadeBase {
     @Column(name = "valor_nota")
     private Double valorTotal;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="id_envolvido")
     private Entidade entidade;
     
@@ -35,7 +39,7 @@ public class NotaFiscal implements EntidadeBase {
     private Long numero;
     
     @Column(name = "serie")
-    private Integer serie;
+    private String serie;
     
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "tipo")
@@ -62,7 +66,7 @@ public class NotaFiscal implements EntidadeBase {
     public NotaFiscal() {
     }
 
-    public NotaFiscal(String chave, Date emissao, Double valorTotal, Entidade entidade, Long numero, Integer serie, TipoNota tipo, Natureza natureza, ModoCadastro modoCadastro, Usuario usuario) {
+    public NotaFiscal(String chave, Date emissao, double valorTotal, Entidade entidade, Long numero, String serie, TipoNota tipo, Natureza natureza, List<Movimentacao> itens, ModoCadastro modoCadastro, Usuario usuario) {
 
         this.chave = chave;
         this.emissao = emissao;
@@ -127,11 +131,11 @@ public class NotaFiscal implements EntidadeBase {
         this.numero = numero;
     }
 
-    public int getSerie() {
+    public String getSerie() {
         return serie;
     }
 
-    public void setSerie(int serie) {
+    public void setSerie(String serie) {
         this.serie = serie;
     }
 

@@ -21,8 +21,6 @@
         <mapping class="entity.entitys.Categoria"/>
         <mapping class="entity.entitys.Endereco"/>
         <mapping class="entity.entitys.Entidade"/>
-        <mapping class="entity.entitys.Cliente"/>
-        <mapping class="entity.entitys.Fornecedor"/>
         <mapping class="entity.entitys.UnidadeMedida"/>
         <mapping class="entity.entitys.Produto"/>
         <mapping class="entity.entitys.Permissao"/>

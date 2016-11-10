@@ -1,12 +1,15 @@
 package entity.entitys;
 
-//importações para o Hibernate e JPA
 import entity.EntidadeBase;
 import entity.enums.ModoCadastro;
 import entity.enums.TipoEntidade;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
+/**
+ *
+ * @author Bruna
+ */
 @Entity
 @Table(name = "entidade")
 @Inheritance (strategy = InheritanceType.JOINED)
@@ -16,12 +19,12 @@ public class Entidade implements EntidadeBase {
     @Column(name = "id_entidade")
     @GeneratedValue
     private Long id;
-        
-    @Enumerated(EnumType.STRING)
-    @Column(name="tipopessoa_entidade")
-    private TipoEntidade tipoPessoa;
     
-    @Column(name="nome", length=100)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_entidade")
+    private TipoEntidade tipoEntidade;
+
+    @Column(name = "nome", length = 100)
     private String nome;
     
     @Column(name="nome_fantasia", length=100)
@@ -30,10 +33,13 @@ public class Entidade implements EntidadeBase {
     @Column(name="cnpjCpf")
     private Long cnpjCpf;
 
+    @Column(name = "empresa")
+    private boolean empresa = false;
+
     @Column(name="apelido", length=100)
     private String apelido;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
     
@@ -44,7 +50,7 @@ public class Entidade implements EntidadeBase {
     @Column(name="modo_insercao")
     private ModoCadastro modoCadastro;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
     
@@ -52,19 +58,17 @@ public class Entidade implements EntidadeBase {
     public Entidade() {
     }
 
-    public Entidade(TipoEntidade tipoPessoa, String nome, String nomeFantasia, Long cnpjCpf, String apelido, Endereco endereco, LocalDateTime dataCadastro, ModoCadastro modoCadastro, Usuario usuario) {
-        this.tipoPessoa = tipoPessoa;
+    public Entidade(TipoEntidade tipoEntidade, String nome, String nomeFantasia, Long cnpjCpf, String apelido, Endereco endereco, ModoCadastro modoCadastro) {
+        this.tipoEntidade = tipoEntidade;
         this.nome = nome;
         this.nomeFantasia = nomeFantasia;
         this.cnpjCpf = cnpjCpf;
         this.apelido = apelido;
         this.endereco = endereco;
-        this.dataCadastro = dataCadastro;
+        this.dataCadastro = LocalDateTime.now();
         this.modoCadastro = modoCadastro;
-        this.usuario = usuario;
+        this.empresa = false;
     }
-
-
 
     @Override
     public Long getId() {
@@ -75,12 +79,12 @@ public class Entidade implements EntidadeBase {
         this.id = id;
     }
 
-    public TipoEntidade getTipo() {
-        return tipoPessoa;
+    public TipoEntidade getTipoEntidade() {
+        return tipoEntidade;
     }
 
-    public void setTipo(TipoEntidade tipoPessoa) {
-        this.tipoPessoa = tipoPessoa;
+    public void setTipo(TipoEntidade tipoEntidade) {
+        this.tipoEntidade = tipoEntidade;
     }
 
     public Endereco getEndereco() {

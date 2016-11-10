@@ -12,13 +12,13 @@ pageEncoding="UTF-8"%>
         <link href="resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/cssLayout.css" rel="stylesheet" type="text/css"/>
         <script src="resources/js/jquery-1.11.2.min.js" type="text/javascript"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+        <script src="resources/js/angular.min.js" type="text/javascript"></script>
         <script src="resources/js/bootstrap.js" type="text/javascript"></script>
         <script src="resources/js/customScripts.js" type="text/javascript"></script>
         <script src="resources/js/app.js" type="text/javascript"></script>
         <!--<script src="resources/js/ajax.js" ></script>-->
     </head>
-    <body ng-app="myModule">
+    <body ng-app="myModule" ng-cloak>
         <div>
             <header id="top">
                 <nav class="navbar navbar-default navbar-fixed-top">
@@ -47,7 +47,8 @@ pageEncoding="UTF-8"%>
         <div ng-controller="myController" class="container-fluid">
             <div class="row">
                 <div class="list col-md-2">
-                    <a href="#" class="list-group-item" id="menuPrincipal" ng-click="carregarPrincipal()"><strong><center>Principal</center></strong></a>
+                    <a href="#" class="list-group-item" id="menuPrincipal" ng-click="carregarPrincipal(true)"><strong><center>Principal</center></strong></a>
+                    <a href="#" class="list-group-item" id="menuNotaFiscal" ng-click="carregarNotasFiscais(true, '')"><strong><center>Notas Fiscais</center></strong></a>
                     <a href="#" class="list-group-item" id="menuMovimentacoes" ng-click="carregarMovimentacoes(true, '')"><strong><center>Movimentações</center></strong></a>
                     <a href="#" class="list-group-item" id="menuProdutos"ng-click="carregarProdutos(true, '')"><strong><center>Produtos</center></strong></a>
                     <a href="#" class="list-group-item" id="menuCategorias" ng-click="carregarCategorias(true, '')"><strong><center>Categorias</center></strong></a>
@@ -57,15 +58,18 @@ pageEncoding="UTF-8"%>
                     <jsp:include page="contentPrincipal.jsp" />
                 </div>
                 <div class="col-md-10" ng-show="toggled==2">
-                    <jsp:include page="contentMovimentacao.jsp" />
+                    <jsp:include page="contentNotaFiscal.jsp" />
                 </div>
                 <div class="col-md-10" ng-show="toggled==3">
-                    <jsp:include page="contentProduto.jsp" />
+                    <jsp:include page="contentMovimentacao.jsp" />
                 </div>
                 <div class="col-md-10" ng-show="toggled==4">
-                    <jsp:include page="contentCategoria.jsp" />
+                    <jsp:include page="contentProduto.jsp" />
                 </div>
                 <div class="col-md-10" ng-show="toggled==5">
+                    <jsp:include page="contentCategoria.jsp" />
+                </div>
+                <div class="col-md-10" ng-show="toggled==6">
                     <jsp:include page="contentUnidade.jsp" />
                 </div>
             </div>

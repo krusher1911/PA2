@@ -87,7 +87,7 @@ public class NotaFiscalController extends HttpServlet {
             notaFiscal.setEntidade((Entidade) dao.buscarPorId(Entidade.class, entidade));
         }
         notaFiscal.setNumero(obj.get("numero").getAsLong());
-        notaFiscal.setSerie(obj.get("serie").getAsInt());
+        notaFiscal.setSerie(obj.get("serie").getAsString());
         if (obj.get("tipo").getAsString().equalsIgnoreCase("E")) {
             notaFiscal.setTipo(TipoNota.ENTRADA);
         } else {

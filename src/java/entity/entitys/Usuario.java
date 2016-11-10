@@ -4,6 +4,10 @@ import entity.EntidadeBase;
 import java.io.Serializable;
 import javax.persistence.*;
 
+/**
+ *
+ * @author Bruna
+ */
 @Entity
 @Table(name = "usuario")
 public class Usuario implements EntidadeBase, Serializable {

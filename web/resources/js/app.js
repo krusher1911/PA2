@@ -5,8 +5,50 @@ var app = angular.module("myModule", []).controller("myController", function ($s
 
     $scope.toggled = 1;
 
-    $scope.carregarPrincipal = function () {
+    $scope.carregarPrincipal = function (limpar) {
+        if(limpar){
+            $('#dicCaptcha').html('');
+        }
         $scope.toggled = 1;
+    };
+    
+    $scope.buscarNota = function(){
+        $http({
+            method: 'GET',
+            url: 'Receita'
+        }).then(function success(rs) {
+            $('#dicCaptcha').html(rs.data.capt);
+            $scope.carregarPrincipal();
+            
+        });
+    };
+    
+    $scope.salvarNota= function(){
+        $http({
+            method: 'POST',
+            url: 'posteceita'
+        }).then(function success(rs) {
+            $scope.erroPost = rs.data.erroPost;
+            if(erroPost != null || erroPost != ''){
+                
+            }
+            $scope.carregarPrincipal();
+            
+        });
+    }
+    
+    $scope.carregarNotasFiscais = function (redirect, id) {
+        //debugger;
+        $http({
+            method: 'GET',
+            url: 'NotaFiscalController',
+            params: {id: id}
+        }).then(function success(rs) {
+            $scope.notasFiscais = rs.data;
+            if(redirect){
+                $scope.toggled = 2;
+            }
+        });
     };
 
     $scope.carregarMovimentacoes = function (redirect, id) {
@@ -17,7 +59,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         }).then(function success(rs) {
             $scope.movimentacoes = rs.data.movimentacoes;
             if (redirect) {
-                $scope.toggled = 2;
+                $scope.toggled = 3;
             }
         });
     };
@@ -30,7 +72,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         }).then(function success(rs) {
             $scope.produtos = rs.data.produtos;
             if (redirect) {
-                $scope.toggled = 3;
+                $scope.toggled = 4;
             }
         });
     };
@@ -42,7 +84,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         }).then(function success(rs) {
             $scope.categorias = rs.data;
             if (redirect) {
-                $scope.toggled = 4;
+                $scope.toggled = 5;
             }
         });
     };
@@ -54,21 +96,10 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         }).then(function success(rs) {
             $scope.unidades = rs.data;
             if (redirect) {
-                $scope.toggled = 5;
+                $scope.toggled = 6;
             }
         });
     };
-
-    $scope.carregarNotasFiscais = function () {
-        $http({
-            method: 'GET',
-            url: 'NotaFiscalController'
-        }).then(function success(rs) {
-            $scope.notasFiscais = rs.data;
-        });
-    };
-
-
 
     //===INICIO DELETE ITEM===//
     $scope.id = 0;
@@ -155,28 +186,6 @@ var app = angular.module("myModule", []).controller("myController", function ($s
     };
     
     //=== MOVIMENTACAO ===//
-
-    $scope.carregarProdutos = function (redirect, id) {
-        $http({
-            method: 'GET',
-            url: 'ProdutoController',
-            params: {id: id}
-        }).then(function success(rs) {
-            $scope.produtos = rs.data.produtos;
-            if(redirect){
-                $scope.toggled = 3;
-            }
-        });
-    };
-
-    $scope.carregarNotasFiscais = function () {
-        $http({
-            method: 'GET',
-            url: 'NotaFiscalController'
-        }).then(function success(rs) {
-            $scope.notasFiscais = rs.data;
-        });
-    };
 
     $scope.abrirCadastrarMovimentacao = function () {
         $scope.movimentacao = null;

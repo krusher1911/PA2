@@ -5,9 +5,13 @@
  */
 package servlet;
 
+import coletor.ParseNfe;
 import coletor.ConectorReceita;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -92,6 +96,7 @@ public class ServletPostReceita extends HttpServlet {
 
         try {
             resposta = conector.sendPost(cookies[0], parametros, nome_parametros);
+            
             doc = Jsoup.parse(resposta, "UTF-8", Parser.xmlParser());
             prod = doc.select("#Prod");
 
@@ -99,26 +104,23 @@ public class ServletPostReceita extends HttpServlet {
             // Always must return something
             System.out.println(e);
         }
-
+        
+        ParseNfe teste = new ParseNfe(resposta);
+        teste.rodar();
         try {
-            /* TODO output your page here. You may use following sample code. */
+            Map<String, Object> map = new HashMap<String, Object>();
             if ("".equals(prod.toString())) {
-                out.print("Erro");
-                RequestDispatcher rd = request.getRequestDispatcher("Receita");
-                rd.include(request, response);
-                System.out.println("teste");
-            } else {
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet ServletPostReceita</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("\"" + prod.toString() + "\"");
-                out.println("<h1>Servlet ServletPostReceita at " + request.getContextPath() + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
+                String erroPost ="Erro ao gravar nota.";
+                map.put("erroPost", erroPost);
+                
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(new Gson().toJson(map));
+                
+                
             }
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                rd.include(request, response);
         } catch (Exception e) {
             // Always must return something
             System.out.println(e);
