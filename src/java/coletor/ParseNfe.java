@@ -109,9 +109,9 @@ public class ParseNfe {
         LocalDateTime dataCadastro = LocalDateTime.now();
         Usuario user = null;
         TipoEntidade tipoPessoa = verificaPessoa(entidadeElem);
-
+        
         Long cpfCnpj = Long.parseLong(removePontuacaoInsc(verificaCpfCnpj(entidadeElem, tipoPessoa)));
-
+        
         Entidade ent = cadastrarEntidade(tipoPessoa, nome, nomeFantasia, cpfCnpj, apelido, ende, dataCadastro, modoCadastro, user);
         return ent;
     }
@@ -241,19 +241,19 @@ public class ParseNfe {
     }
 
     public TipoEntidade verificaPessoa(Element entidadeElem) {
-        if (entidadeElem.select(":containsOwn(CNPJ)") == null) {
+        if (entidadeElem.select(":containsOwn(CNPJ)").isEmpty()) {
             return TipoEntidade.FÍSICA;
         }
         return TipoEntidade.JURIDICA;
     }
 
     public String verificaCpfCnpj(Element entidadeElem, TipoEntidade tipo) {
-        //System.out.println("Tipo: " + tipo);
-        //System.out.println(entidadeElem.toString());
+
+
         if (tipo == TipoEntidade.FÍSICA) {
-            return entidadeElem.select(":containsOwn(CPF)").first().parent().child(1).text();
+            return retornaElemento(entidadeElem, "CPF");
         } else {
-            return entidadeElem.select(":containsOwn(CNPJ)").first().parent().child(1).text();
+            return retornaElemento(entidadeElem, "CNPJ");
         }
     }
 
