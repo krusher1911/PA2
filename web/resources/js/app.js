@@ -2,7 +2,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
 
     $scope.status = '  ';
     $scope.customFullscreen = false;
-
+ var obh =
     $scope.toggled = 1;
 
     $scope.carregarPrincipal = function (limpar) {
@@ -20,6 +20,11 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             $('#dicCaptcha').html(rs.data.capt);
             $scope.carregarPrincipal();
             
+        }).catch(function(){
+            $('#dicCaptcha').html('<div class="alert alert-danger">\n\
+                                                                   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n\
+                                                                   <center><p><strong>Erro na pesquisa da nota!</strong></p>\n\
+                                                                   <p>Verifique sua coneção.</p></center></div>');
         });
     };
     
@@ -28,12 +33,12 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             method: 'POST',
             url: 'posteceita'
         }).then(function success(rs) {
-            $scope.erroPost = rs.data.erroPost;
-            if(erroPost != null || erroPost != ''){
-                
-            }
             $scope.carregarPrincipal();
-            
+        }).catch(function(){
+            $('#dicCaptcha').html('<div class="alert alert-danger">\n\
+                                                                   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n\
+                                                                   <center><p><strong>Erro na pesquisa da nota!</strong></p>\n\
+                                                                   <p>Verifique sua coneção.</p></center></div>');
         });
     }
     

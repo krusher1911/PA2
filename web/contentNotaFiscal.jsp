@@ -8,18 +8,18 @@
                 <p class="panel-title" align="center"><strong>Notas Fiscais</strong></p>
             </div>
             <div class="col-md-4">
-
+                
             </div>
         </div>
     </div>
-    <div class="panel panel-default">
+    <!--<div class="panel panel-default">
         <div class="panel-body">
             <label class="col-lg-2 control-label" for="inputDescricao">Buscar nota:</label>
             <div class="col-lg-10">
                 <input ng-model="nota.buscarNota" required class="form-control" id="inputNota" name="buscarNota" placeholder="Nota" type="text" data-toggle="tooltip" data-placement="top" title="Digite a chave da nota">
             </div>
         </div>
-      </div>
+      </div>-->
     <div class="panel-body">
         <table class="table table-hover">
             <thead class="thead-inverse">
