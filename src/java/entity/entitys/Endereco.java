@@ -117,4 +117,10 @@ public class Endereco implements EntidadeBase {
         this.estado = estado;
     }
 
+    @Override
+    public String toString() {
+        String endereco = tipo_logadouro.name() + logadouro + ", numero " + numero + " complemento " + complemento + ", Bairro " + bairro + ", Cidade " + cidade + ", estado " + estado;
+        return endereco.toUpperCase();
+    }
+
 }

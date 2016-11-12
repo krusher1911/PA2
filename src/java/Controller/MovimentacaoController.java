@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import dao.DAOGenerica;
 import entity.entitys.Movimentacao;
 import entity.entitys.NotaFiscal;
 import entity.entitys.Produto;
@@ -18,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javassist.NotFoundException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,9 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-public class MovimentacaoController extends HttpServlet {
+public class MovimentacaoController extends ControllerGeneric {
 
-    private static final DAOGenerica dao = new DAOGenerica();
     private Movimentacao movimentacao;
     boolean isValid = false;
 

@@ -82,10 +82,11 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         });
     };
 
-    $scope.carregarCategorias = function (redirect) {
+    $scope.carregarCategorias = function (redirect, id) {
         $http({
             method: 'GET',
-            url: 'CategoriaController'
+            url: 'CategoriaController',
+            params: {id: id}
         }).then(function success(rs) {
             $scope.categorias = rs.data;
             if (redirect) {
@@ -94,10 +95,11 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         });
     };
 
-    $scope.carregarUnidades = function (redirect) {
+    $scope.carregarUnidades = function (redirect, id) {
         $http({
             method: 'GET',
-            url: 'UnidadeController'
+            url: 'UnidadeController',
+            params: {id: id}
         }).then(function success(rs) {
             $scope.unidades = rs.data;
             if (redirect) {
@@ -124,8 +126,8 @@ var app = angular.module("myModule", []).controller("myController", function ($s
 
     $scope.abrirCadastrarProduto = function () {
         $scope.produto = null;
-        $scope.carregarUnidades();
-        $scope.carregarCategorias();
+        $scope.carregarUnidades(false, '');
+        $scope.carregarCategorias(false, '');
     };
     
     $scope.cadastrarProduto = function (produto, method, valid) {
@@ -159,8 +161,8 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             url: 'ProdutoController',
             params: {id: id}
         }).then(function success(rs) {
-            $scope.carregarUnidades();
-            $scope.carregarCategorias();
+            $scope.carregarUnidades(false, '');
+            $scope.carregarCategorias(false, '');
             $scope.produto = rs.data.produto;
         });
     };
