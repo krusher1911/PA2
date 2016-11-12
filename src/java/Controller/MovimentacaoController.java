@@ -80,7 +80,6 @@ public class MovimentacaoController extends ControllerGeneric {
         movimentacao.setQuantidade(obj.get("quantidade").getAsInt());
         Long unidade = obj.get("unidade").getAsLong();
         if (unidade != null) {
-        } else {
             movimentacao.setUnidade((UnidadeMedida) dao.buscarPorId(UnidadeMedida.class, unidade));
         }
         JsonElement notaFiscal = obj.get("notaFiscal");
