@@ -108,6 +108,19 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             }
         });
     };
+    
+    $scope.carregarEntidades = function (redirect, id) {
+        $http({
+            method: 'GET',
+            url: 'EntidadeController',
+            params: {id: id}
+        }).then(function success(rs) {
+            $scope.entidades = rs.data.entidades;
+            if (redirect) {
+                $scope.toggled = 7;
+            }
+        });
+    };
 
     //===INICIO DELETE ITEM===//
     $scope.id = 0;
@@ -390,6 +403,70 @@ var app = angular.module("myModule", []).controller("myController", function ($s
     };
 
     $scope.cadastrarCategoria = function (categoria, valid) {
+        if (valid) {
+            var data = {
+                id: categoria.id,
+                nome: categoria.nome
+            };
+            $http({
+                method: 'POST',
+                url: 'CategoriaController',
+                data: data,
+                headers: {"Content-Type": "application/json;charset=UTF-8"}
+            }).then(function success(rs) {
+                $scope.carregarCategorias(true, '');
+            });
+        } else {
+
+        }
+    };
+
+    $scope.abrirEditarCategoria = function (id) {
+        $http({
+            method: 'GET',
+            url: 'CategoriaController',
+            params: {id: id}
+        }).then(function success(rs) {
+            $scope.categoria = rs.data.categoria;
+        });
+    };
+
+    $scope.editarCategoria = function (categoria, valid) {
+        if (valid) {
+            var data = {
+                id: categoria.id,
+                nome: categoria.nome
+            };
+            $http({
+                method: 'PUT',
+                url: 'CategoriaController',
+                data: data,
+                headers: {"Content-Type": "application/json;charset=UTF-8"}
+            }).then(function success(rs) {
+                $scope.carregarCategorias(true, '');
+            });
+        } else {
+
+        }
+    };
+
+    $scope.deletarCategoria = function () {
+        $http({
+            method: 'DELETE',
+            url: 'CategoriaController',
+            params: {id: $scope.id}
+        }).then(function sucess(rs) {
+            $scope.carregarCategorias(true, '');
+        });
+    };
+    
+    //=== ENTIDADE ===//
+
+    $scope.abrirCadastrarEntidade = function () {
+        $scope.entidade = null;
+    };
+
+    $scope.cadastrarEntidade = function (categoria, valid) {
         if (valid) {
             var data = {
                 id: categoria.id,

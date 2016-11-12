@@ -53,6 +53,7 @@ pageEncoding="UTF-8"%>
                     <a href="#" class="list-group-item" id="menuProdutos"ng-click="carregarProdutos(true, '')"><strong><center>Produtos</center></strong></a>
                     <a href="#" class="list-group-item" id="menuCategorias" ng-click="carregarCategorias(true, '')"><strong><center>Categorias</center></strong></a>
                     <a href="#" class="list-group-item" id="menuUnidades" ng-click="carregarUnidades(true, '')"><strong><center>Unidades</center></strong></a>
+                    <a href="#" class="list-group-item" id="menuEntidades" ng-click="carregarEntidades(true, '')"><strong><center>Entidades</center></strong></a>
                 </div>
                 <div class="col-md-10" ng-show="toggled==1">
                     <jsp:include page="contentPrincipal.jsp" />
@@ -71,6 +72,9 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="col-md-10" ng-show="toggled==6">
                     <jsp:include page="contentUnidade.jsp" />
+                </div>
+                <div class="col-md-10" ng-show="toggled==7">
+                    <jsp:include page="contentEntidade.jsp" />
                 </div>
             </div>
         </div>
