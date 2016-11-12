@@ -8,54 +8,75 @@
                 <center><h4 class="modal-title">Cadastro de Movimentação</h4></center>
             </div>
 
-            <form class="form-horizontal">
+            <form class="form-horizontal" name="formCadastroMovimentacao" ng-modal="movimentacao" novalidate>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label" for="inputNotaFiscal">Nota Fiscal:</label>
-                    <div class="col-lg-10">
-                        <input ng-model="movimentacao.notaFiscal" class="form-control" id="inputNotaFiscal" name="notaFiscal" placeholder="Nota Fiscal" type="text" data-toggle="tooltip" data-placement="top" title="Nota Fiscal referente a movimentação">
+                    <div class="form-group" ng-class="
+                        {'has-error':!formCadastroMovimentacao.notaFiscal.$valid,
+                         'has-success':formCadastroMovimentacao.notaFiscal.$valid
+                            }">
+                        <label class="col-lg-3 control-label" for="inputNotaFiscal">Nota Fiscal:</label>
+                        <div class="col-lg-9">
+                            <input ng-model="movimentacao.notaFiscal" class="form-control" id="inputNotaFiscal" name="notaFiscal" placeholder="Nota Fiscal" type="text" data-toggle="tooltip" data-placement="top" title="Nota Fiscal referente a movimentação">
+                            <p class="help-block" ng-show="formCadastroMovimentacao.notaFiscal.$error.required">
+                                Informe o código da nota fiscal.
+                            </p>
+                            <pre>{{formCadastroMovimentacao.notaFiscal.$error.required}}</pre>
+                        </div>
                     </div>
-                    <!--nnota fiscal nao é obrigatório-->
-                    </div>
-                <div class="form-group">
-                        <label class="col-lg-2 control-label" for="inputProduto">Produto</label>
-                        <div class="col-lg-10">
-                            <select  class="form-control" ng-model="movimentacao.produto" id="selectNotasFiscais"
+                <div class="form-group" ng-class="
+                        {'has-error':!formCadastroMovimentacao.produto.$valid,
+                         'has-success':formCadastroMovimentacao.produto.$valid
+                            }">
+                        <label class="col-lg-3 control-label" for="inputProduto">Produto</label>
+                        <div class="col-lg-9">
+                            <select  class="form-control" name="produto" ng-model="movimentacao.produto" id="selectProduto"
                                      ng-options="produto.descricao for produto in produtos track by produto.id">
                             </select>
+                            <p class="help-block" ng-show="formCadastroMovimentacao.produto.$error.required">
+                                Selecione o produto da movimentação.
+                            </p>
+                            <pre>{{formCadastroMovimentacao.$valid}}</pre>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="inputUnidade">Unidade</label>
-                        <div class="col-lg-10">
+                        <label class="col-lg-3 control-label" for="inputUnidade">Unidade</label>
+                        <div class="col-lg-9">
                             <select  class="form-control" ng-model="movimentacao.unidade" id="selectUnidades"
                                      ng-options="unidade.sigla for unidade in unidades track by unidade.id">
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="inputQuantidade">Quantidade</label>
-                        <div class="col-lg-10">
-                            <input ng-model="movimentacao.quantidade"  class="form-control" id="inputTipo" name="quantidade" placeholder="Quantidade" type="text" data-toggle="tooltip" data-placement="top" title="Quantidade">
+                        <label class="col-lg-3 control-label" for="inputQuantidade">Quantidade</label>
+                        <div class="col-lg-9">
+                            <input ng-model="movimentacao.quantidade" ng-change="cacTotal()" class="form-control" id="inputTipo" name="quantidade" placeholder="Quantidade" type="number" data-toggle="tooltip" data-placement="top" title="Quantidade">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="inputValorUnitario">Valor Unitário</label>
-                        <div class="col-lg-10">
-                            <input ng-model="movimentacao.unitario" class="form-control" id="inputValorUnitario" name="unitario" placeholder="Valor Unitário" type="text" data-toggle="tooltip" data-placement="top" title="Valor Unitário">
+                        <label class="col-lg-3 control-label" for="inputValorUnitario">Valor Unitário</label>
+                        <div class="col-lg-9">
+                            <div <div class="input-group">
+                                <span class="input-group-addon">R$</span>
+                                <input ng-model="movimentacao.unitario" ng-change="cacTotal()" class="form-control" id="inputValorUnitario" name="unitario" placeholder="Valor Unitário" type="text" data-toggle="tooltip" data-placement="top" title="Valor Unitário">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="inputValorDesconto">Valor Desconto</label>
-                        <div class="col-lg-10">
-                            <input ng-model="movimentacao.desconto" class="form-control" id="inputValorDesconto" name="desconto" placeholder="Valor Desconto" type="text" data-toggle="tooltip" data-placement="top" title="Valor Desconto">
+                        <label class="col-lg-3 control-label" for="inputValorDesconto">Valor Desconto</label>
+                        <div class="col-lg-9">
+                            <div <div class="input-group">
+                                <span class="input-group-addon">R$</span>
+                                <input ng-model="movimentacao.desconto" ng-change="cacTotal()" class="form-control" id="inputValorDesconto" name="desconto" placeholder="Valor Desconto" type="text" data-toggle="tooltip" data-placement="top" title="Valor Desconto">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="inputValorTotal">Valor Total</label>
-                        <div class="col-lg-10">
-                            <!--calcular de acordo com a quantidade, valor unitario e desconto e colocar desabilitado-->
-                            <input ng-model="movimentacao.total" class="form-control" id="inputValorTotal" name="total" placeholder="Valor Total" type="text" data-toggle="tooltip" data-placement="top" title="Valor Total">
+                        <label class="col-lg-3 control-label" for="inputValorTotal">Valor Total</label>
+                        <div class="col-lg-9">
+                            <div <div class="input-group">
+                                <span class="input-group-addon">R$</span>
+                                <input ng-model="movimentacao.total" ng-bind="" disabled class="form-control" id="inputValorTotal" name="total" placeholder="Valor Total" type="text" data-toggle="tooltip" data-placement="top" title="Valor Total">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">

@@ -23,9 +23,6 @@
         <mapping class="entity.entitys.Entidade"/>
         <mapping class="entity.entitys.UnidadeMedida"/>
         <mapping class="entity.entitys.Produto"/>
-        <!--<mapping class="entity.entitys.Permissao"/>
-        <mapping class="entity.entitys.GrupoAcesso"/>
-        <mapping class="entity.entitys.Log"/>-->
         <mapping class="entity.entitys.Movimentacao"/>
         <mapping class="entity.entitys.NotaFiscal"/>
 

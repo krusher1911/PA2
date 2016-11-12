@@ -1,6 +1,5 @@
 <div class="modal fade" id="modalCadastrarProduto" tabindex="-1" role="dialog" aria-labelledby="modalCadastrarLabel">
     <div class="modal-dialog" role="document">
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -84,6 +83,7 @@
                             <p class="help-block" ng-show="formCadastroProduto.categoria.$error.required">
                                 Selecione a categoria do produto.
                             </p>
+                            <pre>{{formCadastroProduto.$valid}}</pre>
                         </div>
                     </div>
                     <div class="form-group">

@@ -38,7 +38,7 @@
                     <td>{{m.desconto}}</td>
                     <td>{{m.total}}</td>
                     <td>
-                        <button id="editarProduto" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEditarMovimentacao"><span class="glyphicon glyphicon-edit"></span></button>
+                        <button id="editarProduto" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEditarMovimentacao" ng-click="abrirEditarMovimentacao()"><span class="glyphicon glyphicon-edit"></span></button>
                         <button id="removerProduto" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalRemoverMovimentacao"><span class="glyphicon glyphicon-remove"></span></button>
                     </td>
                 </tr>

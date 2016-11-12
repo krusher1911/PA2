@@ -57,15 +57,15 @@ public class ServletGetReceita extends HttpServlet {
                                 "<center>"+ imagemCaptcha + "</center>"+
                     "       </div>"+        
                     "       <div class=\"form-group\">"+
-                    "           <label class=\"col-lg-2 control-label\" for=\"ctl00_ContentPlaceHolder1_txtChaveAcessoCompleta\">Chave completa</label>"+
-                    "           <div class=\"col-lg-10\">"+
-                                    chaveCompleta +
+                    "           <label class=\"col-lg-4 control-label\" for=\"ctl00_ContentPlaceHolder1_txtCaptcha\">Chave captcha</label>"+
+                    "           <div class=\"col-lg-8\">"+
+                                    chaveCaptcha+
                     "           </div>"+
                     "       </div>"+
                     "       <div class=\"form-group\">"+
-                    "           <label class=\"col-lg-2 control-label\" for=\"ctl00_ContentPlaceHolder1_txtCaptcha\">Chave captcha</label>"+
-                    "           <div class=\"col-lg-10\">"+
-                                    chaveCaptcha+
+                    "           <label class=\"col-lg-4 control-label\" for=\"ctl00_ContentPlaceHolder1_txtChaveAcessoCompleta\">Chave completa</label>"+
+                    "           <div class=\"col-lg-8\">"+
+                                    chaveCompleta +
                                     "<center>"+btnLimpar + btnConsultar +"</center>"+
                     "           </div>"+
                     "       </div>"+
