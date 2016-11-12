@@ -289,7 +289,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         });
     };
 
-    $scope.editarNotaFiscal = function (notaFiscal, method) {
+    $scope.editarNotaFiscal = function (notaFiscal) {
         debugger;
         var data = {
             id: notaFiscal.id,
@@ -302,7 +302,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             entidade: ''
         };
         $http({
-            method: method,
+            method: 'PUT',
             url: 'NotaFiscalController',
             data: data,
             headers: {"Content-Type": "application/json;charset=UTF-8"}
@@ -341,7 +341,6 @@ var app = angular.module("myModule", []).controller("myController", function ($s
     };
 
     $scope.editarUnidade = function (unidade, method) {
-        debugger;
         var data = {
             id: unidade.id,
             descricao: unidade.descricao,
@@ -366,5 +365,68 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             $scope.carregarUnidades(true, '');
         });
     };
-});
+    
+    //=== CATEGORIA ===//
 
+    $scope.abrirCadastrarCategoria = function () {
+        $scope.categoria = null;
+    };
+
+    $scope.cadastrarCategoria = function (categoria, valid) {
+        if (valid) {
+            var data = {
+                id: categoria.id,
+                nome: categoria.nome
+            };
+            $http({
+                method: 'POST',
+                url: 'CategoriaController',
+                data: data,
+                headers: {"Content-Type": "application/json;charset=UTF-8"}
+            }).then(function success(rs) {
+                $scope.carregarCategorias(true, '');
+            });
+        } else {
+
+        }
+    };
+
+    $scope.abrirEditarCategoria = function (id) {
+        $http({
+            method: 'GET',
+            url: 'CategoriaController',
+            params: {id: id}
+        }).then(function success(rs) {
+            $scope.categoria = rs.data.categoria;
+        });
+    };
+
+    $scope.editarCategoria = function (categoria, valid) {
+        if (valid) {
+            var data = {
+                id: categoria.id,
+                nome: categoria.nome
+            };
+            $http({
+                method: 'PUT',
+                url: 'CategoriaController',
+                data: data,
+                headers: {"Content-Type": "application/json;charset=UTF-8"}
+            }).then(function success(rs) {
+                $scope.carregarCategorias(true, '');
+            });
+        } else {
+
+        }
+    };
+
+    $scope.deletarCategoria = function () {
+        $http({
+            method: 'DELETE',
+            url: 'CategoriaController',
+            params: {id: $scope.id}
+        }).then(function sucess(rs) {
+            $scope.carregarCategorias(true, '');
+        });
+    };
+});

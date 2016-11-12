@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-4 col-lg-offset-7">
-                                <button type="submit" id="btnCadastrarProduto" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" ng-click="cadastrarNotaFiscal(notaFiscal, 'POST')">Salvar</button>
+                                <button type="submit" id="btnCadastrarProduto" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" ng-click="cadastrarNotaFiscal(notaFiscal)">Salvar</button>
                             </div>
                         </div>
                     </div>
