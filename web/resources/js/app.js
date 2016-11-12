@@ -309,6 +309,62 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         }).then(function success(rs) {
             $scope.carregarNotasFiscais(true, '');
         });
-    };   
+    }; 
+    
+    $scope.abrirCadastrarUnidade = function () {
+        $scope.unidade = null;
+    };
+
+    $scope.cadastrarUnidade = function (unidade) {
+        var data = {
+            descricao: unidade.descricao,
+            sigla: unidade.sigla
+        };
+        $http({
+            method: 'POST',
+            url: 'UnidadeController',
+            data: data,
+            headers: {"Content-Type": "application/json;charset=UTF-8"}
+        }).then(function success(rs) {
+            $scope.carregarUnidades(true, '');
+        });
+    };
+    
+    $scope.abrirEditarUnidade = function (id) {
+        $http({
+            method: 'GET',
+            url: 'UnidadeController',
+            params: {id: id}
+        }).then(function success(rs) {
+            $scope.unidade = rs.data.unidade;
+        });
+    };
+
+    $scope.editarUnidade = function (unidade, method) {
+        debugger;
+        var data = {
+            id: unidade.id,
+            descricao: unidade.descricao,
+            sigla: unidade.sigla
+        };
+        $http({
+            method: method,
+            url: 'UnidadeController',
+            data: data,
+            headers: {"Content-Type": "application/json;charset=UTF-8"}
+        }).then(function success(rs) {
+            $scope.carregarUnidades(true, '');
+        });
+    };
+    
+    $scope.excluirUnidade = function () {
+        $http({
+            method: 'DELETE',
+            url: 'UnidadeController',
+            params: {id: $scope.id}
+        }).then(function success(rs) {
+            $scope.carregarUnidades(true, '');
+        });
+    };
 });
 
