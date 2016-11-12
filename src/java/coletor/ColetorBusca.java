@@ -13,12 +13,12 @@ import java.util.Queue;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-
 /**
-*
+ *
  * @author Bruna
  */
 public class ColetorBusca {
+
     Queue url = new LinkedList();
     String texto = new String();
     Produto produto;

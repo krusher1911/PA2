@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-public class EntidadeController extends ControllerGeneric {
+public class EntidadeController extends ControllerGenerica {
 
     private Entidade entidade;
     boolean isValid = false;

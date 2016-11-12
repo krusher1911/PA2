@@ -9,8 +9,8 @@
         <servlet-class>servlet.ServletPostReceita</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletBuscaPreco</servlet-name>
-        <servlet-class>servlet.ServletBuscaPreco</servlet-class>
+        <servlet-name>BuscaPrecoController</servlet-name>
+        <servlet-class>Controller.BuscaPrecoController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginController</servlet-name>
@@ -53,8 +53,8 @@
         <url-pattern>/posteceita</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletBuscaPreco</servlet-name>
-        <url-pattern>/BuscaPreco</url-pattern>
+        <servlet-name>BuscaPrecoController</servlet-name>
+        <url-pattern>/BuscaPrecoController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-public class UnidadeController extends ControllerGeneric {
+public class UnidadeController extends ControllerGenerica {
 
     private UnidadeMedida unidade;
     boolean isValid = false;

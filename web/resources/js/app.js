@@ -192,6 +192,17 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             
         }
     };
+
+    $scope.buscarPreco = function (id) {
+        $http({
+            method: 'GET',
+            url: 'BuscaPrecoController',
+            params: {id: id},
+            headers: {"Content-Type": "application/json;charset=UTF-8"}
+        }).then(function success(rs) {
+            $scope.carregarProdutos(true, '');
+        });
+    };
     
     //=== MOVIMENTACAO ===//
 

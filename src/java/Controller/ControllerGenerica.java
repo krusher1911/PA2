@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-public abstract class ControllerGeneric extends HttpServlet {
+public abstract class ControllerGenerica extends HttpServlet {
 
     protected static final DAOGenerica dao = new DAOGenerica();
 

@@ -13,7 +13,7 @@ import org.hibernate.criterion.MatchMode;
  *
  * @author Hygor Azevedo
  */
-public class LoginController extends ControllerGeneric {
+public class LoginController extends ControllerGenerica {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
