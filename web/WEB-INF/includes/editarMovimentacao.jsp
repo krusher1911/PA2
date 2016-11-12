@@ -40,25 +40,34 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputQuantidade">Quantidade</label>
                         <div class="col-lg-10">
-                            <input ng-model="movimentacao.quantidade"  class="form-control" id="inputTipo" name="quantidade" placeholder="Quantidade" type="text" data-toggle="tooltip" data-placement="top" title="Quantidade">
+                            <input ng-model="movimentacao.quantidade" ng-change="cacTotal()" class="form-control" id="inputTipo" name="quantidade" placeholder="Quantidade" type="text" data-toggle="tooltip" data-placement="top" title="Quantidade">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputValorUnitario">Valor Unitário</label>
                         <div class="col-lg-10">
-                            <input ng-model="movimentacao.unitario" class="form-control" id="inputValorUnitario" name="unitario" placeholder="Valor Unitário" type="text" data-toggle="tooltip" data-placement="top" title="Valor Unitário">
+                            <div class="input-group">
+                                <span class="input-group-addon">R$</span>
+                                <input ng-model="movimentacao.unitario" ng-change="cacTotal()" class="form-control" id="inputValorUnitario" name="unitario" placeholder="Valor Unitário" type="text" data-toggle="tooltip" data-placement="top" title="Valor Unitário">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputValorDesconto">Valor Desconto</label>
                         <div class="col-lg-10">
-                            <input ng-model="movimentacao.desconto" class="form-control" id="inputValorDesconto" name="desconto" placeholder="Valor Desconto" type="text" data-toggle="tooltip" data-placement="top" title="Valor Desconto">
+                            <div class="input-group">
+                                <span class="input-group-addon">R$</span>
+                                <input ng-model="movimentacao.desconto" ng-change="cacTotal()" class="form-control" id="inputValorDesconto" name="desconto" placeholder="Valor Desconto" type="text" data-toggle="tooltip" data-placement="top" title="Valor Desconto">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="inputValorTotal">Valor Total</label>
                         <div class="col-lg-10">
-                            <input ng-model="movimentacao.total" class="form-control" id="inputValorTotal" name="total" placeholder="Valor Total" type="text" data-toggle="tooltip" data-placement="top" title="Valor Total">
+                            <div class="input-group">
+                                <span class="input-group-addon">R$</span>
+                                <input ng-model="movimentacao.total" disabled class="form-control" id="inputValorTotal" name="total" placeholder="Valor Total" type="text" data-toggle="tooltip" data-placement="top" title="Valor Total">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">

@@ -34,12 +34,12 @@
                     <td>{{m.produto.descricao}}</td>
                     <td>{{m.unidade.sigla}}</td>
                     <td>{{m.quantidade}}</td>
-                    <td>{{m.unitario}}</td>
-                    <td>{{m.desconto}}</td>
-                    <td>{{m.total}}</td>
+                    <td>{{m.unitario | currency: 'R$'}}</td>
+                    <td>{{m.desconto | currency: 'R$'}}</td>
+                    <td>{{m.total | currency: 'R$'}}</td>
                     <td>
-                        <button id="editarProduto" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEditarMovimentacao" ng-click="abrirEditarMovimentacao()"><span class="glyphicon glyphicon-edit"></span></button>
-                        <button id="removerProduto" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalRemoverMovimentacao"><span class="glyphicon glyphicon-remove"></span></button>
+                        <button id="editarMovimentacao" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEditarMovimentacao" ng-click="abrirEditarMovimentacao(m.id)"><span class="glyphicon glyphicon-edit"></span></button>
+                        <button id="removerMovimentacao" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalRemoverMovimentacao" ng-click="confirmacao(m.id)"><span class="glyphicon glyphicon-remove"></span></button>
                     </td>
                 </tr>
             </tbody>

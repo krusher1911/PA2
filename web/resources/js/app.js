@@ -222,10 +222,16 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         });
     };
 
-    $scope.abrirEditarMovimentacao = function () {
-        $scope.movimentacao = null;
-        $scope.carregarUnidades(false,'');
-        $scope.carregarProdutos(false, '');
+    $scope.abrirEditarMovimentacao = function (id) {
+        $http({
+            method: 'GET',
+            url: 'MovimentacaoController',
+            params: {id: id}
+        }).then(function success(rs) {
+            $scope.carregarProdutos(false, '');
+            $scope.carregarUnidades(false, '');
+            $scope.movimentacao = rs.data.movimentacao;
+        });
     };
 
     $scope.editarMovimentacao = function (movimentacao) {
@@ -245,6 +251,16 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             data: data,
             headers: {"Content-Type": "application/json;charset=UTF-8"}
         }).then(function success(rs) {
+            $scope.carregarMovimentacoes(true, '');
+        });
+    };
+
+    $scope.deletarMovimentacao = function () {
+        $http({
+            method: 'DELETE',
+            url: 'MovimentacaoController',
+            params: {id: $scope.id}
+        }).then(function sucess(rs) {
             $scope.carregarMovimentacoes(true, '');
         });
     };
