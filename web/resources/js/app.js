@@ -87,7 +87,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         $http({
             method: 'GET',
             url: 'CategoriaController',
-            params:{id:id}
+            params: {id: id}
         }).then(function success(rs) {
             $scope.categorias = rs.data.categorias;
             if (redirect) {
@@ -100,7 +100,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         $http({
             method: 'GET',
             url: 'UnidadeController',
-            params:{id:id}
+            params: {id: id}
         }).then(function success(rs) {
             $scope.unidades = rs.data.unidades;
             if (redirect) {
@@ -162,8 +162,8 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             url: 'ProdutoController',
             params: {id: id}
         }).then(function success(rs) {
-            $scope.carregarUnidades();
-            $scope.carregarCategorias();
+            $scope.carregarUnidades(false, '');
+            $scope.carregarCategorias(false, '');
             $scope.produto = rs.data.produto;
         });
     };

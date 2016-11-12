@@ -1,6 +1,5 @@
 package dao;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -13,16 +12,25 @@ import org.hibernate.cfg.Configuration;
  */
 class HibernateUtil {
 
-    protected static Session getSession() {
-        Configuration c = new Configuration().addResource("hibernate.cfg.xml").configure();
-        StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(c.getProperties());
-        SessionFactory sf = c.buildSessionFactory(ssrb.build());
-        Session sessao = sf.openSession();
-        return sessao;
+    private static final SessionFactory sessionFactory;
+
+    static {
+        try {
+            Configuration c = new Configuration().configure();
+            StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(c.getProperties());
+            sessionFactory = c.buildSessionFactory(ssrb.build());
+        } catch (Throwable ex) {
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
     }
 
-    protected static void closeSession(Session sessao) {
-        sessao.close();
+    protected static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    protected static void closeSessionFactory(SessionFactory sf) {
+        sf.close();
     }
 
 }

@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import dao.DAOGenerica;
 import entity.entitys.Categoria;
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javassist.NotFoundException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,16 +19,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-public class CategoriaController extends HttpServlet {
+public class CategoriaController extends ControllerGeneric {
 
-    private static final DAOGenerica dao = new DAOGenerica();
     private Categoria categoria;
-    boolean isValid = false;
+    private boolean isValid = false;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         Map<String, Object> map = new HashMap<String, Object>();
         if (request.getParameter("id").equals("")) {
             List<Categoria> categorias = dao.buscarTudo(Categoria.class);
@@ -53,6 +44,7 @@ public class CategoriaController extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(map));
+
     }
 
     @Override
@@ -84,5 +76,4 @@ public class CategoriaController extends HttpServlet {
             Logger.getLogger(CategoriaController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }

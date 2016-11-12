@@ -4,12 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.entitys.Entidade;
-import entity.entitys.NotaFiscal;
+import entity.entitys.Movimentacao;
 import entity.enums.ModoCadastro;
-import entity.enums.Natureza;
-import entity.enums.TipoNota;
+import entity.enums.TipoEntidade;
+import entity.enums.TipoLogadouro;
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +23,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-public class NotaFiscalController extends ControllerGeneric {
+public class EntidadeController extends ControllerGeneric {
 
-    private NotaFiscal notaFiscal;
+    private Entidade entidade;
     boolean isValid = false;
 
     @Override
@@ -34,14 +33,14 @@ public class NotaFiscalController extends ControllerGeneric {
             throws ServletException, IOException {
         Map<String, Object> map = new HashMap<String, Object>();
         if (request.getParameter("id").equals("")) {
-        List<NotaFiscal> notasFiscais = dao.buscarTudo(NotaFiscal.class);
-            if (!notasFiscais.isEmpty()) {
-                map.put("notasFiscais", notasFiscais);
+            List<Entidade> entidades = dao.buscarTudo(Entidade.class);
+            if (!entidades.isEmpty()) {
+                map.put("entidades", entidades);
                 isValid = true;
             }
         } else {
-            notaFiscal = (NotaFiscal) dao.buscarPorId(NotaFiscal.class, Long.parseLong(request.getParameter("id")));
-            map.put("notaFiscal", notaFiscal);
+            entidade = (Entidade) dao.buscarPorId(Entidade.class, Long.parseLong(request.getParameter("id")));
+            map.put("entidade", entidade);
             isValid = true;
         }
         map.put("isValid", isValid);
@@ -55,9 +54,9 @@ public class NotaFiscalController extends ControllerGeneric {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
-        notaFiscal = new NotaFiscal();
-        montarNotaFiscal(obj);
-        dao.save(notaFiscal);
+        entidade = new Entidade();
+        montarEntidade(obj);
+        dao.save(entidade);
 
     }
 
@@ -65,43 +64,41 @@ public class NotaFiscalController extends ControllerGeneric {
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
-        notaFiscal = (NotaFiscal) dao.buscarPorId(NotaFiscal.class, obj.get("id").getAsLong());
-        montarNotaFiscal(obj);
-        dao.update(notaFiscal);
+        entidade = (Entidade) dao.buscarPorId(Entidade.class, obj.get("id").getAsLong());
+        montarEntidade(obj);
+        dao.update(entidade);
 
     }
 
-    private void montarNotaFiscal(JsonObject obj) throws IOException {
-        notaFiscal.setEmissao(new Date(obj.get("emissao").toString()));
-        notaFiscal.setValorTotal(obj.get("valorTotal").getAsDouble());
-        Long entidade = obj.get("entidade").getAsLong();
-        if (entidade != null) {
-            notaFiscal.setEntidade((Entidade) dao.buscarPorId(Entidade.class, entidade));
+    private void montarEntidade(JsonObject obj) throws IOException {
+        String tipoEntidade = obj.get("tipoEntidade").getAsString();
+        if (!tipoEntidade.equals("")) {
+            entidade.setTipo(TipoEntidade.valueOf(tipoEntidade));
         }
-        notaFiscal.setNumero(obj.get("numero").getAsLong());
-        notaFiscal.setSerie(obj.get("serie").getAsString());
-        if (obj.get("tipo").getAsString().equalsIgnoreCase("E")) {
-            notaFiscal.setTipo(TipoNota.ENTRADA);
+        entidade.setNome(obj.get("nome").getAsString());
+        if (tipoEntidade.equals("FÍSICA")) {
+            entidade.setApelido(obj.get("apelido").getAsString());
         } else {
-            notaFiscal.setTipo(TipoNota.SAíDA);
+            entidade.setNomeFantasia(obj.get("nomeFantasia").getAsString());
         }
-
-        switch (obj.get("natureza").getAsCharacter()) {
-            case 'B':
-                notaFiscal.setNatureza(Natureza.BONIFICAÇÃO);
-            case 'D':
-                notaFiscal.setNatureza(Natureza.DEVOLUÇÃO);
-            case 'V':
-                notaFiscal.setNatureza(Natureza.VENDA);
+        entidade.setCpfCnpj(obj.get("cnpjCpf").getAsLong());
+        String tipoLogadouro = obj.get("tipoLogadouro").getAsString();
+        if (!tipoLogadouro.equals("")) {
+            entidade.getEndereco().setTipo_logadouro(TipoLogadouro.valueOf(tipoLogadouro));
         }
-        notaFiscal.setModoCadastro(ModoCadastro.MANUALMENTE);
+        entidade.getEndereco().setLogadouro(obj.get("logadouro").getAsString());
+        entidade.getEndereco().setNumero(obj.get("numero").getAsInt());
+        entidade.getEndereco().setBairro(obj.get("bairro").getAsString());
+        entidade.getEndereco().setCidade(obj.get("cidade").getAsString());
+        entidade.getEndereco().setEstado(obj.get("estado").getAsString());
+        entidade.setModoCadastro(ModoCadastro.MANUALMENTE);
     }
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            dao.delete(NotaFiscal.class, Long.parseLong(request.getParameter("id")));
+            dao.delete(Movimentacao.class, Long.parseLong(request.getParameter("id")));
         } catch (NotFoundException ex) {
             Logger.getLogger(UnidadeController.class.getName()).log(Level.SEVERE, null, ex);
         }

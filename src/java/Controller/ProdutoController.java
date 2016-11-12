@@ -3,7 +3,6 @@ package Controller;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import dao.DAOGenerica;
 import entity.entitys.Categoria;
 import entity.entitys.Produto;
 import entity.entitys.UnidadeMedida;
@@ -15,13 +14,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javassist.NotFoundException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ProdutoController extends HttpServlet {
+public class ProdutoController extends ControllerGeneric {
 
-    private static final DAOGenerica dao = new DAOGenerica();
     private Produto produto;
     boolean isValid = false;
 
