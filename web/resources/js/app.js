@@ -290,7 +290,6 @@ var app = angular.module("myModule", []).controller("myController", function ($s
     };
 
     $scope.editarNotaFiscal = function (notaFiscal, method) {
-        debugger;
         var data = {
             id: notaFiscal.id,
             emissao: notaFiscal.emissao,
@@ -309,6 +308,72 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         }).then(function success(rs) {
             $scope.carregarNotasFiscais(true, '');
         });
-    };   
+    };
+
+    //=== CATEGORIA ===//
+
+    $scope.abrirCadastrarCategoria = function () {
+        $scope.categoria = null;
+    };
+
+    $scope.cadastrarCategoria = function (categoria, valid) {
+        if (valid) {
+            var data = {
+                id: categoria.id,
+                nome: categoria.nome
+            };
+            $http({
+                method: 'POST',
+                url: 'CategoriaController',
+                data: data,
+                headers: {"Content-Type": "application/json;charset=UTF-8"}
+            }).then(function success(rs) {
+                $scope.carregarCategorias(true, '');
+            });
+        } else {
+
+        }
+    };
+
+    $scope.abrirEditarCategoria = function (id) {
+        $http({
+            method: 'GET',
+            url: 'CategoriaController',
+            params: {id: id}
+        }).then(function success(rs) {
+            $scope.categoria = rs.data.categoria;
+        });
+    };
+
+    $scope.editarCategoria = function (categoria, valid) {
+        if (valid) {
+            var data = {
+                id: categoria.id,
+                nome: categoria.nome
+            };
+            $http({
+                method: 'PUT',
+                url: 'CategoriaController',
+                data: data,
+                headers: {"Content-Type": "application/json;charset=UTF-8"}
+            }).then(function success(rs) {
+                $scope.carregarCategorias(true, '');
+            });
+        } else {
+
+        }
+    };
+
+    $scope.deletarCategoria = function () {
+        $http({
+            method: 'DELETE',
+            url: 'CategoriaController',
+            params: {id: $scope.id}
+        }).then(function sucess(rs) {
+            $scope.carregarCategorias(true, '');
+        });
+    };
+
+
 });
 
