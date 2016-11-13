@@ -5,7 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class IndexController extends ControllerGeneric {
+public class IndexController extends ControllerGenerica {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

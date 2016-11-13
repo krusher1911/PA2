@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-public class MovimentacaoController extends ControllerGeneric {
+public class MovimentacaoController extends ControllerGenerica {
 
     private Movimentacao movimentacao;
     boolean isValid = false;

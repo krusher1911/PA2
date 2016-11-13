@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-public class CategoriaController extends ControllerGeneric {
+public class CategoriaController extends ControllerGenerica {
 
     private Categoria categoria;
     private boolean isValid = false;

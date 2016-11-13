@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-public class NotaFiscalController extends ControllerGeneric {
+public class NotaFiscalController extends ControllerGenerica {
 
     private NotaFiscal notaFiscal;
     boolean isValid = false;

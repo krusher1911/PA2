@@ -17,7 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ProdutoController extends ControllerGeneric {
+public class ProdutoController extends ControllerGenerica {
 
     private Produto produto;
     boolean isValid = false;
