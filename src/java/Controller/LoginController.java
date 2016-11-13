@@ -9,10 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.criterion.MatchMode;
 
-/**
- *
- * @author Hygor Azevedo
- */
 public class LoginController extends ControllerGenerica {
 
 

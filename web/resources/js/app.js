@@ -44,7 +44,6 @@ var app = angular.module("myModule", []).controller("myController", function ($s
     }
     
     $scope.carregarNotasFiscais = function (redirect, id) {
-        //debugger;
         $http({
             method: 'GET',
             url: 'NotaFiscalController',
@@ -105,6 +104,19 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             $scope.unidades = rs.data.unidades;
             if (redirect) {
                 $scope.toggled = 6;
+            }
+        });
+    };
+    
+    $scope.carregarEntidades = function (redirect, id) {
+        $http({
+            method: 'GET',
+            url: 'EntidadeController',
+            params: {id: id}
+        }).then(function success(rs) {
+            $scope.entidades = rs.data.entidades;
+            if (redirect) {
+                $scope.toggled = 7;
             }
         });
     };
@@ -278,7 +290,6 @@ var app = angular.module("myModule", []).controller("myController", function ($s
     
     $scope.cacTotal = function(){
         $scope.movimentacao.total = $scope.movimentacao.quantidade * $scope.movimentacao.unitario - $scope.movimentacao.desconto;
-        //$('#').val($scope.total);
     };
     
     
@@ -316,7 +327,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         });
     };
 
-    $scope.editarNotaFiscal = function (notaFiscal, method) {
+    $scope.editarNotaFiscal = function (notaFiscal) {
         var data = {
             id: notaFiscal.id,
             emissao: notaFiscal.emissao,
@@ -328,12 +339,67 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             entidade: ''
         };
         $http({
-            method: method,
+            method: 'PUT',
             url: 'NotaFiscalController',
             data: data,
             headers: {"Content-Type": "application/json;charset=UTF-8"}
         }).then(function success(rs) {
             $scope.carregarNotasFiscais(true, '');
+        });
+    };
+    
+    $scope.abrirCadastrarUnidade = function () {
+        $scope.unidade = null;
+    };
+
+    $scope.cadastrarUnidade = function (unidade) {
+        var data = {
+            descricao: unidade.descricao,
+            sigla: unidade.sigla
+        };
+        $http({
+            method: 'POST',
+            url: 'UnidadeController',
+            data: data,
+            headers: {"Content-Type": "application/json;charset=UTF-8"}
+        }).then(function success(rs) {
+            $scope.carregarUnidades(true, '');
+        });
+    };
+    
+    $scope.abrirEditarUnidade = function (id) {
+        $http({
+            method: 'GET',
+            url: 'UnidadeController',
+            params: {id: id}
+        }).then(function success(rs) {
+            $scope.unidade = rs.data.unidade;
+        });
+    };
+
+    $scope.editarUnidade = function (unidade, method) {
+        var data = {
+            id: unidade.id,
+            descricao: unidade.descricao,
+            sigla: unidade.sigla
+        };
+        $http({
+            method: method,
+            url: 'UnidadeController',
+            data: data,
+            headers: {"Content-Type": "application/json;charset=UTF-8"}
+        }).then(function success(rs) {
+            $scope.carregarUnidades(true, '');
+        });
+    };
+    
+    $scope.excluirUnidade = function () {
+        $http({
+            method: 'DELETE',
+            url: 'UnidadeController',
+            params: {id: $scope.id}
+        }).then(function success(rs) {
+            $scope.carregarUnidades(true, '');
         });
     };
 
@@ -401,6 +467,68 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         });
     };
 
+    //=== ENTIDADE ===//
 
+    $scope.abrirCadastrarEntidade = function () {
+        $scope.entidade = null;
+    };
+
+    $scope.cadastrarEntidade = function (categoria, valid) {
+        if (valid) {
+            var data = {
+                id: categoria.id,
+                nome: categoria.nome
+            };
+            $http({
+                method: 'POST',
+                url: 'CategoriaController',
+                data: data,
+                headers: {"Content-Type": "application/json;charset=UTF-8"}
+            }).then(function success(rs) {
+                $scope.carregarCategorias(true, '');
+            });
+        } else {
+
+        }
+    };
+
+    $scope.abrirEditarEntidade = function (id) {
+        $http({
+            method: 'GET',
+            url: 'CategoriaController',
+            params: {id: id}
+        }).then(function success(rs) {
+            $scope.categoria = rs.data.categoria;
+        });
+    };
+
+    $scope.editarEntidade = function (categoria, valid) {
+        if (valid) {
+            var data = {
+                id: categoria.id,
+                nome: categoria.nome
+            };
+            $http({
+                method: 'PUT',
+                url: 'CategoriaController',
+                data: data,
+                headers: {"Content-Type": "application/json;charset=UTF-8"}
+            }).then(function success(rs) {
+                $scope.carregarCategorias(true, '');
+            });
+        } else {
+
+        }
+    };
+
+    $scope.deletarEntidade = function () {
+        $http({
+            method: 'DELETE',
+            url: 'CategoriaController',
+            params: {id: $scope.id}
+        }).then(function sucess(rs) {
+            $scope.carregarCategorias(true, '');
+        });
+    };
 });
 

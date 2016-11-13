@@ -71,8 +71,8 @@ public class ServletPostReceita extends HttpServlet {
         parametros[5] = "";
 
         nome_parametros[6] = "ctl00$ContentPlaceHolder1$txtChaveAcessoCompleta";
-        parametros[6] = request.getParameter("ctl00$ContentPlaceHolder1$txtChaveAcessoCompleta");
-
+        parametros[6] = request.getParameter("ctl00$ContentPlaceHolder1$txtChaveAcessoCompleta").trim().replace(".", "");
+        
         nome_parametros[7] = "ctl00$ContentPlaceHolder1$txtCaptcha";
         parametros[7] = request.getParameter("ctl00$ContentPlaceHolder1$txtCaptcha");
 
@@ -116,7 +116,6 @@ public class ServletPostReceita extends HttpServlet {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(new Gson().toJson(map));
-                
                 
             }
             RequestDispatcher rd = request.getRequestDispatcher("index.jsp");

@@ -23,10 +23,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javassist.NotFoundException;
 
-/**
- *
- * @author Gustavo
- */
 public class ParseNfe {
 
     private static DAOGenerica dao;
