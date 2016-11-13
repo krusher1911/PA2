@@ -15,7 +15,13 @@ import org.hibernate.criterion.MatchMode;
  */
 public class LoginController extends ControllerGeneric {
 
-    @Override
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+    }
+
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
