@@ -485,7 +485,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         }
     };
 
-    $scope.abrirEditarCategoria = function (id) {
+    $scope.abrirEditarEntidade = function (id) {
         $http({
             method: 'GET',
             url: 'CategoriaController',
@@ -495,7 +495,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         });
     };
 
-    $scope.editarCategoria = function (categoria, valid) {
+    $scope.editarEntidade = function (categoria, valid) {
         if (valid) {
             var data = {
                 id: categoria.id,
@@ -514,7 +514,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         }
     };
 
-    $scope.deletarCategoria = function () {
+    $scope.deletarEntidade = function () {
         $http({
             method: 'DELETE',
             url: 'CategoriaController',
