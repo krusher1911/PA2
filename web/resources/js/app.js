@@ -469,8 +469,40 @@ var app = angular.module("myModule", []).controller("myController", function ($s
 
     //=== ENTIDADE ===//
 
+    $scope.textBtnCadEnd = 'Adicionar';
+    
+    $scope.Show = function(){
+        $('#contantAdress').removeClass('hidden');
+        $scope.textBtnCadEnd = 'Cancelar';
+    }
+    
+    $scope.Hide = function(){
+        $('#contantAdress').addClass('hidden');
+        $scope.textBtnCadEnd = 'Adicionar';
+    }
+    
+    $scope.abrirCadastrarEndereco = function(){
+        if($scope.textBtnCadEnd == 'Adicionar'){
+            $scope.endereco = null;
+            $scope.fullAddress = null;
+            $scope.Show();
+        }
+        else{
+            $scope.Hide();
+        }
+    };
+    
+    $scope.cadastrarEndereco = function(endereco){
+        var data = {
+                tipo_endereco: endereco.tipo_endereco,
+                logradouro: endereco.logradouro,
+                
+            };
+    };
+    
     $scope.abrirCadastrarEntidade = function () {
         $scope.entidade = null;
+        $scope.Hide();
     };
 
     $scope.cadastrarEntidade = function (categoria, valid) {

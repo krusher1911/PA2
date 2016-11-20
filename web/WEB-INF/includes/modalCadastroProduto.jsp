@@ -83,7 +83,6 @@
                             <p class="help-block" ng-show="formCadastroProduto.categoria.$error.required">
                                 Selecione a categoria do produto.
                             </p>
-                            <pre>{{formCadastroProduto.$valid}}</pre>
                         </div>
                     </div>
                     <div class="form-group">
