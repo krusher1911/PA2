@@ -47,7 +47,21 @@ public class BuscaPrecoController extends ControllerGenerica {
         descricao = descricao.replace("MOTO", "MOTOROLA");
         descricao = descricao.replace("NEW", "");
         descricao = descricao.replace("-", "");
-
+        descricao = descricao.replace("PAN", "PANELEIRO");
+        descricao = descricao.replace("BALC", "BALCÃO");
+        descricao = descricao.replace("6PT", "6 PORTAS ");
+        descricao = descricao.replace("3PT", "3 PORTAS ");
+        descricao = descricao.replace("2GV", "2 GAVETAS ");
+        descricao = descricao.replace("TRIP C/TP", "");
+        descricao = descricao.replace("BR/PT", "");
+        descricao = descricao.replace("ARM", "ARMARIO");
+        descricao = descricao.replace("TRI BAS VD SER C/", "");
+        descricao = descricao.replace("BRANC ", "");
+        descricao = descricao.replace("GEL", "GELADEIRA");
+        descricao = descricao.replace("BASC", "");
+        descricao = descricao.replace("COL", "COLCHÃO");
+        descricao = descricao.replace("BONEL", "BONNEL");
+        descricao = descricao.replace("088X188X20", "20x88x188cm");
         return descricao;
     }
 

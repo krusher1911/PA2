@@ -71,7 +71,6 @@ public class ProdutoController extends ControllerGenerica {
             produto.setUnidade((UnidadeMedida) dao.buscarPorId(UnidadeMedida.class, unidade));
         }
         produto.setPermiteFracionar(obj.get("permiteFracionar").getAsBoolean());
-        produto.setTipo(obj.get("tipo").getAsString());
         produto.setCodigNcm(obj.get("codigoNcm").getAsInt());
         Long categoria = obj.get("categoria").getAsLong();
         if (!categoria.equals("")) {

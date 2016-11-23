@@ -150,7 +150,6 @@ var app = angular.module("myModule", []).controller("myController", function ($s
                 descricao: produto.descricao,
                 unidade: produto.unidade.id,
                 permiteFracionar: produto.permiteFracionar,
-                tipo: produto.tipo,
                 codigoNcm: produto.codigoNcm,
                 categoria: produto.categoria.id
             };
@@ -187,7 +186,6 @@ var app = angular.module("myModule", []).controller("myController", function ($s
                 descricao: produto.descricao,
                 unidade: produto.unidade.id,
                 permiteFracionar: produto.permiteFracionar,
-                tipo: produto.tipo,
                 codigoNcm: produto.codigoNcm,
                 categoria: produto.categoria.id
             };

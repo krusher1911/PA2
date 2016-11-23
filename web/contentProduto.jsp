@@ -20,7 +20,6 @@
                     <th>Descrição</th>
                     <th>Unidade de Medida</th>
                     <th>Fracionavel?</th>
-                    <th>Tipo</th>
                     <th>Código NCM</th>
                     <th>Categoria</th>
                     <th>Valor Mínimo Estimado</th>
@@ -34,17 +33,17 @@
                     <td>{{p.id}}</td>
                     <td>{{p.descricao}}</td>
                     <td>{{p.unidade.sigla}}</td>
-                    <td>{{p.permiteFracionar}}</td>
-                    <td>{{p.tipo}}</td>
+                    <td ng-if="p.permiteFracionar">Sim</td>
+                    <td ng-if="!p.permiteFracionar">Não</td>
                     <td>{{p.codigoNcm}}</td>
                     <td>{{p.categoria.nome}}</td>
                     <td>{{p.valorMinimo  | currency:'R$'}}</td>
                     <td>{{p.valorMaximo  | currency:'R$'}}</td>
                     <td><a href="{{p.link}}" ng-show="{{p.link}}" target="_blank"> Visualize aqui a busca de preço</a></td>
                     <td>
-                        <button id="editarProduto"  type="button" class="editarProduto btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEditarProduto" ng-click="abrirEditarProduto(p.id)"><span class="glyphicon glyphicon-edit"></span></button>
+                        <button id="editarProduto"  type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEditarProduto" ng-click="abrirEditarProduto(p.id)"><span class="glyphicon glyphicon-edit"></span></button>
                         <button id="removerProduto" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalRemoverProduto" ng-click="confirmacao(p.id)"><span class="glyphicon glyphicon-remove"></span></button>
-                        <button id="buscarPreco"  type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Buscar preço" ng-click="buscarPreco(p.id)" data-toggle="modal" data-target="#BuscaPrecoRealizada"><span class="glyphicon glyphicon-usd"></span></button>
+                        <button id="buscarPreco"  type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Buscar preço" ng-click="buscarPreco(p.id)"><span class="glyphicon glyphicon-usd"></span></button>
                     </td>
                 </tr>
             </tbody>
@@ -55,6 +54,8 @@
         <jsp:include page="WEB-INF/includes/modalEdicaoProduto.jsp"/>
 
         <jsp:include page="WEB-INF/includes/modalExclusaoProduto.jsp"/>
+
+        <jsp:include page="WEB-INF/includes/buscaPrecoRealizada.jsp"/>
 
     </div>
 </div>

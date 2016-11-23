@@ -26,9 +26,6 @@ public class Produto implements EntidadeBase {
     @Column(name = "permite_fracionamento")
     private Boolean permiteFracionar;
 
-    @Column(name = "tipo")
-    private String tipo;
-
     @Column(name = "codigo_ncm")
     private Integer codigoNcm;
 
@@ -48,22 +45,10 @@ public class Produto implements EntidadeBase {
     public Produto() {
     }
 
-    public Produto(String descricao, UnidadeMedida unidade, Boolean permiteFracionar, String tipo, Integer codigoNcm, Categoria categoria) {
+    public Produto(String descricao, UnidadeMedida unidade, Boolean permiteFracionar, Integer codigoNcm, Categoria categoria) {
         this.descricao = descricao;
         this.unidade = unidade;
         this.permiteFracionar = permiteFracionar;
-        this.tipo = tipo;
-        this.codigoNcm = codigoNcm;
-        this.categoria = categoria;
-    }
-    
-    
-    public Produto(Long id, String descricao, UnidadeMedida unidade, Boolean permiteFracionar, String tipo, Integer codigoNcm, Categoria categoria) {
-        this.id = id;
-        this.descricao = descricao;
-        this.unidade = unidade;
-        this.permiteFracionar = permiteFracionar;
-        this.tipo = tipo;
         this.codigoNcm = codigoNcm;
         this.categoria = categoria;
     }
@@ -115,14 +100,6 @@ public class Produto implements EntidadeBase {
 
     public void setPermiteFracionar(boolean permiteFracionar) {
         this.permiteFracionar = permiteFracionar;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public Integer getCodigNcm() {

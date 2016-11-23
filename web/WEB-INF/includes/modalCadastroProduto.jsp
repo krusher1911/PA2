@@ -48,18 +48,6 @@
                         </div>
                     </div>
                     <div class="form-group" ng-class="
-                        {'has-error':!formCadastroProduto.tipo.$valid,
-                         'has-success':formCadastroProduto.tipo.$valid 
-                            }">
-                        <label class="col-lg-2 control-label" for="inputTipo">Tipo</label>
-                        <div class="col-lg-10">
-                            <input ng-model="produto.tipo" required ng-maxlength="1" class="form-control" id="inputTipo" name="tipo" placeholder="A" type="text" data-toggle="tooltip" data-placement="top" title="Por favor, insira apenas uma letra.">
-                            <p class="help-block" ng-show="formCadastroProduto.tipo.$error.required">
-                                Informe o tipo do produto. Apenas uma letra.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group" ng-class="
                         {'has-error':!formCadastroProduto.codigoNcm.$valid,
                          'has-success':formCadastroProduto.codigoNcm.$valid
                             }">

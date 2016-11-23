@@ -1,11 +1,5 @@
 package coletor;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.parser.Parser;
-import org.jsoup.select.Elements;
-
 import dao.DAOGenerica;
 import entity.entitys.*;
 import entity.enums.ModoCadastro;
@@ -14,14 +8,18 @@ import entity.enums.TipoEntidade;
 import entity.enums.TipoNota;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
-import org.hibernate.criterion.MatchMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javassist.NotFoundException;
+import org.hibernate.criterion.MatchMode;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.parser.Parser;
+import org.jsoup.select.Elements;
 
 public class ParseNfe {
 
@@ -118,9 +116,8 @@ public class ParseNfe {
         List<Movimentacao> movtoList = new ArrayList<Movimentacao>();
 
         int ncm;
-        Long codigo;
+//        Long codigoProduto;
         String descricao;
-        String tipo = null;
         String unidadeSigla;
         boolean permiteFracionar = true;
         double quantidade;
@@ -149,11 +146,11 @@ public class ParseNfe {
             unidadeSigla = prodHeader.select(".fixo-prod-serv-uc").text();
             descricao = prodHeader.select(".fixo-prod-serv-descricao").text();
 
-            codigo = Long.parseLong(retornaElemento(prodContent, "Código do Produto"));
+//            codigoProduto = Long.parseLong(retornaElemento(prodContent, "Código do Produto"));
             ncm = Integer.parseInt(retornaElemento(prodContent, "Código NCM"));
 
             unidade = cadastrarUnidade(unidadeSigla);
-            produto = cadastrarProduto(descricao, unidade, permiteFracionar, tipo, ncm, categoria);
+            produto = cadastrarProduto(descricao, unidade, permiteFracionar, ncm, categoria);
             quantidade = getValor(prodHeader, "fixo-prod-serv-qtd");
 
             total = getValorPorClasse(prodHeader, "fixo-prod-serv-vb");
@@ -169,13 +166,13 @@ public class ParseNfe {
 
     }
 
-    public Produto cadastrarProduto(String descricao, UnidadeMedida unidade, boolean permiteFracionar, String tipo, int codigoNcm, Categoria categoria) {
+    public Produto cadastrarProduto(String descricao, UnidadeMedida unidade, boolean permiteFracionar, int codigoNcm, Categoria categoria) {
         Produto produto;
 
         List<Produto> produtoList = dao.buscarPorPropriedade(Produto.class, "descricao", descricao, MatchMode.EXACT);
 
         if (produtoList.isEmpty()) {
-            produto = new Produto(descricao, unidade, permiteFracionar, tipo, codigoNcm, categoria);
+            produto = new Produto(descricao, unidade, permiteFracionar, codigoNcm, categoria);
             dao.save(produto);
         } else {
             produto = produtoList.get(0);
