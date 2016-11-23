@@ -206,10 +206,14 @@ var app = angular.module("myModule", []).controller("myController", function ($s
     };
 
     $scope.buscarPreco = function (id) {
+
+        var data = {
+            id: id
+        };
         $http({
-            method: 'GET',
+            method: 'POST',
             url: 'BuscaPrecoController',
-            params: {id: id},
+            data: data,
             headers: {"Content-Type": "application/json;charset=UTF-8"}
         }).then(function success(rs) {
             $scope.carregarProdutos(true, '');

@@ -4,9 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.entitys.Endereco;
-import entity.entitys.Entidade;
-import entity.enums.ModoCadastro;
-import entity.enums.TipoEntidade;
+import entity.enums.TipoLogadouro;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -22,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-public class EntidadeController extends ControllerGenerica {
+public class EnderecoController extends ControllerGenerica {
 
-    private Entidade entidade;
+    private Endereco endereco;
     boolean isValid = false;
 
     @Override
@@ -32,14 +30,14 @@ public class EntidadeController extends ControllerGenerica {
             throws ServletException, IOException {
         Map<String, Object> map = new HashMap<String, Object>();
         if (request.getParameter("id").equals("")) {
-            List<Entidade> entidades = dao.buscarTudo(Entidade.class);
-            if (!entidades.isEmpty()) {
-                map.put("entidades", entidades);
+            List<Endereco> enderecos = dao.buscarTudo(Endereco.class);
+            if (!enderecos.isEmpty()) {
+                map.put("enderecos", enderecos);
                 isValid = true;
             }
         } else {
-            entidade = (Entidade) dao.buscarPorId(Entidade.class, Long.parseLong(request.getParameter("id")));
-            map.put("entidade", entidade);
+            endereco = (Endereco) dao.buscarPorId(Endereco.class, Long.parseLong(request.getParameter("id")));
+            map.put("endereco", endereco);
             isValid = true;
         }
         map.put("isValid", isValid);
@@ -53,45 +51,39 @@ public class EntidadeController extends ControllerGenerica {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
-        entidade = new Entidade();
-        montarEntidade(obj, request, response);
-        dao.save(entidade);
-
+        endereco = new Endereco();
+        montarEndereco(obj);
+        dao.save(endereco);
+        Long id = endereco.getId();
     }
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         JsonObject obj = (JsonObject) new JsonParser().parse(request.getReader());
-        entidade = (Entidade) dao.buscarPorId(Entidade.class, obj.get("id").getAsLong());
-        montarEntidade(obj, request, response);
-        dao.update(entidade);
+        endereco = (Endereco) dao.buscarPorId(Endereco.class, obj.get("id").getAsLong());
+        montarEndereco(obj);
+        dao.update(endereco);
 
     }
 
-    private void montarEntidade(JsonObject obj, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String tipoEntidade = obj.get("tipoEntidade").getAsString();
-        if (!tipoEntidade.equals("")) {
-            entidade.setTipo(TipoEntidade.valueOf(tipoEntidade));
+    private void montarEndereco(JsonObject obj) throws IOException {
+        String tipoLogadouro = obj.get("tipoLogadouro").getAsString();
+        if (!tipoLogadouro.equals("")) {
+            endereco.setTipo_logadouro(TipoLogadouro.valueOf(tipoLogadouro));
         }
-        entidade.setNome(obj.get("nome").getAsString());
-        if (tipoEntidade.equals("FÍSICA")) {
-            entidade.setApelido(obj.get("apelido").getAsString());
-        } else {
-            entidade.setNomeFantasia(obj.get("nomeFantasia").getAsString());
-        }
-        entidade.setCpfCnpj(obj.get("cnpjCpf").getAsLong());
-        entidade.setEndereco(new Endereco());
-        request.setAttribute("id", entidade.getEndereco().getId());
-        new EnderecoController().doPut(request, response);
-        entidade.setModoCadastro(ModoCadastro.MANUALMENTE);
+        endereco.setLogadouro(obj.get("logadouro").getAsString());
+        endereco.setNumero(obj.get("numero").getAsInt());
+        endereco.setBairro(obj.get("bairro").getAsString());
+        endereco.setCidade(obj.get("cidade").getAsString());
+        endereco.setEstado(obj.get("estado").getAsString());
     }
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            dao.delete(Entidade.class, Long.parseLong(request.getParameter("id")));
+            dao.delete(Endereco.class, Long.parseLong(request.getParameter("id")));
         } catch (NotFoundException ex) {
             Logger.getLogger(UnidadeController.class.getName()).log(Level.SEVERE, null, ex);
         }
