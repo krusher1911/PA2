@@ -29,7 +29,7 @@ public class Movimentacao implements EntidadeBase {
     @JoinColumn(name = "id_unidade")
     private UnidadeMedida unidade;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_nota")
     private NotaFiscal notaFiscal;
 
