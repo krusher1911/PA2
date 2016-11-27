@@ -106,8 +106,8 @@ public class ServletPostReceita extends HttpServlet {
         }
         
         ParseNfe teste = new ParseNfe(resposta);
-        teste.rodar();
         try {
+            teste.rodar();
             Map<String, Object> map = new HashMap<String, Object>();
             if ("".equals(prod.toString())) {
                 String erroPost ="Erro ao gravar nota.";
@@ -121,8 +121,12 @@ public class ServletPostReceita extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
                 rd.include(request, response);
         } catch (Exception e) {
-            // Always must return something
-            System.out.println(e);
+            String msg = "<div class=\"alert alert-danger\">";
+            msg += "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>";
+            msg += "<center><p><strong>Erro inesperado!</strong></p>";
+            msg += "</div>";
+            request.setAttribute("messageError", msg);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         } finally {
             out.close();
         }

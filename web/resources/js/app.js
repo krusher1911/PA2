@@ -10,6 +10,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         if(limpar){
             $('#dicCaptcha').html('');
         }
+        $('#principal').load();
         $scope.toggled = 1;
     };
     
@@ -24,8 +25,8 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         }).catch(function(){
             $('#dicCaptcha').html('<div class="alert alert-danger">\n\
                                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n\
-                                                                   <center><p><strong>Erro na pesquisa da nota!</strong></p>\n\
-                                                                   <p>Verifique sua coneção.</p></center></div>');
+                                                                   <center><p><strong>Erro de conexão</strong></p>\n\
+                                                                   <p>Verifique se sua internet está ativa.</p></center></div>');
         });
     };
     
@@ -36,10 +37,11 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         }).then(function success(rs) {
             $scope.carregarPrincipal();
         }).catch(function(){
-            $('#dicCaptcha').html('<div class="alert alert-danger">\n\
-                                                                   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n\
-                                                                   <center><p><strong>Erro na pesquisa da nota!</strong></p>\n\
-                                                                   <p>Verifique sua coneção.</p></center></div>');
+        $('#dicCaptcha').html(' <div class="alert alert-danger">\n\
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n\
+                                    <center><p><strong>Erro na pesquisa da nota!</strong></p>\n\
+                                    <p>Verifique sua coneção.</p></center>\n\
+                                </div>');
         });
     }
     

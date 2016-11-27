@@ -20,7 +20,6 @@
                             <p class="help-block" ng-show="formCadastroMovimentacao.notaFiscal.$error.required">
                                 Informe o código da nota fiscal.
                             </p>
-                            <pre>{{formCadastroMovimentacao.notaFiscal.$error.required}}</pre>
                         </div>
                     </div>
                 <div class="form-group" ng-class="
@@ -35,7 +34,6 @@
                             <p class="help-block" ng-show="formCadastroMovimentacao.produto.$error.required">
                                 Selecione o produto da movimentação.
                             </p>
-                            <pre>{{formCadastroMovimentacao.$valid}}</pre>
                         </div>
                     </div>
                     <div class="form-group">

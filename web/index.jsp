@@ -47,7 +47,7 @@ pageEncoding="UTF-8"%>
         <div ng-controller="myController" class="container-fluid">
             <div class="row">
                 <div class="list col-md-2">
-                    <a href="#" class="list-group-item" id="menuPrincipal" ng-click="carregarPrincipal(true)"><strong><center>Principal</center></strong></a>
+                    <a href="#" class="list-group-item" id="menuPrincipal" ng-click="buscarNota()" ng-click="carregarPrincipal(true)"><strong><center>Principal</center></strong></a>
                     <a href="#" class="list-group-item" id="menuNotaFiscal" ng-click="carregarNotasFiscais(true, '')"><strong><center>Notas Fiscais</center></strong></a>
                     <a href="#" class="list-group-item" id="menuMovimentacoes" ng-click="carregarMovimentacoes(true, '')"><strong><center>Movimentações</center></strong></a>
                     <a href="#" class="list-group-item" id="menuProdutos"ng-click="carregarProdutos(true, '')"><strong><center>Produtos</center></strong></a>

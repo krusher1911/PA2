@@ -39,11 +39,8 @@ public class ServletGetReceita extends HttpServlet {
         String imagemCaptcha = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_imgCaptcha");
         String chaveCompleta = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_txtChaveAcessoCompleta");
         String chaveCaptcha = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_txtCaptcha");
-        btnConsultar = btnConsultar.replace("class=\"botao\"", "class=\"btn btn-primary\"");
-        btnLimpar = btnLimpar.replace("class=\"botao\"", "class=\"btn btn-default\"");
         chaveCompleta = chaveCompleta.replace("class=\"txtChaveAcesso\"", "class=\"form-control\" placeholder=\"chave completa\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"chave completa da nota\"");
         chaveCaptcha = chaveCaptcha.replace("class=\"txtCaptcha\"", "class=\"form-control\" placeholder=\"chave captcha\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"chave de validação\"");
-        
         
         String viewstate = coletor2.getElementoPorID("[name=__VIEWSTATE]");
         String viewstatgen = coletor2.getElementoPorID("[name=__VIEWSTATEGENERATOR]");
@@ -51,6 +48,8 @@ public class ServletGetReceita extends HttpServlet {
         String contenttoken = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_token");
         String contentcapsom = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_captchaSom");
 
+        btnConsultar = btnConsultar.replace("class=\"botao\"", "class=\"btn btn-primary\" ");
+        btnLimpar = btnLimpar.replace("class=\"botao\"", "class=\"btn btn-default\" ");
         
         String captcha ="<form class=\"form-horizontal\" name=\"form_coletor\" action=\"posteceita\" method=\"POST\">"+
                     "       <div class=\"form-group\">"+
@@ -59,7 +58,7 @@ public class ServletGetReceita extends HttpServlet {
                     "       <div class=\"form-group\">"+
                     "           <label class=\"col-lg-4 control-label\" for=\"ctl00_ContentPlaceHolder1_txtCaptcha\">Chave captcha</label>"+
                     "           <div class=\"col-lg-8\">"+
-                                    chaveCaptcha+
+                                    chaveCaptcha +
                     "           </div>"+
                     "       </div>"+
                     "       <div class=\"form-group\">"+

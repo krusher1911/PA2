@@ -32,7 +32,7 @@
                     <td>{{e.nome}}</td>
                     <td>{{e.nomeFantasia}}</td>
                     <td>{{e.cnpjCpf}}</td>
-                    <td>{{e.endereco}}</td>
+                    <td>{{e.endereco.logadouro + ", "+ e.endereco.bairro + ". CEP: "+ e.endereco.cidade + " - " + e.endereco.estado}}</td>
                     <td>
                         <button id="editarEntidade"  type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEditarEntidade" ng-click="abrirEditarEntidade(e.id)"><span class="glyphicon glyphicon-edit"></span></button>
                         <button id="excluirEntidade" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalRemoverEntidade" ng-click="confirmacao(e.id)"><span class="glyphicon glyphicon-remove"></span></button>
