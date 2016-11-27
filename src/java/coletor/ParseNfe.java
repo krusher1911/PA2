@@ -70,10 +70,12 @@ public class ParseNfe {
         natureza = getNatureza(retornaElemento(doc, "Natureza da Operação"));
         modoCadastro = ModoCadastro.IMPORTACAO;
         usuario = null;
+
+        nota = new NotaFiscal(chave, emissao, valorTotal, emitente, numero, serie, tipo, natureza, modoCadastro, usuario);
+        dao.save(nota);
+
         movimentacao = mvtoNota(doc.select("#Prod").first());
 
-        nota = new NotaFiscal(chave, emissao, valorTotal, emitente, numero, serie, tipo, natureza, movimentacao, modoCadastro, usuario);
-        dao.save(nota);
 
     }
 

@@ -26,7 +26,7 @@
                 <tr>
                     <th>Código</th>
                     <th>Chave</th>
-                    <th>Emissão</th>
+                    <!--<th>Emissão</th>-->
                     <th>Entidade</th>
                     <th>Total</th>
                     <th>Número</th>
@@ -40,9 +40,9 @@
                 <tr ng-repeat="n in notasFiscais">
                     <td>{{n.id}}</td>
                     <td>{{n.chave}}</td>
-                    <td>{{n.emissao}}</td>
+                    <!--<td>{{n.emissao}}</td>-->
                     <td>{{n.entidade.nome}}</td>
-                    <td>{{n.valorTotal}}</td>
+                    <td>{{n.valorTotal | currency: 'R$'}}</td>
                     <td>{{n.numero}}</td>
                     <td>{{n.serie}}</td>
                     <td>{{n.tipo}}</td>

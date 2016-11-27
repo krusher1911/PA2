@@ -47,6 +47,7 @@ public class BuscaPrecoController extends ControllerGenerica {
         descricao = descricao.replace("MOTO", "MOTOROLA");
         descricao = descricao.replace("NEW", "");
         descricao = descricao.replace("-", "");
+        descricao = descricao.replace(" 32GB   BRANCO", "");
         descricao = descricao.replace("PAN", "PANELEIRO");
         descricao = descricao.replace("BALC", "BALCÃO");
         descricao = descricao.replace("6PT", "6 PORTAS ");

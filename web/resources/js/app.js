@@ -35,7 +35,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             method: 'POST',
             url: 'posteceita'
         }).then(function success(rs) {
-            $scope.carregarPrincipal();
+            $scope.carregarNotasFiscais(true, '');
         }).catch(function(){
         $('#dicCaptcha').html(' <div class="alert alert-danger">\n\
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n\

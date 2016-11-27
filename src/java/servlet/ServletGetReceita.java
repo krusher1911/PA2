@@ -3,16 +3,13 @@ package servlet;
 import coletor.ColetorReceita;
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "Receita", urlPatterns = {"/Receita"})
 public class ServletGetReceita extends HttpServlet {
@@ -39,8 +36,8 @@ public class ServletGetReceita extends HttpServlet {
         String imagemCaptcha = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_imgCaptcha");
         String chaveCompleta = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_txtChaveAcessoCompleta");
         String chaveCaptcha = coletor2.getElementoPorID("#ctl00_ContentPlaceHolder1_txtCaptcha");
-        chaveCompleta = chaveCompleta.replace("class=\"txtChaveAcesso\"", "class=\"form-control\" placeholder=\"chave completa\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"chave completa da nota\"");
-        chaveCaptcha = chaveCaptcha.replace("class=\"txtCaptcha\"", "class=\"form-control\" placeholder=\"chave captcha\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"chave de validação\"");
+        chaveCompleta = chaveCompleta.replace("class=\"txtChaveAcesso\"", "class=\"form-control\" placeholder=\"Chave de Acesso da NF-e\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Chave de Acesso da NF-e\"");
+        chaveCaptcha = chaveCaptcha.replace("class=\"txtCaptcha\"", "class=\"form-control\" placeholder=\"Captcha\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Captcha\"");
         
         String viewstate = coletor2.getElementoPorID("[name=__VIEWSTATE]");
         String viewstatgen = coletor2.getElementoPorID("[name=__VIEWSTATEGENERATOR]");
@@ -50,26 +47,35 @@ public class ServletGetReceita extends HttpServlet {
 
         btnConsultar = btnConsultar.replace("class=\"botao\"", "class=\"btn btn-primary\" ");
         btnLimpar = btnLimpar.replace("class=\"botao\"", "class=\"btn btn-default\" ");
-        
-        String captcha ="<form class=\"form-horizontal\" name=\"form_coletor\" action=\"posteceita\" method=\"POST\">"+
-                    "       <div class=\"form-group\">"+
-                                "<center>"+ imagemCaptcha + "</center>"+
-                    "       </div>"+        
-                    "       <div class=\"form-group\">"+
-                    "           <label class=\"col-lg-4 control-label\" for=\"ctl00_ContentPlaceHolder1_txtCaptcha\">Chave captcha</label>"+
-                    "           <div class=\"col-lg-8\">"+
-                                    chaveCaptcha +
-                    "           </div>"+
-                    "       </div>"+
-                    "       <div class=\"form-group\">"+
-                    "           <label class=\"col-lg-4 control-label\" for=\"ctl00_ContentPlaceHolder1_txtChaveAcessoCompleta\">Chave completa</label>"+
-                    "           <div class=\"col-lg-8\">"+
-                                    chaveCompleta +
-                                    "<center>"+btnLimpar + btnConsultar +"</center>"+
-                    "           </div>"+
-                    "       </div>"+
-                        "</from>"+
-                        viewstate +
+        btnLimpar = btnLimpar.replace("type=\"submit\"", "type=\"reset\" ");
+
+        String captcha = ""
+                + "<form class=\"form-horizontal\" name=\"form_coletor\" action=\"posteceita\" method=\"POST\">"
+                + "       <div class=\"form-group\">"
+                + "<center>" + imagemCaptcha + "</center>"
+                + "       </div>"
+                + "       <div class=\"form-group\">"
+                + "           <label class=\"col-lg-4 control-label\" for=\"ctl00_ContentPlaceHolder1_txtCaptcha\">Captcha</label>"
+                + "           <div class=\"col-lg-8\">"
+                + chaveCaptcha
+                + "           </div>"
+                + "       </div>"
+                + "       <div class=\"form-group\">"
+                + "           <label class=\"col-lg-4 control-label\" for=\"ctl00_ContentPlaceHolder1_txtChaveAcessoCompleta\">Chave de Acesso</label>"
+                + "           <div class=\"col-lg-8\">"
+                + chaveCompleta
+                + "           </div>"
+                + "       </div>"
+                + "       <div class=\"form-group\">"
+                + "           <div class=\"col-lg-6\">"
+                + "<center>" + btnLimpar + "</center>"
+                + "           </div>"
+                + "           <div class=\"col-lg-6\">"
+                + "<center>" + btnConsultar + "</center>"
+                + "           </div>"
+                + "       </div>"
+                + "</from>"
+                +                        viewstate +
                         viewstatgen+
                         eventval+
                         contenttoken+

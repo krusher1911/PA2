@@ -5,14 +5,13 @@
  */
 package servlet;
 
-import coletor.ParseNfe;
 import coletor.ConectorReceita;
+import coletor.ParseNfe;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -118,8 +117,7 @@ public class ServletPostReceita extends HttpServlet {
                 response.getWriter().write(new Gson().toJson(map));
                 
             }
-            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-                rd.include(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         } catch (Exception e) {
             String msg = "<div class=\"alert alert-danger\">";
             msg += "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>";

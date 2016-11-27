@@ -6,7 +6,6 @@ import entity.enums.Natureza;
 import entity.enums.TipoNota;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -66,7 +65,7 @@ public class NotaFiscal implements EntidadeBase {
     public NotaFiscal() {
     }
 
-    public NotaFiscal(String chave, Date emissao, double valorTotal, Entidade entidade, Long numero, String serie, TipoNota tipo, Natureza natureza, List<Movimentacao> itens, ModoCadastro modoCadastro, Usuario usuario) {
+    public NotaFiscal(String chave, Date emissao, double valorTotal, Entidade entidade, Long numero, String serie, TipoNota tipo, Natureza natureza, ModoCadastro modoCadastro, Usuario usuario) {
 
         this.chave = chave;
         this.emissao = emissao;
