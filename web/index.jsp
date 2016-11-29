@@ -55,7 +55,9 @@ pageEncoding="UTF-8"%>
                     <a href="#" class="list-group-item" id="menuUnidades" ng-click="carregarUnidades(true, '')"><strong><center>Unidades</center></strong></a>
                     <a href="#" class="list-group-item" id="menuEntidades" ng-click="carregarEntidades(true, '')"><strong><center>Entidades</center></strong></a>
                 </div>
+                
                 <div class="col-md-10" ng-show="toggled==1">
+                    ${messageError}
                     <jsp:include page="contentPrincipal.jsp" />
                 </div>
                 <div class="col-md-10" ng-show="toggled==2">
@@ -65,6 +67,8 @@ pageEncoding="UTF-8"%>
                     <jsp:include page="contentMovimentacao.jsp" />
                 </div>
                 <div class="col-md-10" ng-show="toggled==4">
+                    <div id="msgSuccess">
+                    </div>
                     <jsp:include page="contentProduto.jsp" />
                 </div>
                 <div class="col-md-10" ng-show="toggled==5">

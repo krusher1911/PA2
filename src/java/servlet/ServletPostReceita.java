@@ -121,7 +121,7 @@ public class ServletPostReceita extends HttpServlet {
         } catch (Exception e) {
             String msg = "<div class=\"alert alert-danger\">";
             msg += "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>";
-            msg += "<center><p><strong>Erro inesperado!</strong></p>";
+            msg += "<center><p><strong>Erro: Captcha ou Chave de acesso incorrretos.</strong></p>";
             msg += "</div>";
             request.setAttribute("messageError", msg);
             request.getRequestDispatcher("index.jsp").forward(request, response);

@@ -5,6 +5,17 @@ var app = angular.module("myModule", []).controller("myController", function ($s
     $scope.status = '  ';
     $scope.customFullscreen = false;
     $scope.toggled = 1;
+    
+    $scope.ativaTab = function(toggled){
+        var ids = ["#menuPrincipal", "#menuNotaFiscal", "#menuMovimentacoes", "#menuProdutos", "#menuCategorias", "#menuUnidades", "#menuEntidades"];
+        for (i = 0; i < ids.length; i++) {
+            if(toggled === i + 1){
+                $(ids[i]).addClass('active');
+            }else{
+                $(ids[i]).removeClass('active');
+            }
+        }
+    };
 
     $scope.carregarPrincipal = function (limpar) {
         if(limpar){
@@ -12,6 +23,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         }
         $('#principal').load();
         $scope.toggled = 1;
+        $scope.ativaTab($scope.toggled);
     };
     
     $scope.buscarNota = function(){
@@ -54,6 +66,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             $scope.notasFiscais = rs.data.notasFiscais;
             if(redirect){
                 $scope.toggled = 2;
+                $scope.ativaTab($scope.toggled);
             }
         });
     };
@@ -67,6 +80,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             $scope.movimentacoes = rs.data.movimentacoes;
             if (redirect) {
                 $scope.toggled = 3;
+                $scope.ativaTab($scope.toggled);
             }
         });
     };
@@ -79,7 +93,9 @@ var app = angular.module("myModule", []).controller("myController", function ($s
         }).then(function success(rs) {
             $scope.produtos = rs.data.produtos;
             if (redirect) {
+                $('#msgSuccess').html('');
                 $scope.toggled = 4;
+                $scope.ativaTab($scope.toggled);
             }
         });
     };
@@ -93,6 +109,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             $scope.categorias = rs.data.categorias;
             if (redirect) {
                 $scope.toggled = 5;
+                $scope.ativaTab($scope.toggled);
             }
         });
     };
@@ -106,6 +123,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             $scope.unidades = rs.data.unidades;
             if (redirect) {
                 $scope.toggled = 6;
+                $scope.ativaTab($scope.toggled);
             }
         });
     };
@@ -119,6 +137,7 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             $scope.entidades = rs.data.entidades;
             if (redirect) {
                 $scope.toggled = 7;
+                $scope.ativaTab($scope.toggled);
             }
         });
     };
@@ -217,6 +236,9 @@ var app = angular.module("myModule", []).controller("myController", function ($s
             headers: {"Content-Type": "application/json;charset=UTF-8"}
         }).then(function success(rs) {
             $scope.carregarProdutos(true, '');
+            $('#msgSuccess').html('<div class="alert alert-success">\n\
+                                                                   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n\
+                                                                   <center><p>Busca finalizada.<</p></div>');
         });
     };
     

@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-md-6 col-md-offset-3" id="dicCaptcha">
-                ${messageError}
+                
             </div>
         </div>
     </div>

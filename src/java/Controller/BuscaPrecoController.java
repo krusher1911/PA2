@@ -1,5 +1,6 @@
 package Controller;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.entitys.Produto;
@@ -8,7 +9,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +33,7 @@ public class BuscaPrecoController extends ControllerGenerica {
         request.setCharacterEncoding("UTF-8");
         String url = montaURL((JsonObject) new JsonParser().parse(request.getReader()));
         procurarValores(url);
+        
     }
 
     private String montaURL(JsonObject obj) throws UnsupportedEncodingException {

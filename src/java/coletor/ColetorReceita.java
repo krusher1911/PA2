@@ -78,8 +78,7 @@ public class ColetorReceita {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
-            System.out.println("Erro: não foi possível coletar a página: " + str_url + "!");
+            
         }
         return pagina.toString();
     }
